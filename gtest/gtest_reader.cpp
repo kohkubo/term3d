@@ -89,7 +89,7 @@ TEST(Reader, ReadTriangle) {
   exp2.vert3 = exp2.vert2;
   EXPECT_TRUE(read_rtfile(&data2, "gtest/reader_testfiles/valid2.rt"));
   EXPECT_TRUE(is_equal_triangle(data2.triangle, &exp2));
-  free(data1.triangle);
+  free(data2.triangle);
 
   t_data data3;
   init_triangle(&data3);
@@ -101,7 +101,7 @@ TEST(Reader, ReadTriangle) {
   exp3.vert3 = exp3.vert2;
   EXPECT_TRUE(read_rtfile(&data3, "gtest/reader_testfiles/valid3.rt"));
   EXPECT_TRUE(is_equal_triangle(data3.triangle, &exp3));
-  free(data1.triangle);
+  free(data3.triangle);
 
   t_data data4;
   init_triangle(&data4);
@@ -113,5 +113,5 @@ TEST(Reader, ReadTriangle) {
   exp4.vert3 = exp4.vert2;
   EXPECT_TRUE(read_rtfile(&data4, "gtest/reader_testfiles/valid4.rt"));
   EXPECT_TRUE(is_equal_triangle(data4.triangle, &exp4));
-  free(data1.triangle);
+  free(data4.triangle);
 }
