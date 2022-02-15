@@ -7,6 +7,6 @@
 !*.sh
 !*.cpp
 !*.yml
+!*.rt
 !Makefile
-!gtest/reader_testiles/*
 test
