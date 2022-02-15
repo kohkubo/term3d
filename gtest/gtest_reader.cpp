@@ -8,14 +8,19 @@ void init_triangle(t_data *data) {
   data->triangle->vert1 = vect_new(0, 0, 0);
   data->triangle->vert2 = vect_new(0, 0, 0);
   data->triangle->vert3 = vect_new(0, 0, 0);
+  data->triangle->next = NULL;
 }
 
 bool is_equal_vector(t_vect *act, t_vect *exp) {
+  if (!act || !exp)
+    return (false);
   return (is_equal(act->x, exp->x) && is_equal(act->y, exp->y) &&
           is_equal(act->z, exp->z));
 }
 
 bool is_equal_triangle(t_triangle *act, t_triangle *exp) {
+  if (!act || !exp)
+    return (false);
   return (is_equal_vector(&act->normal, &exp->normal) &&
           is_equal_vector(&act->vert1, &exp->vert1) &&
           is_equal_vector(&act->vert2, &exp->vert2) &&
@@ -61,38 +66,45 @@ TEST(Reader, InvalidTRFormat) {
 }
 
 TEST(Reader, ReadTriangle) {
-  t_data data;
-  t_triangle exp;
+  t_data data1;
+  init_triangle(&data1);
+  t_triangle exp1;
+  exp1.normal = vect_new(1, 1, 1);
+  exp1.vert1 = exp1.normal;
+  exp1.vert2 = exp1.vert1;
+  exp1.vert3 = exp1.vert2;
+  EXPECT_TRUE(read_rtfile(&data1, "gtest/reader_testfiles/valid1.rt"));
+  EXPECT_TRUE(is_equal_triangle(data1.triangle, &exp1));
 
-  init_triangle(&data);
+  t_data data2;
+  init_triangle(&data2);
+  t_triangle exp2;
+  exp2.normal = vect_new(-1, -1, -1);
+  exp2.vert1 = exp2.normal;
+  exp2.vert2 = exp2.vert1;
+  exp2.vert3 = exp2.vert2;
+  EXPECT_TRUE(read_rtfile(&data2, "gtest/reader_testfiles/valid2.rt"));
+  EXPECT_TRUE(is_equal_triangle(data2.triangle, &exp2));
 
-  exp.normal = vect_new(1, 1, 1);
-  exp.vert1 = exp.normal;
-  exp.vert2 = exp.vert1;
-  exp.vert3 = exp.vert2;
-  EXPECT_TRUE(read_rtfile(&data, "gtest/reader_testfiles/valid1.rt"));
-  EXPECT_TRUE(is_equal_triangle(data.triangle, &exp));
-
-  exp.normal = vect_new(-1, -1, -1);
-  exp.vert1 = exp.normal;
-  exp.vert2 = exp.vert1;
-  exp.vert3 = exp.vert2;
-  EXPECT_TRUE(read_rtfile(&data, "gtest/reader_testfiles/valid2.rt"));
-  EXPECT_TRUE(is_equal_triangle(data.triangle, &exp));
-
-  exp.normal =
+  t_data data3;
+  init_triangle(&data3);
+  t_triangle exp3;
+  exp3.normal =
       vect_new(1.0000000000000001, 1.0000000000000001, 1.0000000000000001);
-  exp.vert1 = exp.normal;
-  exp.vert2 = exp.vert1;
-  exp.vert3 = exp.vert2;
-  EXPECT_TRUE(read_rtfile(&data, "gtest/reader_testfiles/valid3.rt"));
-  EXPECT_TRUE(is_equal_triangle(data.triangle, &exp));
+  exp3.vert1 = exp3.normal;
+  exp3.vert2 = exp3.vert1;
+  exp3.vert3 = exp3.vert2;
+  EXPECT_TRUE(read_rtfile(&data3, "gtest/reader_testfiles/valid3.rt"));
+  EXPECT_TRUE(is_equal_triangle(data3.triangle, &exp3));
 
-  exp.normal =
+  t_data data4;
+  init_triangle(&data4);
+  t_triangle exp4;
+  exp4.normal =
       vect_new(-1.0000000000000001, -1.0000000000000001, -1.0000000000000001);
-  exp.vert1 = exp.normal;
-  exp.vert2 = exp.vert1;
-  exp.vert3 = exp.vert2;
-  EXPECT_TRUE(read_rtfile(&data, "gtest/reader_testfiles/valid4.rt"));
-  EXPECT_TRUE(is_equal_triangle(data.triangle, &exp));
+  exp4.vert1 = exp4.normal;
+  exp4.vert2 = exp4.vert1;
+  exp4.vert3 = exp4.vert2;
+  EXPECT_TRUE(read_rtfile(&data4, "gtest/reader_testfiles/valid4.rt"));
+  EXPECT_TRUE(is_equal_triangle(data4.triangle, &exp4));
 }
