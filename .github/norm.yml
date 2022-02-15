@@ -1,0 +1,15 @@
+name: CI
+
+on: [pull_request, workflow_dispatch, push]
+
+jobs:
+  norm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Norminette.
+        run: |
+          python3 -m pip install --upgrade pip setuptools
+          python3 -m pip install norminette==3.3.2
+      - name: Run Norminette.
+        run: norminette

@@ -7,3 +7,4 @@
 !*.sh
 !Makefile
 test
+!*.yml
