@@ -11,6 +11,21 @@ static bool	is_valid_ext(char *filepath) {
 	return (true);
 }
 
+bool	read_identifier(FILE *file) {
+	char identifier[4];
+
+	if (fscanf(file, "%3s", &identifier) != 1)
+		return (false);
+	if (strncmp(identifier, "tr", 3))
+		return (false);
+	return (true);
+}
+
+bool	read_vector(t_vect *vect, FILE *file)
+{
+	return (fscanf(file, "%lf,%lf,%lf ", &vect->x, &vect->y, &vect->z) == 3);
+}
+
 bool	read_rtfile(t_data *data, char *filepath) {
 	FILE	*file;
 
@@ -19,6 +34,22 @@ bool	read_rtfile(t_data *data, char *filepath) {
 	file = fopen(filepath, "r");
 	if (!file) {
 		fprintf(stderr, "Error: Input filepath named \"%s\" not found.\n", filepath);
+		return (false);
+	}
+	while (read_identifier(file))
+	{
+		if (!read_vector(&data->triangle->normal, file))
+			break ;
+		if (!read_vector(&data->triangle->vert1, file))
+			break ;
+		if (!read_vector(&data->triangle->vert2, file))
+			break ;
+		if (!read_vector(&data->triangle->vert3, file))
+			break ;
+	}
+	if (!feof(file))
+	{
+		fclose(file);
 		return (false);
 	}
 	fclose(file);

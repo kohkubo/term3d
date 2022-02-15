@@ -8,4 +8,5 @@
 !*.cpp
 !*.yml
 !Makefile
+!gtest/reader_testiles/*
 test
