@@ -8,7 +8,6 @@ void init_triangle(t_data *data) {
   data->triangle->vert1 = vect_new(0, 0, 0);
   data->triangle->vert2 = vect_new(0, 0, 0);
   data->triangle->vert3 = vect_new(0, 0, 0);
-  data->triangle->next = NULL;
 }
 
 bool is_equal_vector(t_vect *act, t_vect *exp) {
