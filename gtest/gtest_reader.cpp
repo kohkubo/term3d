@@ -48,6 +48,8 @@ TEST(Reader, InvalidIdentifier) {
   EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/identifier1.rt"));
   EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/identifier2.rt"));
   EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/identifier3.rt"));
+
+  free(data.triangle);
 }
 
 TEST(Reader, InvalidTRFormat) {
@@ -62,6 +64,8 @@ TEST(Reader, InvalidTRFormat) {
   EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/tr_format6.rt"));
   EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/tr_format7.rt"));
   EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/tr_format8.rt"));
+
+  free(data.triangle);
 }
 
 TEST(Reader, ReadTriangle) {
@@ -74,6 +78,7 @@ TEST(Reader, ReadTriangle) {
   exp1.vert3 = exp1.vert2;
   EXPECT_TRUE(read_rtfile(&data1, "gtest/reader_testfiles/valid1.rt"));
   EXPECT_TRUE(is_equal_triangle(data1.triangle, &exp1));
+  free(data1.triangle);
 
   t_data data2;
   init_triangle(&data2);
@@ -84,6 +89,7 @@ TEST(Reader, ReadTriangle) {
   exp2.vert3 = exp2.vert2;
   EXPECT_TRUE(read_rtfile(&data2, "gtest/reader_testfiles/valid2.rt"));
   EXPECT_TRUE(is_equal_triangle(data2.triangle, &exp2));
+  free(data1.triangle);
 
   t_data data3;
   init_triangle(&data3);
@@ -95,6 +101,7 @@ TEST(Reader, ReadTriangle) {
   exp3.vert3 = exp3.vert2;
   EXPECT_TRUE(read_rtfile(&data3, "gtest/reader_testfiles/valid3.rt"));
   EXPECT_TRUE(is_equal_triangle(data3.triangle, &exp3));
+  free(data1.triangle);
 
   t_data data4;
   init_triangle(&data4);
@@ -106,4 +113,5 @@ TEST(Reader, ReadTriangle) {
   exp4.vert3 = exp4.vert2;
   EXPECT_TRUE(read_rtfile(&data4, "gtest/reader_testfiles/valid4.rt"));
   EXPECT_TRUE(is_equal_triangle(data4.triangle, &exp4));
+  free(data1.triangle);
 }
