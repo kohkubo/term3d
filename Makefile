@@ -51,7 +51,6 @@ srcs_test = \
 	./$(src_dir)/vect/vect3.c \
 	./$(src_dir)/vect/vect4.c \
 
-.PHONY: $(gtest)
 $(gtest):
 	mkdir -p $(dir ../test)
 	curl -OL https://github.com/google/googletest/archive/refs/tags/release-1.11.0.tar.gz
