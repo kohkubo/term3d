@@ -17,20 +17,27 @@ src =\
 	./vect/vect3.c \
 	./vect/vect4.c \
 
+.PHONY: all
 all		: $(NAME)
 
 $(NAME)	: $(obj)
 	$(CC) $(CFLAGS) $(obj) -o $(NAME)
 
+.PHONY: clean
 clean	:
 	$(RM) $(obj)
 	$(RM) -r $(NAME).dSYM
 
+.PHONY: fclean
 fclean	: clean
 	$(RM) $(obj)
 	$(RM) $(NAME)
 
+.PHONY: re
 re		: fclean all
+
+leak:
+	leaks -q -atExit -- ./term3d hoge
 
 gtestdir	=	./test
 gtest		=	$(gtestdir)/gtest $(gtestdir)/googletest-release-1.11.0
@@ -44,6 +51,7 @@ srcs_test = \
 	./$(src_dir)/vect/vect3.c \
 	./$(src_dir)/vect/vect4.c \
 
+.PHONY: $(gtest)
 $(gtest):
 	mkdir -p $(dir ../test)
 	curl -OL https://github.com/google/googletest/archive/refs/tags/release-1.11.0.tar.gz
@@ -52,6 +60,7 @@ $(gtest):
 	python googletest-release-1.11.0/googletest/scripts/fuse_gtest_files.py $(gtestdir)
 	mv googletest-release-1.11.0 $(gtestdir)
 
+.PHONY: test
 test: $(gtest) fclean
 	clang++ -std=c++11 \
 	$(testdir)/gtest.cpp $(gtestdir)/googletest-release-1.11.0/googletest/src/gtest_main.cc $(gtestdir)/gtest/gtest-all.cc \

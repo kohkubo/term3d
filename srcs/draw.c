@@ -14,8 +14,7 @@ static void	init_data(t_data *data)
 	data->camera->screen_dist = 10;
 	data->camera->screen_center = vect_new(0, 0, 0);
 	data->circle = (t_circle *)malloc(sizeof(t_circle));
-	data->circle->center = vect_new(0, 0, 0);
-	data->circle->normal = vect_normalize(vect_new(0, 0, 1));
+	data->circle->normal = vect_new(0, 0, 1);
 	data->circle->radius = 1;
 	data->torus = (t_torus *)malloc(sizeof(t_torus));
 	data->torus->center = vect_new(0, 0, 0);
