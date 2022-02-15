@@ -59,3 +59,40 @@ TEST(Reader, InvalidTRFormat) {
   EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/tr_format7.rt"));
   EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/tr_format8.rt"));
 }
+
+TEST(Reader, ReadTriangle) {
+  t_data data;
+  t_triangle exp;
+
+  init_triangle(&data);
+
+  exp.normal = vect_new(1, 1, 1);
+  exp.vert1 = exp.normal;
+  exp.vert2 = exp.vert1;
+  exp.vert3 = exp.vert2;
+  EXPECT_TRUE(read_rtfile(&data, "gtest/reader_testfiles/valid1.rt"));
+  EXPECT_TRUE(is_equal_triangle(data.triangle, &exp));
+
+  exp.normal = vect_new(-1, -1, -1);
+  exp.vert1 = exp.normal;
+  exp.vert2 = exp.vert1;
+  exp.vert3 = exp.vert2;
+  EXPECT_TRUE(read_rtfile(&data, "gtest/reader_testfiles/valid2.rt"));
+  EXPECT_TRUE(is_equal_triangle(data.triangle, &exp));
+
+  exp.normal =
+      vect_new(1.0000000000000001, 1.0000000000000001, 1.0000000000000001);
+  exp.vert1 = exp.normal;
+  exp.vert2 = exp.vert1;
+  exp.vert3 = exp.vert2;
+  EXPECT_TRUE(read_rtfile(&data, "gtest/reader_testfiles/valid3.rt"));
+  EXPECT_TRUE(is_equal_triangle(data.triangle, &exp));
+
+  exp.normal =
+      vect_new(-1.0000000000000001, -1.0000000000000001, -1.0000000000000001);
+  exp.vert1 = exp.normal;
+  exp.vert2 = exp.vert1;
+  exp.vert3 = exp.vert2;
+  EXPECT_TRUE(read_rtfile(&data, "gtest/reader_testfiles/valid4.rt"));
+  EXPECT_TRUE(is_equal_triangle(data.triangle, &exp));
+}
