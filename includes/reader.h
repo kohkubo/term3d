@@ -7,4 +7,6 @@
 # include <string.h>
 # include <stdbool.h>
 
+bool	read_rtfile(t_data *data, char *filepath);
+
 #endif

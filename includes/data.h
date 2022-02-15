@@ -37,6 +37,14 @@ typedef struct s_torus
 	double		tube_radius;
 }				t_torus;
 
+typedef struct s_trignale
+{
+	t_vect		vert1;
+	t_vect		vert2;
+	t_vect		vert3;
+	t_vect		normal;
+}				t_trignale;
+
 typedef struct s_camera
 {
 	t_vect		pos;
@@ -61,6 +69,7 @@ typedef struct s_data
 	t_camera	*camera;
 	t_circle	*circle;
 	t_torus		*torus;
+	t_trignale	*triangle;
 }				t_data;
 
 bool			is_equal(double a, double b);

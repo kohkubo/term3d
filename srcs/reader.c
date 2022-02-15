@@ -1,50 +1,33 @@
-#include "../include/term3d.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
+#include "reader.h"
 
-//Camera
-//C x,y,z
+static bool	is_valid_ext(char *filepath) {
+	char	*ext;
 
-//Light
-//L x,y,z range
-
-//Circle
-//ci x,y,z x,y,z radius
-
-//Torus
-//to x,y,z x,y,z radius tube_radius
-
-
-//ファイルから一行読み込み
-//読み込みデータからオブジェクトの判別
-//オブジェクトをt_dataに追加
-
-//for debug
-void print_vector(t_vect *vect) {
-	printf("[%f][%f][%f]\n", vect->x, vect->y, vect->z);
+	if (!filepath)
+		return (false);
+	ext = strrchr(filepath, '.');
+	if (!ext || strncmp(ext, ".rt", 4))
+		return (false);
+	return (true);
 }
 
-void	print_data(t_data *data) {
-	printf("\ncamera_pos");
-	print_vector(&data->camera_pos);
+bool	read_rtfile(t_data *data, char *filepath) {
+	FILE	*file;
 
-	printf("light_pos");
-	print_vector(&data->light_pos);
-	printf("light_range[%f]\n\n", data->light_range);
+	if (!is_valid_ext(filepath))
+		return (false);
+	file = fopen(filepath, "r");
+	if (!file) {
+		fprintf(stderr, "Error: Input filepath named \"%s\" not found.\n", filepath);
+		return (false);
+	}
+	fclose(file);
+	return (true);
+}
 
-	printf("circle_center");
-	print_vector(&data->circle.circle_center);
-	printf("circle_normal");
-	print_vector(&data->circle.circle_normal);
-	printf("circle_radius[%f]\n\n", data->circle.circle_radius);
-
-	printf("torus_center");
-	print_vector(&data->torus.torus_center);
-	printf("torus_normal");
-	print_vector(&data->torus.torus_normal);
-	printf("torus_radius[%f]\ntorus_tube_radius[%f]\n\n", data->torus.torus_radius, data->torus.torus_tube_radius);
+/*
+void print_vector(t_vect *vect) {
+	printf("[%f][%f][%f]\n", vect->x, vect->y, vect->z);
 }
 
 bool set_camera(FILE *file, t_data *data)
@@ -121,7 +104,6 @@ void read_rtfile(t_data *data, char *filepath) {
 		exit(1);
 	}
 
-
 	//get_identifier
 	char identifier[256];
 	while (fscanf(file, "%255s", identifier) != EOF) {
@@ -142,15 +124,4 @@ void read_rtfile(t_data *data, char *filepath) {
 	}
 	fclose(file);
 }
-
-int main(int argc, char **argv) {
-	t_data data = {0};
-
-	if (argc != 2) {
-		fprintf(stderr, "Usage: ./term3d [filepath]");
-		exit(1);
-	}
-	read_rtfile(&data, argv[1]);
-	print_data(&data);
-	return (0);
-}
+*/
