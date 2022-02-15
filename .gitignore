@@ -1,0 +1,11 @@
+*
+
+!.gitignore
+!**/
+!*.c
+!*.h
+!*.sh
+!*.cpp
+!*.yml
+!Makefile
+test
