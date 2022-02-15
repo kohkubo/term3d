@@ -25,4 +25,8 @@ t_vect	vect_cross(t_vect vect1, t_vect vect2);
 double	vect_len(t_vect vect);
 t_vect	vect_normalize(t_vect vect);
 double	vect_distance(t_vect vect1, t_vect vect2);
+t_vect	vect_inv(t_vect vect);
+double	vect_det(t_vect vect1, t_vect vect2, t_vect vect3);
+t_vect	vect_rotate(t_vect vect, t_vect axis, double angle);
+double	vect_angle(t_vect vect1, t_vect vect2);
 #endif

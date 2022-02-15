@@ -7,12 +7,14 @@ static void	init_data(t_data *data)
 	data->light->range = vect_new(0, 0, 0);
 	data->camera = (t_camera *)malloc(sizeof(t_camera));
 	data->camera->pos = vect_new(0, 0, 10);
+	data->camera->normal = vect_new(0, 0, -1);
 	data->camera->up = vect_new(0, 1, 0);
+	data->camera->right = vect_new(1, 0, 0);
 	data->camera->lookat = vect_new(0, 0, 0);
 	data->camera->screen_dist = 10;
 	data->camera->screen_center = vect_new(0, 0, 0);
 	data->circle = (t_circle *)malloc(sizeof(t_circle));
-	data->circle->center = vect_new(0, 0, 10.4);
+	data->circle->center = vect_new(0, 0, 0);
 	data->circle->normal = vect_normalize(vect_new(0, 0, 1));
 	data->circle->radius = 1;
 	data->torus = (t_torus *)malloc(sizeof(t_torus));
@@ -53,6 +55,6 @@ void	draw(t_data *data)
 	while (true)
 	{
 		draw_loop(data);
-		usleep(30000);
+		usleep(50000);
 	}
 }

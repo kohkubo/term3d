@@ -8,11 +8,14 @@ CC 			= gcc
 CFLAGS		= -Wall -Wextra -Werror -g $(includes:%=-I%)
 
 src =\
+	./data.c \
 	./term3d.c \
 	./draw.c \
+	./move.c \
 	./vect/vect1.c \
 	./vect/vect2.c \
 	./vect/vect3.c \
+	./vect/vect4.c \
 
 all		: $(NAME)
 
@@ -32,7 +35,14 @@ re		: fclean all
 gtestdir	=	./test
 gtest		=	$(gtestdir)/gtest $(gtestdir)/googletest-release-1.11.0
 testdir = ./gtest
-srcs_test = ./$(src_dir)/vect/vect1.c \
+srcs_test = \
+	./$(src_dir)/draw.c \
+	./$(src_dir)/data.c \
+	./$(src_dir)/move.c \
+	./$(src_dir)/vect/vect1.c \
+	./$(src_dir)/vect/vect2.c \
+	./$(src_dir)/vect/vect3.c \
+	./$(src_dir)/vect/vect4.c \
 
 $(gtest):
 	mkdir -p $(dir ../test)

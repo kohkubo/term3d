@@ -13,7 +13,12 @@ t_vect	vect_cross(t_vect vect1, t_vect vect2)
 
 double	vect_len(t_vect vect)
 {
-	return (sqrt(vect_dot(vect, vect)));
+	double	len;
+
+	len = sqrt(vect_dot(vect, vect));
+	if (isnan(len))
+		return (0);
+	return (len);
 }
 
 t_vect	vect_normalize(t_vect vect)

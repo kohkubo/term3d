@@ -2,6 +2,7 @@
 # define DATA_H
 
 # include <stdbool.h>
+# include <float.h>
 # include "vect.h"
 # define WIDTH 50
 # define HEIGHT 50
@@ -39,8 +40,11 @@ typedef struct s_torus
 typedef struct s_camera
 {
 	t_vect		pos;
-	t_vect		up;
+	t_vect		normal;
 	t_vect		lookat;
+	t_vect		ray;
+	t_vect		up;
+	t_vect		right;
 	double		screen_dist;
 	t_vect		screen_center;
 }				t_camera;
@@ -58,5 +62,10 @@ typedef struct s_data
 	t_circle	*circle;
 	t_torus		*torus;
 }				t_data;
+
+bool			is_equal(double a, double b);
+bool			less(double a, double b);
+bool			less_equal(double a, double b);
+double			radian(double degree);
 
 #endif
