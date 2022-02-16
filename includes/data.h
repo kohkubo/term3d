@@ -3,18 +3,10 @@
 
 # include <stdbool.h>
 # include <float.h>
-# include "vect.h"
-# include "list.h"
+# include <math.h>
 # define WIDTH 50
 # define HEIGHT 50
-/*
-defineの引数は一つでないとnormエラー
-#define TOP HEIGHT / 2 とは書けないです
-*/
-# define TOP 25
-# define BOTTOM -25
-# define LEFT -25
-# define RIGHT 25
+# define FOCUS_DISTANCE 20
 # define O ". "
 # define X "  "
 /*
@@ -26,20 +18,19 @@ TOP_LEFTは標準出力の位置を固定するためのものです
 # define CIRCLE_SIZE 10000
 # define TORUS_SIZE 10000
 
+typedef struct s_vect
+{
+	double		x;
+	double		y;
+	double		z;
+}				t_vect;
+
 typedef struct s_circle
 {
 	t_vect		center;
 	t_vect		normal;
 	double		radius;
 }				t_circle;
-
-typedef struct s_torus
-{
-	t_vect		center;
-	t_vect		normal;
-	double		radius;
-	double		tube_radius;
-}				t_torus;
 
 typedef struct s_triangle
 {
@@ -65,15 +56,13 @@ typedef enum e_type
 typedef struct s_data
 {
 	t_camera	*camera;
-	t_circle	circle[CIRCLE_SIZE];
-	t_torus		torus[TORUS_SIZE];
-	t_type		type;
-	int			count;
+	t_circle	circle[1000];
 }				t_data;
 
 bool			is_equal(double a, double b);
 bool			less(double a, double b);
 bool			less_equal(double a, double b);
 double			radian(double degree);
+double			degree(double radian);
 
 #endif

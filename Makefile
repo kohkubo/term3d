@@ -11,6 +11,8 @@ src =\
 	./data.c \
 	./term3d.c \
 	./draw.c \
+	./circle.c \
+	./camera.c \
 	./move.c \
 	./list.c \
 	./init.c \
@@ -40,6 +42,7 @@ fclean	: clean
 .PHONY: re
 re		: fclean all
 
+.PHONY: leak
 leak:
 	leaks -q -atExit -- ./term3d hoge
 
@@ -49,11 +52,11 @@ testdir = ./gtest
 srcs_test = \
 	./$(src_dir)/draw.c \
 	./$(src_dir)/data.c \
+	./$(src_dir)/circle.c \
 	./$(src_dir)/move.c \
 	./$(src_dir)/list.c \
-	./$(src_dir)/init.c \
 	./$(src_dir)/reader.c \
-	./$(src_dir)/read_object.c \
+	./$(src_dir)/camera.c \
 	./$(src_dir)/vect/vect1.c \
 	./$(src_dir)/vect/vect2.c \
 	./$(src_dir)/vect/vect3.c \
