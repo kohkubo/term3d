@@ -69,5 +69,6 @@ bool			is_equal(double a, double b);
 bool			less(double a, double b);
 bool			less_equal(double a, double b);
 double			radian(double degree);
+double			angle(double radian);
 
 #endif

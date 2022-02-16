@@ -6,7 +6,7 @@ static void	init_data(t_data *data)
 	data->light->pos = vect_new(0, 0, 0);
 	data->light->range = vect_new(0, 0, 0);
 	data->camera = (t_camera *)malloc(sizeof(t_camera));
-	data->camera->pos = vect_new(0, 0, -1);
+	data->camera->pos = vect_new(0, 0, -2);
 	data->camera->lookat = vect_new(0, 0, 0);
 	data->circle = (t_circle *)malloc(sizeof(t_circle));
 	data->circle->center = vect_new(0, 0, 0);
@@ -64,14 +64,14 @@ static void	draw_loop(t_data *data)
 
 void	draw(t_data *data)
 {
-	t_vect   tmp = vect_normalize(vect_new(0, 1, 0));
 	init_data(data);
 	while (true)
 	{
 		draw_loop(data);
 		// move_camera(data->camera);
-		data->circle->normal = vect_rotate(data->circle->normal, tmp, radian(1));
-		vect_print(data->circle->normal);
+		data->circle->normal = vect_rotate(data->circle->normal, vect_new(0, 1, 0), radian(1));
+		double a = vect_angle(data->circle->normal, vect_new(0, 0, 1));
+		printf("angle: %f\n", angle(a));
 		usleep(50000);
 	}
 }
