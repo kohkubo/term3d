@@ -226,3 +226,19 @@ TEST(Data, radian)
   EXPECT_EQ(radian(270.0), M_PI_2 * 3.0);
   EXPECT_EQ(radian(360.0), M_PI * 2.0);
 }
+
+TEST(Data, less_equal)
+{
+  EXPECT_EQ(less_equal(0.0, 0.0), true);
+  EXPECT_EQ(less_equal(0.0, 1.0), true);
+
+  EXPECT_EQ(less_equal(1.0, 0.0), false);
+  EXPECT_EQ(less_equal(1.0, 1.0), true);
+  EXPECT_EQ(less_equal(1.0, 2.0), true);
+  EXPECT_EQ(less_equal(2.0, 1.0), false);
+  EXPECT_EQ(less_equal(2.0, 2.0), true);
+  EXPECT_EQ(less_equal(0.00001, 0.00001), true);
+  EXPECT_EQ(less_equal(0.00001, 0.00002), true);
+  EXPECT_EQ(less_equal(0.00002, 0.00001), false);
+  EXPECT_EQ(less_equal(0.000001, 0.000001), true);
+}
