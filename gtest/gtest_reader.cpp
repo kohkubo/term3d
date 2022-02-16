@@ -58,7 +58,7 @@ TEST(DISBALED_Reader, InvalidIdentifier) {
   */
 }
 
-TEST(Reader, InvalidCircleFormat) {
+TEST(DISABLED_Reader, InvalidCircleFormat) {
   t_data data = {0};
 
   /*
