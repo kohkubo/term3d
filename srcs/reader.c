@@ -1,49 +1,59 @@
 #include "reader.h"
 
-static bool	is_valid_ext(char *filepath)
+void	exit_perror(void)
+{
+	perror(NULL);
+	exit(EXIT_FAILURE);
+}
+
+void	exit_error(char *errmsg)
+{
+	if (errmsg)
+		fprintf(stderr, "%s\n", errmsg);
+	exit(EXIT_FAILURE);
+}
+
+static void	check_extension(char *filepath)
 {
 	char	*ext;
 
 	if (!filepath)
-		return (false);
+		exit_error("does not filepath.");
 	ext = strrchr(filepath, '.');
-	if (!ext || strncmp(ext, ".rt", 4))
-		return (false);
-	return (true);
+	if (!ext || strncmp(ext, ".cir", 5))
+		exit_error("file extension error.");
 }
 
-static t_list	*read_object(FILE *file)
+void	read_circle(t_circle *circle, FILE *file)
 {
-	return (ft_lstnew(read_triangle(file)));
+	t_vect	nrm;
+	t_vect	cnt;
+	double	radius;
+
+	if (fscanf(file, "%lf,%lf,%lf %lf,%lf,%lf %lf",
+			   &cnt.x, &cnt.y, &cnt.z, &nrm.x, &nrm.y, &nrm.z, &radius) != 7)
+		exit_error("read failed");
+	circle->center = cnt;
+	circle->normal = nrm;
+	circle->radius = radius;
 }
 
-static bool	add_object(t_data *data, t_list *add)
-{
-	if (!add)
-		return (false);
-	ft_lstadd_back(&data->triangle, add);
-	return (true);
-}
-
-bool	read_rtfile(t_data *data, char *filepath)
+void	read_rtfile(t_data *data, char *filepath)
 {
 	FILE	*file;
-	bool	success;
+	int		c;
 
-	if (!is_valid_ext(filepath))
-		return (false);
+	check_extension(filepath);
 	file = fopen(filepath, "r");
 	if (!file)
-	{
-		fprintf(stderr, "Error: Input filepath named \"%s\" not found.\n", \
-				filepath);
-		return (false);
-	}
-	success = true;
-	while (success && !feof(file))
-		success = add_object(data, read_object(file));
-	if (!success)
-		ft_lstclear(&data->triangle, free);
+		exit_perror();
+	data->type = CIRCLE;
+	if (fscanf(file, "%d", &data->count) != 1)
+		exit_error("count read error");
+	c = 0;
+	while (c < data->count)
+		read_circle(&data->circle[c++], file);
+	if (!feof(file) || ferror(file))
+		exit_error("file error");
 	fclose(file);
-	return (success);
 }

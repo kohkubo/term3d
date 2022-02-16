@@ -23,6 +23,9 @@ TOP_LEFTは標準出力の位置を固定するためのものです
 */
 # define TOP_LEFT "\x1b[H"
 
+# define CIRCLE_SIZE 10000
+# define TORUS_SIZE 10000
+
 typedef struct s_circle
 {
 	t_vect		center;
@@ -49,28 +52,23 @@ typedef struct s_triangle
 typedef struct s_camera
 {
 	t_vect		pos;
-	t_vect		normal;
 	t_vect		lookat;
 	t_vect		ray;
-	t_vect		up;
-	t_vect		right;
-	double		screen_dist;
-	t_vect		screen_center;
 }				t_camera;
 
-typedef struct s_light
+typedef enum e_type
 {
-	t_vect		pos;
-	t_vect		range;
-}				t_light;
+	CIRCLE,
+	TRIANGLE,
+}				t_type;
 
 typedef struct s_data
 {
-	t_light		*light;
 	t_camera	*camera;
-	t_circle	*circle;
-	t_torus		*torus;
-	t_list		*triangle;
+	t_circle	circle[CIRCLE_SIZE];
+	t_torus		torus[TORUS_SIZE];
+	t_type		type;
+	int			count;
 }				t_data;
 
 bool			is_equal(double a, double b);

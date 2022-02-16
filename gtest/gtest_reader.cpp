@@ -2,14 +2,6 @@
 #include <gtest/gtest.h>
 
 //テスト用便利関数
-void print_triangle(t_triangle *tri) {
-  printf("Triangle\n");
-  vect_print(tri->normal);
-  vect_print(tri->vert1);
-  vect_print(tri->vert2);
-  vect_print(tri->vert3);
-}
-
 bool is_equal_vector(t_vect *act, t_vect *exp) {
   if (!act || !exp)
     return (false);
@@ -17,133 +9,93 @@ bool is_equal_vector(t_vect *act, t_vect *exp) {
           is_equal(act->z, exp->z));
 }
 
-bool is_equal_triangle(t_triangle *act, t_triangle *exp) {
-  if (!act || !exp)
-    return (false);
-  return (is_equal_vector(&act->normal, &exp->normal) &&
-          is_equal_vector(&act->vert1, &exp->vert1) &&
-          is_equal_vector(&act->vert2, &exp->vert2) &&
-          is_equal_vector(&act->vert3, &exp->vert3));
+t_circle new_circle(t_vect center, t_vect normal, double radius)
+{
+  t_circle circle;
+
+  circle.center = center;
+  circle.normal = normal;
+  circle.radius = radius;
+  return (circle);
 }
 
-bool is_equal_triangle_list(t_list *act, t_list *exp) {
-  while (act && exp) {
-    print_triangle(static_cast<t_triangle *>(act->content));
-    if (!is_equal_triangle(static_cast<t_triangle *>(act->content),
-                           static_cast<t_triangle *>(exp->content)))
-      return (false);
-    act = act->next;
-    exp = exp->next;
+void is_equal_circles(t_data data, t_data exp)
+{
+  EXPECT_EQ(data.count, exp.count);
+  EXPECT_EQ(data.type, exp.type);
+  for (int i = 0; i < 100; i++)
+  {
+    EXPECT_TRUE(is_equal_vector(&data.circle[i].center, &exp.circle[i].center));
+    EXPECT_TRUE(is_equal_vector(&data.circle[i].normal, &exp.circle[i].normal));
+    EXPECT_TRUE(is_equal(data.circle[i].radius, exp.circle[i].radius));
   }
-  return (!act && !exp);
 }
 
 TEST(DISABLED_Reader, InvalidFile) {
   t_data data;
 
+  /*
   EXPECT_FALSE(read_rtfile(&data, NULL));
-  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/hogehoge"));
-  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/test.txt"));
+  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/invalid/hogehoge"));
+  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/invalid/test.txt"));
 
   // chmod 000が反映されないので、検証不可能
-  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/noperm.rt"));
-  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/nopermdir/test.rt"));
+  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/invalid/noperm.rt"));
+  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/invalid/nopermdir/test.rt"));
 
   //ディレクトリはfopenで読み込み可能
-  EXPECT_TRUE(read_rtfile(&data, "gtest/reader_testfiles/dir.rt"));
+  EXPECT_TRUE(read_rtfile(&data, "gtest/reader_testfiles/invalid/dir.rt"));
+  */
 }
 
-TEST(Reader, InvalidIdentifier) {
+TEST(DISBALED_Reader, InvalidIdentifier) {
   t_data data = {0};
 
-  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/identifier1.rt"));
-  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/identifier2.rt"));
-  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/identifier3.rt"));
-
-  ft_lstclear(&data.triangle, free);
+  /*
+  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/invalid/identifier1.rt"));
+  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/invalid/identifier2.rt"));
+  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/invalid/identifier3.rt"));
+  */
 }
 
-TEST(Reader, InvalidTRFormat) {
+TEST(Reader, InvalidCircleFormat) {
   t_data data = {0};
 
-  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/tr_format1.rt"));
-  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/tr_format2.rt"));
-  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/tr_format3.rt"));
-  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/tr_format4.rt"));
-  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/tr_format5.rt"));
-  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/tr_format6.rt"));
-  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/tr_format7.rt"));
-  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/tr_format8.rt"));
-
-  ft_lstclear(&data.triangle, free);
+  /*
+  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/invalid/tr_format1.rt"));
+  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/invalid/tr_format2.rt"));
+  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/invalid/tr_format3.rt"));
+  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/invalid/tr_format4.rt"));
+  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/invalid/tr_format5.rt"));
+  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/invalid/tr_format6.rt"));
+  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/invalid/tr_format7.rt"));
+  EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/invalid/tr_format8.rt"));
+  */
 }
 
-TEST(Reader, ReadTriangle) {
+TEST(Reader, ReadValidCircleFile) {
   t_data data = {0};
-  t_list *exp;
+  t_data exp = {0};
 
-  t_triangle *tri1;
-  tri1 = new_triangle();
-  tri1->normal = vect_new(1, 1, 1);
-  tri1->vert1 = tri1->vert2 = tri1->vert3 = tri1->normal;
-  exp = ft_lstnew(tri1);
-  EXPECT_TRUE(read_rtfile(&data, "gtest/reader_testfiles/valid1.rt"));
-  EXPECT_TRUE(is_equal_triangle_list(data.triangle, exp));
-  ft_lstclear(&data.triangle, free);
-  ft_lstclear(&exp, free);
+  exp.count = 1;
+  exp.type = CIRCLE;
+  exp.circle[0] = new_circle(vect_new(0,0,-10), vect_new(0,1,0), 5.0);
+  read_rtfile(&data, "gtest/reader_testfiles/valid/case1.cir");
+  is_equal_circles(data, exp);
 
-  t_triangle *tri2;
-  tri2 = new_triangle();
-  tri2->normal = vect_new(-1, -1, -1);
-  tri2->vert1 = tri2->vert2 = tri2->vert3 = tri2->normal;
-  exp = ft_lstnew(tri2);
-  EXPECT_TRUE(read_rtfile(&data, "gtest/reader_testfiles/valid2.rt"));
-  EXPECT_TRUE(is_equal_triangle_list(data.triangle, exp));
-  ft_lstclear(&data.triangle, free);
-  ft_lstclear(&exp, free);
+  exp.count = 4;
+  exp.type = CIRCLE;
+  exp.circle[0] = new_circle(vect_new(0,0,0), vect_new(0,0,0), 1);
+  exp.circle[1] = new_circle(vect_new(0,0,0), vect_new(0,0,0), 2);
+  exp.circle[2] = new_circle(vect_new(0,0,0), vect_new(0,0,0), 3);
+  exp.circle[3] = new_circle(vect_new(0,0,0), vect_new(0,0,0), 4);
+  read_rtfile(&data, "gtest/reader_testfiles/valid/case2.cir");
+  is_equal_circles(data, exp);
 
-  t_triangle *tri3;
-  tri3 = new_triangle();
-  tri3->normal =
-      vect_new(1.0000000000000001, 1.0000000000000001, 1.0000000000000001);
-  tri3->vert1 = tri3->vert2 = tri3->vert3 = tri3->normal;
-  exp = ft_lstnew(tri3);
-  EXPECT_TRUE(read_rtfile(&data, "gtest/reader_testfiles/valid3.rt"));
-  EXPECT_TRUE(is_equal_triangle_list(data.triangle, exp));
-  ft_lstclear(&data.triangle, free);
-  ft_lstclear(&exp, free);
-
-  t_triangle *tri4;
-  tri4 = new_triangle();
-  tri4->normal =
-      vect_new(-1.0000000000000001, -1.0000000000000001, -1.0000000000000001);
-  tri4->vert1 = tri4->vert2 = tri4->vert3 = tri4->normal;
-  exp = ft_lstnew(tri4);
-  EXPECT_TRUE(read_rtfile(&data, "gtest/reader_testfiles/valid4.rt"));
-  EXPECT_TRUE(is_equal_triangle_list(data.triangle, exp));
-  ft_lstclear(&data.triangle, free);
-  ft_lstclear(&exp, free);
-
-  tri1 = new_triangle();
-  tri1->normal = vect_new(1, 1, 1);
-  tri1->vert1 = tri1->vert2 = tri1->vert3 = tri1->normal;
-  exp = ft_lstnew(tri1);
-  tri2 = new_triangle();
-  tri2->normal = vect_new(-1, -1, -1);
-  tri2->vert1 = tri2->vert2 = tri2->vert3 = tri2->normal;
-  ft_lstadd_back(&exp, ft_lstnew(tri2));
-  tri3 = new_triangle();
-  tri3->normal =
-      vect_new(1.0000000000000001, 1.0000000000000001, 1.0000000000000001);
-  tri3->vert1 = tri3->vert2 = tri3->vert3 = tri3->normal;
-  ft_lstadd_back(&exp, ft_lstnew(tri3));
-  tri4 = new_triangle();
-  tri4->normal =
-      vect_new(-1.0000000000000001, -1.0000000000000001, -1.0000000000000001);
-  tri4->vert1 = tri4->vert2 = tri4->vert3 = tri4->normal;
-  ft_lstadd_back(&exp, ft_lstnew(tri4));
-  EXPECT_TRUE(read_rtfile(&data, "gtest/reader_testfiles/valid5.rt"));
-  EXPECT_TRUE(is_equal_triangle_list(data.triangle, exp));
-  ft_lstclear(&data.triangle, free);
-  ft_lstclear(&exp, free);
+  exp.count = 20;
+  exp.type = CIRCLE;
+  for (int i = 0; i < exp.count; i++)
+    exp.circle[i] = new_circle(vect_new(0,5,0), vect_new(0,0,1), 1.0);
+  read_rtfile(&data, "gtest/reader_testfiles/valid/case3.cir");
+  is_equal_circles(data, exp);
 }
