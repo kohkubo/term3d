@@ -7,6 +7,6 @@
 !*.sh
 !*.cpp
 !*.yml
-!*.rt
+!*.cir
 !Makefile
 test
