@@ -71,7 +71,8 @@ $(gtest):
 test: $(gtest) fclean
 	clang++ -std=c++11 \
 	$(testdir)/gtest.cpp $(gtestdir)/googletest-release-1.11.0/googletest/src/gtest_main.cc $(gtestdir)/gtest/gtest-all.cc \
+	-g -fsanitize=address -fsanitize=undefined -fsanitize=leak \
 	-I$(gtestdir) -I/usr/local/opt/llvm/include -I$(includes) -lpthread $(srcs_test) -o tester
-	leaks -q -atExit --  ./tester
+	./tester
 	rm -rf tester
 	rm -rf tester.dSYM
