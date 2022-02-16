@@ -1,8 +1,8 @@
 #ifndef INIT_H
 # define INIT_H
 
-#include "data.h"
-#include <stdlib.h>
+# include "data.h"
+# include <stdlib.h>
 
 t_triangle	*new_triangle(void);
 //t_circle	*new_circle(void);

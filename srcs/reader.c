@@ -1,8 +1,8 @@
 #include "reader.h"
 
-static bool is_valid_ext(char *filepath)
+static bool	is_valid_ext(char *filepath)
 {
-	char *ext;
+	char	*ext;
 
 	if (!filepath)
 		return (false);
@@ -15,8 +15,6 @@ static bool is_valid_ext(char *filepath)
 static t_list	*read_object(FILE *file)
 {
 	return (ft_lstnew(read_triangle(file)));
-	//return (ft_lstnew(read_circle(file)));
-	//return (ft_lstnew(read_torus(file)));
 }
 
 static bool	add_object(t_data *data, t_list *add)
@@ -37,7 +35,7 @@ bool	read_rtfile(t_data *data, char *filepath)
 	file = fopen(filepath, "r");
 	if (!file)
 	{
-		fprintf(stderr, "Error: Input filepath named \"%s\" not found.\n",
+		fprintf(stderr, "Error: Input filepath named \"%s\" not found.\n", \
 				filepath);
 		return (false);
 	}
