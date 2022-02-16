@@ -67,6 +67,7 @@ TEST(Circle, intersect_with_plane)
 	double distance = vect_distance(camera->lookat, center);
 	EXPECT_EQ(is_equal(vect_distance(camera->lookat, center), 0), true);
 
+	free(camera);
 }
 
 TEST(Circle, is_intersect_with_circle)
@@ -94,4 +95,7 @@ TEST(Circle, is_intersect_with_circle)
 	camera->ray = vect_new(0, 0, -1);
 	EXPECT_EQ(is_intersect_with_circle(camera, circle), false);
 	EXPECT_EQ(isinf(vect_distance(camera->lookat, camera->pos)), true);
+
+	free(camera);
+	free(circle);
 }
