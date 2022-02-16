@@ -2,6 +2,7 @@
 # define DRAW_H
 
 # include "data.h"
+# include "vect.h"
 # include "move.h"
 # include <stdio.h>
 # include <stdlib.h>

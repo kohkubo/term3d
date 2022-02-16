@@ -3,7 +3,7 @@
 
 # include <stdbool.h>
 # include <float.h>
-# include "vect.h"
+# include <math.h>
 # define WIDTH 50
 # define HEIGHT 50
 /*
@@ -21,6 +21,13 @@ TOP_LEFTは標準出力の位置を固定するためのものです
 これを出力の最初に行うことで、標準出力を使ったアニメーションができます
 */
 # define TOP_LEFT "\x1b[H"
+
+typedef struct s_vect
+{
+	double		x;
+	double		y;
+	double		z;
+}				t_vect;
 
 typedef struct s_circle
 {
@@ -40,13 +47,8 @@ typedef struct s_torus
 typedef struct s_camera
 {
 	t_vect		pos;
-	t_vect		normal;
 	t_vect		lookat;
 	t_vect		ray;
-	t_vect		up;
-	t_vect		right;
-	double		screen_dist;
-	t_vect		screen_center;
 }				t_camera;
 
 typedef struct s_light

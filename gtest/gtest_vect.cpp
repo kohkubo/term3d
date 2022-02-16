@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "data.h"
+#include "vect.h"
 
 TEST(Vect, vect_new)
 {
