@@ -66,7 +66,7 @@ void	draw(t_data *data)
 		data->circle->normal = vect_rotate(data->circle->normal, vect_new(0, 1,
 					0), radian(2));
 		a = vect_angle(data->circle->normal, vect_new(0, 0, 1));
-		printf("angle: %f\n", angle(a));
+		printf("angle: %f\n", degree(a));
 		printf("circle normal ");
 		vect_print(data->circle->normal);
 		usleep(50000);

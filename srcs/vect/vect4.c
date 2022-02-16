@@ -5,24 +5,24 @@ t_vect	vect_inv(t_vect vect)
 	return (vect_new(-vect.x, -vect.y, -vect.z));
 }
 
-t_vect	vect_rotate(t_vect vect, t_vect axis, double angle)
+t_vect	vect_rotate(t_vect vect, t_vect axis, double radian)
 {
 	t_vect	ret;
 	double	x_rot;
 	double	y_rot;
 	double	z_rot;
 
-	x_rot = axis.x * axis.x * (1 - cos(angle)) + cos(angle);
-	y_rot = axis.x * axis.y * (1 - cos(angle)) - axis.z * sin(angle);
-	z_rot = axis.z * axis.x * (1 - cos(angle)) + axis.y * sin(angle);
+	x_rot = axis.x * axis.x * (1 - cos(radian)) + cos(radian);
+	y_rot = axis.x * axis.y * (1 - cos(radian)) - axis.z * sin(radian);
+	z_rot = axis.z * axis.x * (1 - cos(radian)) + axis.y * sin(radian);
 	ret.x = x_rot * vect.x + y_rot * vect.y + z_rot * vect.z;
-	x_rot = axis.y * axis.x * (1 - cos(angle)) + axis.z * sin(angle);
-	y_rot = axis.y * axis.y * (1 - cos(angle)) + cos(angle);
-	z_rot = axis.y * axis.z * (1 - cos(angle)) - axis.x * sin(angle);
+	x_rot = axis.y * axis.x * (1 - cos(radian)) + axis.z * sin(radian);
+	y_rot = axis.y * axis.y * (1 - cos(radian)) + cos(radian);
+	z_rot = axis.y * axis.z * (1 - cos(radian)) - axis.x * sin(radian);
 	ret.y = x_rot * vect.x + y_rot * vect.y + z_rot * vect.z;
-	x_rot = axis.z * axis.x * (1 - cos(angle)) - axis.y * sin(angle);
-	y_rot = axis.z * axis.y * (1 - cos(angle)) + axis.x * sin(angle);
-	z_rot = axis.z * axis.z * (1 - cos(angle)) + cos(angle);
+	x_rot = axis.z * axis.x * (1 - cos(radian)) - axis.y * sin(radian);
+	y_rot = axis.z * axis.y * (1 - cos(radian)) + axis.x * sin(radian);
+	z_rot = axis.z * axis.z * (1 - cos(radian)) + cos(radian);
 	ret.z = x_rot * vect.x + y_rot * vect.y + z_rot * vect.z;
 	return (ret);
 }
