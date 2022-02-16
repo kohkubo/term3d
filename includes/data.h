@@ -29,14 +29,6 @@ typedef struct s_circle
 	double		radius;
 }				t_circle;
 
-typedef struct s_torus
-{
-	t_vect		center;
-	t_vect		normal;
-	double		radius;
-	double		tube_radius;
-}				t_torus;
-
 typedef struct s_camera
 {
 	t_vect		pos;
@@ -44,18 +36,10 @@ typedef struct s_camera
 	t_vect		ray;
 }				t_camera;
 
-typedef struct s_light
-{
-	t_vect		pos;
-	t_vect		range;
-}				t_light;
-
 typedef struct s_data
 {
-	t_light		*light;
 	t_camera	*camera;
-	t_circle	*circle;
-	t_torus		*torus;
+	t_circle	circle[1000];
 }				t_data;
 
 bool			is_equal(double a, double b);
