@@ -6,14 +6,7 @@
 # include <math.h>
 # define WIDTH 50
 # define HEIGHT 50
-/*
-defineの引数は一つでないとnormエラー
-#define TOP HEIGHT / 2 とは書けないです
-*/
-# define TOP 25
-# define BOTTOM -25
-# define LEFT -25
-# define RIGHT 25
+# define FOCUS_DISTANCE 10
 # define O ". "
 # define X "  "
 /*

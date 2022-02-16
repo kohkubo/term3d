@@ -5,6 +5,7 @@
 # include "vect.h"
 # include "circle.h"
 # include "move.h"
+# include "camera.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
