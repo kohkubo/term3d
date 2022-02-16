@@ -13,6 +13,9 @@ src =\
 	./draw.c \
 	./move.c \
 	./list.c \
+	./init.c \
+	./reader.c \
+	./read_object.c \
 	./vect/vect1.c \
 	./vect/vect2.c \
 	./vect/vect3.c \
@@ -48,7 +51,9 @@ srcs_test = \
 	./$(src_dir)/data.c \
 	./$(src_dir)/move.c \
 	./$(src_dir)/list.c \
+	./$(src_dir)/init.c \
 	./$(src_dir)/reader.c \
+	./$(src_dir)/read_object.c \
 	./$(src_dir)/vect/vect1.c \
 	./$(src_dir)/vect/vect2.c \
 	./$(src_dir)/vect/vect3.c \
@@ -66,8 +71,7 @@ $(gtest):
 test: $(gtest) fclean
 	clang++ -std=c++11 \
 	$(testdir)/gtest.cpp $(gtestdir)/googletest-release-1.11.0/googletest/src/gtest_main.cc $(gtestdir)/gtest/gtest-all.cc \
-	-g -fsanitize=address -fsanitize=undefined \
 	-I$(gtestdir) -I/usr/local/opt/llvm/include -I$(includes) -lpthread $(srcs_test) -o tester
-	./tester
+	leaks -q -atExit --  ./tester
 	rm -rf tester
 	rm -rf tester.dSYM
