@@ -57,6 +57,8 @@ typedef struct s_data
 {
 	t_camera	*camera;
 	t_circle	circle[1000];
+	int			count;
+	t_type		type;
 }				t_data;
 
 bool			is_equal(double a, double b);
