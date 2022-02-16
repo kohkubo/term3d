@@ -22,7 +22,8 @@ bool	is_intersect_with_circle(t_camera *camera, t_circle *circle)
 	camera->lookat = intersect_with_plane(camera, &circle->center,
 			&circle->normal);
 	distance = vect_distance(camera->lookat, circle->center);
-	if (distance <= circle->radius)
+	if (less_equal(distance, circle->radius) && \
+less_equal(circle->radius * 0.9, distance))
 		return (true);
 	return (false);
 }

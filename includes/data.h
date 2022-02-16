@@ -6,7 +6,7 @@
 # include <math.h>
 # define WIDTH 50
 # define HEIGHT 50
-# define FOCUS_DISTANCE 10
+# define FOCUS_DISTANCE 20
 # define O ". "
 # define X "  "
 /*

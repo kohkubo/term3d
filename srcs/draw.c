@@ -34,7 +34,6 @@ static void	draw_loop(t_data *data)
 	int		y;
 	double	camera_to_circle;
 
-	(void)data;
 	printf(TOP_LEFT);
 	y = 0;
 	while (y <= HEIGHT)

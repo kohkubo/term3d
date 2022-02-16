@@ -27,7 +27,6 @@ t_vect	camera_ray(t_camera *camera, int x, int y)
 	pixel_x = (double)x / (double)WIDTH - 0.5;
 	pixel_y = (double)y / (double)HEIGHT - 0.5;
 	ret = vect_add(screen_center(camera, camera_normal), \
-vect_scalar_mul(camera_normal, FOCUS_DISTANCE));
-	ret = vect_add(ret, vect_add(screen_right(pixel_x), screen_up(pixel_y)));
+vect_add(screen_right(pixel_x), screen_up(pixel_y)));
 	return (ret);
 }
