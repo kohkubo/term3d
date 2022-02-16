@@ -2,21 +2,12 @@
 
 static void	init_data(t_data *data)
 {
-	data->light = (t_light *)malloc(sizeof(t_light));
-	data->light->pos = vect_new(0, 0, 0);
-	data->light->range = vect_new(0, 0, 0);
 	data->camera = (t_camera *)malloc(sizeof(t_camera));
 	data->camera->pos = vect_new(0, 0, -15);
 	data->camera->lookat = vect_new(0, 0, 0);
-	data->circle = (t_circle *)malloc(sizeof(t_circle));
-	data->circle->center = vect_new(0, 0, 0);
-	data->circle->normal = vect_new(0, 0, 1);
+	data->circle[0].center = vect_new(0, 0, 0);
+	data->circle[0].normal = vect_new(0, 0, 1);
 	data->circle->radius = 1;
-	data->torus = (t_torus *)malloc(sizeof(t_torus));
-	data->torus->center = vect_new(0, 0, 0);
-	data->torus->normal = vect_new(0, 0, 0);
-	data->torus->radius = 1;
-	data->torus->tube_radius = 1;
 }
 
 static void	draw_point(t_data *data, int x, int y)
