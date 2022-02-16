@@ -2,12 +2,12 @@
 #include <gtest/gtest.h>
 
 //テスト用便利関数
-void init_triangle(t_data *data) {
-  data->triangle = static_cast<t_triangle *>(malloc(sizeof(t_triangle)));
-  data->triangle->normal = vect_new(0, 0, 0);
-  data->triangle->vert1 = vect_new(0, 0, 0);
-  data->triangle->vert2 = vect_new(0, 0, 0);
-  data->triangle->vert3 = vect_new(0, 0, 0);
+void print_triangle(t_triangle *tri) {
+  printf("Triangle\n");
+  vect_print(tri->normal);
+  vect_print(tri->vert1);
+  vect_print(tri->vert2);
+  vect_print(tri->vert3);
 }
 
 bool is_equal_vector(t_vect *act, t_vect *exp) {
@@ -26,6 +26,18 @@ bool is_equal_triangle(t_triangle *act, t_triangle *exp) {
           is_equal_vector(&act->vert3, &exp->vert3));
 }
 
+bool is_equal_triangle_list(t_list *act, t_list *exp) {
+  while (act && exp) {
+    print_triangle(static_cast<t_triangle *>(act->content));
+    if (!is_equal_triangle(static_cast<t_triangle *>(act->content),
+                           static_cast<t_triangle *>(exp->content)))
+      return (false);
+    act = act->next;
+    exp = exp->next;
+  }
+  return (!act && !exp);
+}
+
 TEST(DISABLED_Reader, InvalidFile) {
   t_data data;
 
@@ -42,20 +54,18 @@ TEST(DISABLED_Reader, InvalidFile) {
 }
 
 TEST(Reader, InvalidIdentifier) {
-  t_data data;
+  t_data data = {0};
 
-  init_triangle(&data);
   EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/identifier1.rt"));
   EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/identifier2.rt"));
   EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/identifier3.rt"));
 
-  free(data.triangle);
+  ft_lstclear(&data.triangle, free);
 }
 
 TEST(Reader, InvalidTRFormat) {
-  t_data data;
+  t_data data = {0};
 
-  init_triangle(&data);
   EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/tr_format1.rt"));
   EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/tr_format2.rt"));
   EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/tr_format3.rt"));
@@ -65,53 +75,75 @@ TEST(Reader, InvalidTRFormat) {
   EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/tr_format7.rt"));
   EXPECT_FALSE(read_rtfile(&data, "gtest/reader_testfiles/tr_format8.rt"));
 
-  free(data.triangle);
+  ft_lstclear(&data.triangle, free);
 }
 
 TEST(Reader, ReadTriangle) {
-  t_data data1;
-  init_triangle(&data1);
-  t_triangle exp1;
-  exp1.normal = vect_new(1, 1, 1);
-  exp1.vert1 = exp1.normal;
-  exp1.vert2 = exp1.vert1;
-  exp1.vert3 = exp1.vert2;
-  EXPECT_TRUE(read_rtfile(&data1, "gtest/reader_testfiles/valid1.rt"));
-  EXPECT_TRUE(is_equal_triangle(data1.triangle, &exp1));
-  free(data1.triangle);
+  t_data data = {0};
+  t_list *exp;
 
-  t_data data2;
-  init_triangle(&data2);
-  t_triangle exp2;
-  exp2.normal = vect_new(-1, -1, -1);
-  exp2.vert1 = exp2.normal;
-  exp2.vert2 = exp2.vert1;
-  exp2.vert3 = exp2.vert2;
-  EXPECT_TRUE(read_rtfile(&data2, "gtest/reader_testfiles/valid2.rt"));
-  EXPECT_TRUE(is_equal_triangle(data2.triangle, &exp2));
-  free(data2.triangle);
+  t_triangle *tri1;
+  tri1 = new_triangle();
+  tri1->normal = vect_new(1, 1, 1);
+  tri1->vert1 = tri1->vert2 = tri1->vert3 = tri1->normal;
+  exp = ft_lstnew(tri1);
+  EXPECT_TRUE(read_rtfile(&data, "gtest/reader_testfiles/valid1.rt"));
+  EXPECT_TRUE(is_equal_triangle_list(data.triangle, exp));
+  ft_lstclear(&data.triangle, free);
+  ft_lstclear(&exp, free);
 
-  t_data data3;
-  init_triangle(&data3);
-  t_triangle exp3;
-  exp3.normal =
+  t_triangle *tri2;
+  tri2 = new_triangle();
+  tri2->normal = vect_new(-1, -1, -1);
+  tri2->vert1 = tri2->vert2 = tri2->vert3 = tri2->normal;
+  exp = ft_lstnew(tri2);
+  EXPECT_TRUE(read_rtfile(&data, "gtest/reader_testfiles/valid2.rt"));
+  EXPECT_TRUE(is_equal_triangle_list(data.triangle, exp));
+  ft_lstclear(&data.triangle, free);
+  ft_lstclear(&exp, free);
+
+  t_triangle *tri3;
+  tri3 = new_triangle();
+  tri3->normal =
       vect_new(1.0000000000000001, 1.0000000000000001, 1.0000000000000001);
-  exp3.vert1 = exp3.normal;
-  exp3.vert2 = exp3.vert1;
-  exp3.vert3 = exp3.vert2;
-  EXPECT_TRUE(read_rtfile(&data3, "gtest/reader_testfiles/valid3.rt"));
-  EXPECT_TRUE(is_equal_triangle(data3.triangle, &exp3));
-  free(data3.triangle);
+  tri3->vert1 = tri3->vert2 = tri3->vert3 = tri3->normal;
+  exp = ft_lstnew(tri3);
+  EXPECT_TRUE(read_rtfile(&data, "gtest/reader_testfiles/valid3.rt"));
+  EXPECT_TRUE(is_equal_triangle_list(data.triangle, exp));
+  ft_lstclear(&data.triangle, free);
+  ft_lstclear(&exp, free);
 
-  t_data data4;
-  init_triangle(&data4);
-  t_triangle exp4;
-  exp4.normal =
+  t_triangle *tri4;
+  tri4 = new_triangle();
+  tri4->normal =
       vect_new(-1.0000000000000001, -1.0000000000000001, -1.0000000000000001);
-  exp4.vert1 = exp4.normal;
-  exp4.vert2 = exp4.vert1;
-  exp4.vert3 = exp4.vert2;
-  EXPECT_TRUE(read_rtfile(&data4, "gtest/reader_testfiles/valid4.rt"));
-  EXPECT_TRUE(is_equal_triangle(data4.triangle, &exp4));
-  free(data4.triangle);
+  tri4->vert1 = tri4->vert2 = tri4->vert3 = tri4->normal;
+  exp = ft_lstnew(tri4);
+  EXPECT_TRUE(read_rtfile(&data, "gtest/reader_testfiles/valid4.rt"));
+  EXPECT_TRUE(is_equal_triangle_list(data.triangle, exp));
+  ft_lstclear(&data.triangle, free);
+  ft_lstclear(&exp, free);
+
+  tri1 = new_triangle();
+  tri1->normal = vect_new(1, 1, 1);
+  tri1->vert1 = tri1->vert2 = tri1->vert3 = tri1->normal;
+  exp = ft_lstnew(tri1);
+  tri2 = new_triangle();
+  tri2->normal = vect_new(-1, -1, -1);
+  tri2->vert1 = tri2->vert2 = tri2->vert3 = tri2->normal;
+  ft_lstadd_back(&exp, ft_lstnew(tri2));
+  tri3 = new_triangle();
+  tri3->normal =
+      vect_new(1.0000000000000001, 1.0000000000000001, 1.0000000000000001);
+  tri3->vert1 = tri3->vert2 = tri3->vert3 = tri3->normal;
+  ft_lstadd_back(&exp, ft_lstnew(tri3));
+  tri4 = new_triangle();
+  tri4->normal =
+      vect_new(-1.0000000000000001, -1.0000000000000001, -1.0000000000000001);
+  tri4->vert1 = tri4->vert2 = tri4->vert3 = tri4->normal;
+  ft_lstadd_back(&exp, ft_lstnew(tri4));
+  EXPECT_TRUE(read_rtfile(&data, "gtest/reader_testfiles/valid5.rt"));
+  EXPECT_TRUE(is_equal_triangle_list(data.triangle, exp));
+  ft_lstclear(&data.triangle, free);
+  ft_lstclear(&exp, free);
 }

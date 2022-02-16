@@ -4,6 +4,7 @@
 # include <stdbool.h>
 # include <float.h>
 # include "vect.h"
+# include "list.h"
 # define WIDTH 50
 # define HEIGHT 50
 /*
@@ -69,7 +70,7 @@ typedef struct s_data
 	t_camera	*camera;
 	t_circle	*circle;
 	t_torus		*torus;
-	t_triangle	*triangle;
+	t_list		*triangle;
 }				t_data;
 
 bool			is_equal(double a, double b);

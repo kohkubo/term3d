@@ -47,6 +47,28 @@ static bool	read_triangle(t_triangle *tri, FILE *file)
 	return (true);
 }
 
+t_triangle	*new_triangle(void)
+{
+	t_triangle	*tri;
+
+	tri = (t_triangle*)malloc(sizeof(t_triangle));
+	if (!tri)
+		return (NULL);
+	tri->normal = vect_new(0, 0, 0);
+	tri->vert1 = vect_new(0, 0, 0);
+	tri->vert2 = vect_new(0, 0, 0);
+	tri->vert3 = vect_new(0, 0, 0);
+	return (tri);
+}
+
+static void 	print_triangle(t_triangle *tri) {
+  printf("Triangle\n");
+  vect_print(tri->normal);
+  vect_print(tri->vert1);
+  vect_print(tri->vert2);
+  vect_print(tri->vert3);
+}
+
 bool	read_rtfile(t_data *data, char *filepath)
 {
 	FILE	*file;
@@ -62,8 +84,22 @@ bool	read_rtfile(t_data *data, char *filepath)
 		return (false);
 	}
 	success = true;
+	t_triangle	*tri;
+	t_list		*add;
 	while (success && !feof(file))
-		success = read_triangle(data->triangle, file);
+	{
+		tri = new_triangle();
+		success = read_triangle(tri, file);
+		add = ft_lstnew(tri);
+		if (!add && data->triangle)
+			ft_lstclear(&data->triangle, free);
+		if (!add && !data->triangle)
+			ft_lstclear(&add, free);
+		if (data->triangle)
+			ft_lstadd_back(&data->triangle, add);
+		else
+			data->triangle = add;
+	}
 	fclose(file);
 	return (success);
 }
