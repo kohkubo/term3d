@@ -47,3 +47,8 @@ double	vect_angle(t_vect vect1, t_vect vect2)
 		return (0);
 	return (acos(vect_dot(vect1, vect2) / tmp));
 }
+
+bool	is_right_angle(t_vect vect1, t_vect vect2)
+{
+	return (is_equal(vect_dot(vect1, vect2), 0));
+}

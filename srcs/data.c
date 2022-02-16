@@ -8,12 +8,16 @@ kawadaさんがEPSILONは 0.000001 くらいがいいって言ってた
 
 bool	is_equal(double a, double b)
 {
-	return (fabs(a - b) <= EPSILON * fmax(1.0, fmax(fabs(a), fabs(b))));
+	if (fabs(a - b) < EPSILON)
+		return (true);
+	return (false);
 }
 
 bool	less(double a, double b)
 {
-	return (a - b < -EPSILON * fmax(1.0, fmax(fabs(a), fabs(b))));
+	if (a < b - EPSILON)
+		return (true);
+	return (false);
 }
 
 bool	less_equal(double a, double b)
@@ -24,4 +28,9 @@ bool	less_equal(double a, double b)
 double	radian(double degree)
 {
 	return (degree * M_PI / 180.0);
+}
+
+double	angle(double radian)
+{
+	return (radian * 180.0 / M_PI);
 }
