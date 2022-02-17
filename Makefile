@@ -6,6 +6,7 @@ obj_dir		= objs
 obj			= $(src:%.c=$(src_dir)/%.o)
 CC 			= gcc
 CFLAGS		= -Wall -Wextra -Werror -g $(includes:%=-I%) -MMD -MP
+dep			= $(obj:.o=.d)
 
 src =\
 	./data.c \
@@ -29,12 +30,11 @@ $(NAME)	: $(obj)
 
 .PHONY: clean
 clean	:
-	$(RM) $(obj)
+	$(RM) $(obj) $(dep)
 	$(RM) -r $(NAME).dSYM
 
 .PHONY: fclean
 fclean	: clean
-	$(RM) $(obj)
 	$(RM) $(NAME)
 
 .PHONY: re
@@ -77,3 +77,5 @@ test: $(gtest) fclean
 	./tester
 	rm -rf tester
 	rm -rf tester.dSYM
+
+-include $(dep)
