@@ -28,14 +28,16 @@ less_equal(circle->radius * 0.9, distance))
 	return (false);
 }
 
-enum {
+enum
+{
 	U,
 	V,
 	T,
 	DET,
 };
 
-enum {
+enum
+{
 	P,
 	VT,
 	Q,
@@ -71,28 +73,27 @@ bool	is_intersect_with_triangle(t_camera *camera, t_triangle *triangle)
 	return (true);
 }
 
-void	rotate_triangle(t_data *data)
+void	rotate_triangle(t_triangle *triangle)
 {
 	double	a;
 
-	data->triangle->vert1 = vect_rotate(data->triangle->vert1, vect_new(0, 1,
-				0), radian(2));
-	data->triangle->vert2 = vect_rotate(data->triangle->vert2, vect_new(0, 1,
-				0), radian(2));
-	data->triangle->vert3 = vect_rotate(data->triangle->vert3, vect_new(0, 1,
-				0), radian(2));
-	a = vect_angle(data->triangle->vert2, vect_new(0, 0, 1));
+	triangle->vert1 = vect_rotate(triangle->vert1, vect_new(0, 1, 0),
+			radian(2));
+	triangle->vert2 = vect_rotate(triangle->vert2, vect_new(0, 1, 0),
+			radian(2));
+	triangle->vert3 = vect_rotate(triangle->vert3, vect_new(0, 1, 0),
+			radian(2));
+	a = vect_angle(triangle->vert2, vect_new(0, 0, 1));
 	printf("angle: %f\n", degree(a));
 }
 
-void	rotate_circle(t_data *data)
+void	rotate_circle(t_circle *circle)
 {
 	double	a;
 
-	data->circle->normal = vect_rotate(data->circle->normal, vect_new(0, 1,
-				0), radian(2));
-	a = vect_angle(data->circle->normal, vect_new(0, 0, 1));
+	circle->normal = vect_rotate(circle->normal, vect_new(0, 1, 0), radian(2));
+	a = vect_angle(circle->normal, vect_new(0, 0, 1));
 	printf("angle: %f\n", degree(a));
 	printf("circle normal ");
-	vect_print(data->circle->normal);
+	vect_print(circle->normal);
 }

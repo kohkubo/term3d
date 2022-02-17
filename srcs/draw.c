@@ -32,8 +32,8 @@ static void	draw_point(t_data *data, int x, int y)
 
 static void	draw_loop(t_data *data)
 {
-	int		x;
-	int		y;
+	int	x;
+	int	y;
 
 	printf(TOP_LEFT);
 	y = 0;
@@ -52,7 +52,7 @@ static void	draw_loop(t_data *data)
 
 void	draw(t_data *data)
 {
-	int		i;
+	int	i;
 
 	init_data(data);
 	while (true)
@@ -61,8 +61,7 @@ void	draw(t_data *data)
 		i = 0;
 		while (i < data->count)
 		{
-			data->circle[i].normal = vect_rotate(\
-				data->circle[i].normal, vect_new(0, 1, 0), radian(2));
+			rotate_circle(&data->circle[i]);
 			i++;
 		}
 		usleep(50000);
