@@ -17,14 +17,14 @@ void	print_triangle_info(t_data *data)
 	double	camera_to_triangle;
 
 	camera_to_triangle = vect_distance(data->camera->pos,
-			data->triangle->vect1);
+			data->triangle->vert1);
 	printf("camera_to_triangle: %f\n", camera_to_triangle);
 	printf("camera pos");
 	vect_print(data->camera->pos);
 	printf("triangle a ");
-	vect_print(data->triangle->vect1);
+	vect_print(data->triangle->vert1);
 	printf("triangle b ");
-	vect_print(data->triangle->vect2);
+	vect_print(data->triangle->vert2);
 	printf("triangle c ");
-	vect_print(data->triangle->vect3);
+	vect_print(data->triangle->vert3);
 }
