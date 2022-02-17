@@ -5,13 +5,14 @@ src_dir		= srcs
 obj_dir		= objs
 obj			= $(src:%.c=$(src_dir)/%.o)
 CC 			= gcc
-CFLAGS		= -Wall -Wextra -Werror -g $(includes:%=-I%)
+CFLAGS		= -Wall -Wextra -Werror -g $(includes:%=-I%) -MMD -MP
+dep			= $(obj:.o=.d)
 
 src =\
 	./data.c \
 	./term3d.c \
 	./draw.c \
-	./circle.c \
+	./calc.c \
 	./camera.c \
 	./move.c \
 	./reader.c \
@@ -19,6 +20,7 @@ src =\
 	./vect/vect2.c \
 	./vect/vect3.c \
 	./vect/vect4.c \
+	./debug.c \
 
 .PHONY: all
 all		: $(NAME)
@@ -28,12 +30,11 @@ $(NAME)	: $(obj)
 
 .PHONY: clean
 clean	:
-	$(RM) $(obj)
+	$(RM) $(obj) $(dep)
 	$(RM) -r $(NAME).dSYM
 
 .PHONY: fclean
 fclean	: clean
-	$(RM) $(obj)
 	$(RM) $(NAME)
 
 .PHONY: re
@@ -49,7 +50,8 @@ testdir = ./gtest
 srcs_test = \
 	./$(src_dir)/draw.c \
 	./$(src_dir)/data.c \
-	./$(src_dir)/circle.c \
+	./$(src_dir)/calc.c \
+	./$(src_dir)/debug.c \
 	./$(src_dir)/move.c \
 	./$(src_dir)/reader.c \
 	./$(src_dir)/camera.c \
@@ -75,3 +77,5 @@ test: $(gtest) fclean
 	./tester
 	rm -rf tester
 	rm -rf tester.dSYM
+
+-include $(dep)

@@ -3,4 +3,4 @@
 #include "gtest_data.cpp"
 #include "gtest_vect.cpp"
 #include "gtest_reader.cpp"
-#include "gtest_circle.cpp"
+#include "gtest_calc.cpp"
