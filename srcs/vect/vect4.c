@@ -27,14 +27,12 @@ t_vect	vect_rotate(t_vect vect, t_vect axis, double radian)
 	return (ret);
 }
 
-double	vect_det(t_vect vect1, t_vect vect2, t_vect vect3)
+double	vect_det(t_vect a, t_vect b, t_vect c)
 {
 	double	tmp;
 
-	tmp = (vect1.x * vect2.y * vect3.z + vect1.y * vect2.z * vect3.x + vect1.z
-			* vect2.x * vect3.y);
-	tmp -= (vect1.x * vect2.z * vect3.y + vect1.y * vect2.x * vect3.z + vect1.z
-			* vect2.y * vect3.x);
+	tmp = ((a.x * b.y * c.z) + (a.y * b.z * c.x) + (a.z * b.x * c.y));
+	tmp -= ((a.x * b.z * c.y) + (a.y * b.x * c.z) + (a.z * b.y * c.x));
 	return (tmp);
 }
 
