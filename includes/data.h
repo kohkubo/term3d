@@ -14,6 +14,11 @@ TOP_LEFTは標準出力の位置を固定するためのものです
 これを出力の最初に行うことで、標準出力を使ったアニメーションができます
 */
 # define TOP_LEFT "\x1b[H"
+/*
+最大制度 DBL_EPSILON
+kawadaさんがEPSILONは 0.000001 くらいがいいって言ってた
+*/
+#define EPSILON 0.000001
 
 typedef struct s_vect
 {
