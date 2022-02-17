@@ -36,8 +36,16 @@ void	read_circle(t_circle *circle, FILE *file)
 	double	radius;
 
 	if (fscanf(file, "%lf,%lf,%lf %lf,%lf,%lf %lf",
-			   &cnt.x, &cnt.y, &cnt.z, &nrm.x, &nrm.y, &nrm.z, &radius) != 7)
+	&cnt.x, &cnt.y, &cnt.z,
+	&nrm.x, &nrm.y, &nrm.z,
+	&radius) != 7)
+	{
+		printf("%lf,%lf,%lf %lf,%lf,%lf %lf\n",
+	cnt.x, cnt.y, cnt.z,
+	nrm.x, nrm.y, nrm.z,
+	radius);
 		exit_error("circle object read failed.");
+	}
 	circle->center = cnt;
 	circle->normal = nrm;
 	circle->radius = radius;
@@ -55,7 +63,13 @@ void	read_triangle(t_triangle *triangle, FILE *file)
 	&v2.x, &v2.y, &v2.z,
 	&v3.x, &v3.y, &v3.z,
 	&nrm.x, &nrm.y, &nrm.z) != 12)
+	{
+		printf("%lf,%lf,%lf %lf,%lf,%lf %lf,%lf,%lf %lf,%lf,%lf\n", v1.x, v1.y, v1.z,
+	v2.x, v2.y, v2.z,
+	v3.x, v3.y, v3.z,
+	nrm.x, nrm.y, nrm.z);
 		exit_error("triangle object read failed.");
+	}
 	triangle->vert1 = v1;
 	triangle->vert2 = v2;
 	triangle->vert3 = v3;
@@ -71,8 +85,8 @@ void	read_rtfile(t_data *data, char *filepath)
 	file = fopen(filepath, "r");
 	if (!file)
 		exit_perror();
-	if (fscanf(file, "%d", &data->count) != 1)
-		exit_error("count read error");
+	if (fscanf(file, "%d", &data->count) != 1 || data->count <= 0)
+		exit_error("count read error.");
 	c = 0;
 	while (c < data->count)
 	{
@@ -83,6 +97,6 @@ void	read_rtfile(t_data *data, char *filepath)
 		c++;
 	}
 	if (ferror(file))
-		exit_error("file error");
+		exit_error("file error.");
 	fclose(file);
 }
