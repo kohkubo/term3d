@@ -5,6 +5,11 @@ static void	init_data(t_data *data)
 	data->camera = (t_camera *)malloc(sizeof(t_camera));
 	data->camera->pos = vect_new(0, 0, -15);
 	data->camera->lookat = vect_new(0, 0, 0);
+	data->triangle[0].vert1 = vect_new(0, 2, 0);
+	data->triangle[0].vert2 = vect_new(-2, -2, 0);
+	data->triangle[0].vert3 = vect_new(2, -2, 0);
+	data->triangle[0].normal = vect_new(0, 0, 1);
+	data->circle->radius = 1;
 }
 
 static void	draw_point(t_data *data, int x, int y)
@@ -27,8 +32,8 @@ static void	draw_point(t_data *data, int x, int y)
 
 static void	draw_loop(t_data *data)
 {
-	int		x;
-	int		y;
+	int	x;
+	int	y;
 
 	printf(TOP_LEFT);
 	y = 0;
@@ -43,17 +48,11 @@ static void	draw_loop(t_data *data)
 		printf("\n");
 		y++;
 	}
-	printf("camera pos");
-	vect_print(data->camera->pos);
-	printf("circle center");
-	vect_print(data->circle->center);
 }
 
 void	draw(t_data *data)
 {
-	int		i;
-	double	a;
-	double	camera_to_circle;
+	int	i;
 
 	init_data(data);
 	while (true)
@@ -62,15 +61,7 @@ void	draw(t_data *data)
 		i = 0;
 		while (i < data->count)
 		{
-			data->circle[i].normal = vect_rotate(\
-				data->circle[i].normal, vect_new(0, 1, 0), radian(2));
-			camera_to_circle = vect_distance(\
-				data->camera->pos, data->circle[i].center);
-			printf("camera_to_circle: %f\n", camera_to_circle);
-			a = vect_angle(data->circle[i].normal, vect_new(0, 0, 1));
-			printf("angle: %f\n", degree(a));
-			printf("circle normal ");
-			vect_print(data->circle[i].normal);
+			rotate_circle(&data->circle[i]);
 			i++;
 		}
 		usleep(50000);
