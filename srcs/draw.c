@@ -63,7 +63,7 @@ void	draw(t_data *data)
 		while (i < data->count)
 		{
 			data->circle[i].normal = vect_rotate(\
-				data->circle[i].normal, vect_new(0,1,0), radian(2));
+				data->circle[i].normal, vect_new(0, 1, 0), radian(2));
 			camera_to_circle = vect_distance(\
 				data->camera->pos, data->circle[i].center);
 			printf("camera_to_circle: %f\n", camera_to_circle);
