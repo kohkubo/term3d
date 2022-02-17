@@ -99,6 +99,7 @@ TEST(Calc, is_intersect_with_circle)
 	camera->ray = vect_new(0, 0, -1);
 	object = circle;
 	EXPECT_EQ(is_intersect_with_circle(camera, object, 0), false);
+
 	EXPECT_EQ(isinf(vect_distance(camera->lookat, camera->pos)), true);
 
 	free(camera);

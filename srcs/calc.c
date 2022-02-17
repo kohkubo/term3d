@@ -50,6 +50,7 @@ Tomas Mollerのアルゴリズムを使用している。
 カリングが行われるため、この三角形には表と、描画されない裏が存在する。
 高速化とnorm対応のため非常に見にくくなってしまった。
 */
+
 bool	is_intersect_with_triangle(t_camera *camera, void *object, int i)
 {
 	t_vect		edge[2];
