@@ -1,5 +1,5 @@
-#ifndef CIRCLE_H
-# define CIRCLE_H
+#ifndef CALC_H
+# define CALC_H
 
 # include "data.h"
 # include "vect.h"
