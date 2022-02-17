@@ -105,7 +105,7 @@ TEST(Reader, InvalidFile) {
 
   // directory
   EXPECT_EXIT(read_rtfile(&data, "gtest/reader_testfiles/invalid/dir.cir"),
-              ::testing::ExitedWithCode(EXIT_FAILURE), "count read error.");
+              ::testing::ExitedWithCode(EXIT_FAILURE), "");
 }
 
 TEST(Reader, InvalidCircleFormat) {
