@@ -6,6 +6,7 @@
 # include "calc.h"
 # include "move.h"
 # include "camera.h"
+# include "debug.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>

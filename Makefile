@@ -19,6 +19,7 @@ src =\
 	./vect/vect2.c \
 	./vect/vect3.c \
 	./vect/vect4.c \
+	./debug.c \
 
 .PHONY: all
 all		: $(NAME)
@@ -50,6 +51,7 @@ srcs_test = \
 	./$(src_dir)/draw.c \
 	./$(src_dir)/data.c \
 	./$(src_dir)/calc.c \
+	./$(src_dir)/debug.c \
 	./$(src_dir)/move.c \
 	./$(src_dir)/reader.c \
 	./$(src_dir)/camera.c \
