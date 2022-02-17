@@ -14,6 +14,7 @@ src =\
 	./circle.c \
 	./camera.c \
 	./move.c \
+	./reader.c \
 	./vect/vect1.c \
 	./vect/vect2.c \
 	./vect/vect3.c \
@@ -50,6 +51,7 @@ srcs_test = \
 	./$(src_dir)/data.c \
 	./$(src_dir)/circle.c \
 	./$(src_dir)/move.c \
+	./$(src_dir)/reader.c \
 	./$(src_dir)/camera.c \
 	./$(src_dir)/vect/vect1.c \
 	./$(src_dir)/vect/vect2.c \
@@ -68,7 +70,7 @@ $(gtest):
 test: $(gtest) fclean
 	clang++ -std=c++11 \
 	$(testdir)/gtest.cpp $(gtestdir)/googletest-release-1.11.0/googletest/src/gtest_main.cc $(gtestdir)/gtest/gtest-all.cc \
-	-g -fsanitize=address -fsanitize=undefined -fsanitize=leak \
+	-g -fsanitize=address -fsanitize=undefined \
 	-I$(gtestdir) -I/usr/local/opt/llvm/include -I$(includes) -lpthread $(srcs_test) -o tester
 	./tester
 	rm -rf tester
