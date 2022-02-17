@@ -65,6 +65,8 @@ typedef struct s_data
 	void		*object;
 	int			count;
 	t_type		type;
+	bool		(*intersect)(t_camera *, void *, int);
+	void		(*rotate)(void *, int);
 }				t_data;
 
 bool			is_equal(double a, double b);

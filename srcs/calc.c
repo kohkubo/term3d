@@ -15,10 +15,12 @@ t_vect	intersect_with_plane(t_camera *camera, t_vect *center, t_vect *normal)
 	return (intersect_point);
 }
 
-bool	is_intersect_with_circle(t_camera *camera, t_circle *circle)
+bool	is_intersect_with_circle(t_camera *camera, void *object, int i)
 {
-	double	distance;
+	double		distance;
+	t_circle	*circle;
 
+	circle = &((t_circle *)object)[i];
 	camera->lookat = intersect_with_plane(camera, &circle->center,
 			&circle->normal);
 	distance = vect_distance(camera->lookat, circle->center);
@@ -48,12 +50,14 @@ Tomas Mollerのアルゴリズムを使用している。
 カリングが行われるため、この三角形には表と、描画されない裏が存在する。
 高速化とnorm対応のため非常に見にくくなってしまった。
 */
-bool	is_intersect_with_triangle(t_camera *camera, t_triangle *triangle)
+bool	is_intersect_with_triangle(t_camera *camera, void *object, int i)
 {
-	t_vect	edge[2];
-	t_vect	vect[3];
-	double	vl[4];
+	t_vect		edge[2];
+	t_vect		vect[3];
+	double		vl[4];
+	t_triangle	*triangle;
 
+	triangle = &((t_triangle *)object)[i];
 	edge[0] = vect_sub(triangle->vert2, triangle->vert1);
 	edge[1] = vect_sub(triangle->vert3, triangle->vert1);
 	vect[P] = vect_cross(camera->ray, edge[1]);
@@ -73,10 +77,12 @@ bool	is_intersect_with_triangle(t_camera *camera, t_triangle *triangle)
 	return (true);
 }
 
-void	rotate_triangle(t_triangle *triangle)
+void	rotate_triangle(void *object, int i)
 {
-	double	a;
+	double		a;
+	t_triangle	*triangle;
 
+	triangle = &((t_triangle *)object)[i];
 	triangle->vert1 = vect_rotate(triangle->vert1, vect_new(0, 1, 0),
 			radian(2));
 	triangle->vert2 = vect_rotate(triangle->vert2, vect_new(0, 1, 0),
@@ -87,10 +93,12 @@ void	rotate_triangle(t_triangle *triangle)
 	printf("angle: %f\n", degree(a));
 }
 
-void	rotate_circle(t_circle *circle)
+void	rotate_circle(void *object, int i)
 {
-	double	a;
+	double		a;
+	t_circle	*circle;
 
+	circle = &((t_circle *)object)[i];
 	circle->normal = vect_rotate(circle->normal, vect_new(0, 1, 0), radian(2));
 	a = vect_angle(circle->normal, vect_new(0, 0, 1));
 	printf("angle: %f\n", degree(a));
