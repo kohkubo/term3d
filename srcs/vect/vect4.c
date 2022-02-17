@@ -36,7 +36,7 @@ double	vect_det(t_vect a, t_vect b, t_vect c)
 	return (tmp);
 }
 
-double	vect_angle(t_vect vect1, t_vect vect2)
+double	vect_angle_radian(t_vect vect1, t_vect vect2)
 {
 	double	tmp;
 
