@@ -117,4 +117,5 @@ TEST(Calc, is_intersect_with_triangle)
 	// EXPECT_EQ(is_equal(vect_distance(camera->lookat, camera->pos), 15), true);
   // 中心点がないのでいい感じの距離がつかめないためコメントアウト。概数を目視チェックしていた。
 	// EXPECT_DOUBLE_EQ(vect_distance(camera->lookat, triangle.vect1), 15);
+	free(camera);
 }
