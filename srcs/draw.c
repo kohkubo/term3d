@@ -7,6 +7,10 @@ static void	init_data(t_data *data)
 	data->camera->lookat = vect_new(0, 0, 0);
 	data->circle[0].center = vect_new(0, 0, 0);
 	data->circle[0].normal = vect_new(0, 0, 1);
+	data->triangle[0].vert1 = vect_new(0, 2, 0);
+	data->triangle[0].vert2 = vect_new(-2, -2, 0);
+	data->triangle[0].vert3 = vect_new(2, -2, 0);
+	data->triangle[0].normal = vect_new(0, 0, 1);
 	data->circle->radius = 1;
 }
 
