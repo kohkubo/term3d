@@ -14,9 +14,7 @@ src =\
 	./circle.c \
 	./camera.c \
 	./move.c \
-	./list.c \
 	./reader.c \
-	./read_object.c \
 	./vect/vect1.c \
 	./vect/vect2.c \
 	./vect/vect3.c \
