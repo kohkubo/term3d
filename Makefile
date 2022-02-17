@@ -50,6 +50,7 @@ srcs_test = \
 	./$(src_dir)/draw.c \
 	./$(src_dir)/data.c \
 	./$(src_dir)/circle.c \
+	./$(src_dir)/triangle.c \
 	./$(src_dir)/move.c \
 	./$(src_dir)/reader.c \
 	./$(src_dir)/camera.c \
