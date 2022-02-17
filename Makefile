@@ -12,6 +12,7 @@ src =\
 	./term3d.c \
 	./draw.c \
 	./circle.c \
+	./triangle.c \
 	./camera.c \
 	./move.c \
 	./reader.c \
