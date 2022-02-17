@@ -6,9 +6,10 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		printf("Usage: %s <filename>\n", av[0]);
+		fprintf(stderr, "Usage: %s <filename>\n", av[0]);
 		return (EXIT_FAILURE);
 	}
+	read_rtfile(&data, av[1]);
 	draw(&data);
 	return (EXIT_SUCCESS);
 }
