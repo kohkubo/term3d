@@ -82,7 +82,7 @@ void	read_rtfile(t_data *data, char *filepath)
 			read_triangle(&data->triangle[c], file);
 		c++;
 	}
-	if (!feof(file) || ferror(file))
+	if (ferror(file))
 		exit_error("file error");
 	fclose(file);
 }
