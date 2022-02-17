@@ -18,7 +18,7 @@ TOP_LEFTは標準出力の位置を固定するためのものです
 最大制度 DBL_EPSILON
 kawadaさんがEPSILONは 0.000001 くらいがいいって言ってた
 */
-#define EPSILON 0.000001
+# define EPSILON 0.000001
 
 typedef struct s_vect
 {
