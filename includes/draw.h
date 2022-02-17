@@ -6,6 +6,8 @@
 # include "circle.h"
 # include "move.h"
 # include "camera.h"
+# include "debug.h"
+# include "reader.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
