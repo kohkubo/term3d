@@ -8,5 +8,6 @@
 !*.cpp
 !*.yml
 !*.cir
+!*.tri
 !Makefile
 test
