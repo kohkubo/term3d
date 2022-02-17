@@ -1,11 +1,5 @@
 #include "reader.h"
 
-void	exit_perror(void)
-{
-	perror(NULL);
-	exit(EXIT_FAILURE);
-}
-
 void	exit_error(char *errmsg)
 {
 	if (errmsg)
@@ -36,9 +30,9 @@ void	read_circle(t_circle *circle, FILE *file)
 	t_vect	nrm;
 	double	radius;
 
-	if (fscanf(file, "%lf,%lf,%lf %lf,%lf,%lf %lf",
-	&cnt.x, &cnt.y, &cnt.z,
-	&nrm.x, &nrm.y, &nrm.z,
+	if (fscanf(file, "%lf,%lf,%lf %lf,%lf,%lf %lf", \
+	&cnt.x, &cnt.y, &cnt.z, \
+	&nrm.x, &nrm.y, &nrm.z, \
 	&radius) != 7)
 		exit_error("circle object read failed.");
 	circle->center = cnt;
@@ -53,10 +47,10 @@ void	read_triangle(t_triangle *triangle, FILE *file)
 	t_vect	v3;
 	t_vect	nrm;
 
-	if (fscanf(file, "%lf,%lf,%lf %lf,%lf,%lf %lf,%lf,%lf %lf,%lf,%lf",
-	&v1.x, &v1.y, &v1.z,
-	&v2.x, &v2.y, &v2.z,
-	&v3.x, &v3.y, &v3.z,
+	if (fscanf(file, "%lf,%lf,%lf %lf,%lf,%lf %lf,%lf,%lf %lf,%lf,%lf", \
+	&v1.x, &v1.y, &v1.z, \
+	&v2.x, &v2.y, &v2.z, \
+	&v3.x, &v3.y, &v3.z, \
 	&nrm.x, &nrm.y, &nrm.z) != 12)
 		exit_error("triangle object read failed.");
 	triangle->vert1 = v1;
@@ -73,7 +67,7 @@ void	read_rtfile(t_data *data, char *filepath)
 	check_extension(data, filepath);
 	file = fopen(filepath, "r");
 	if (!file)
-		exit_perror();
+		exit_error("file open failed.");
 	if (fscanf(file, "%d", &data->count) != 1 || data->count <= 0)
 		exit_error("count read error.");
 	c = 0;
