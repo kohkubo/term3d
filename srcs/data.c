@@ -1,11 +1,5 @@
 #include "data.h"
 
-/*
-最大制度 DBL_EPSILON
-kawadaさんがEPSILONは 0.000001 くらいがいいって言ってた
-*/
-#define EPSILON 0.000001
-
 bool	is_equal(double a, double b)
 {
 	if (fabs(a - b) < EPSILON)
