@@ -79,23 +79,23 @@ TEST(Reader, ReadValidCircleFile) {
 
   exp.count = 1;
   exp.type = CIRCLE;
-  exp.circle[0] = new_circle(vect_new(0,0,-10), vect_new(0,1,0), 5.0);
+  exp.circle[0] = new_circle(vect_new(0,0,0), vect_new(1,0,1), 1.0);
   read_rtfile(&data, "gtest/reader_testfiles/valid/case1.cir");
   is_equal_circles(data, exp);
 
   exp.count = 4;
   exp.type = CIRCLE;
-  exp.circle[0] = new_circle(vect_new(0,0,0), vect_new(0,0,0), 1);
-  exp.circle[1] = new_circle(vect_new(0,0,0), vect_new(0,0,0), 2);
-  exp.circle[2] = new_circle(vect_new(0,0,0), vect_new(0,0,0), 3);
-  exp.circle[3] = new_circle(vect_new(0,0,0), vect_new(0,0,0), 4);
+  exp.circle[0] = new_circle(vect_new(0,0,0), vect_new(0,0,1), 1);
+  exp.circle[1] = new_circle(vect_new(0,0,0), vect_new(0,0,1), 2);
+  exp.circle[2] = new_circle(vect_new(0,0,0), vect_new(0,0,1), 3);
+  exp.circle[3] = new_circle(vect_new(0,0,0), vect_new(0,0,1), 4);
   read_rtfile(&data, "gtest/reader_testfiles/valid/case2.cir");
   is_equal_circles(data, exp);
 
   exp.count = 20;
   exp.type = CIRCLE;
   for (int i = 0; i < exp.count; i++)
-    exp.circle[i] = new_circle(vect_new(0,5,0), vect_new(0,0,1), 1.0);
+    exp.circle[i] = new_circle(vect_new(0,0,0), vect_new(0,0,1), 1.0);
   read_rtfile(&data, "gtest/reader_testfiles/valid/case3.cir");
   is_equal_circles(data, exp);
 }
