@@ -68,6 +68,7 @@ void	draw(t_data *data)
 			data->rotate(&data->object[i]);
 			i++;
 		}
+		move_camera(data->camera);
 		usleep(50000);
 	}
 }
