@@ -16,6 +16,7 @@ src =\
 	./camera.c \
 	./move.c \
 	./reader.c \
+	./read_object.c \
 	./vect/vect1.c \
 	./vect/vect2.c \
 	./vect/vect3.c \
@@ -54,6 +55,7 @@ srcs_test = \
 	./$(src_dir)/debug.c \
 	./$(src_dir)/move.c \
 	./$(src_dir)/reader.c \
+	./$(src_dir)/read_object.c \
 	./$(src_dir)/camera.c \
 	./$(src_dir)/vect/vect1.c \
 	./$(src_dir)/vect/vect2.c \
