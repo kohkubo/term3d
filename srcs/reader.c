@@ -24,7 +24,7 @@ static void	check_extension(t_data *data, char *filepath)
 		exit_error("file extension error.");
 }
 
-void	read_circle(t_circle *circle, FILE *file)
+void	read_circle(t_object *circle, FILE *file)
 {
 	t_vect	cnt;
 	t_vect	nrm;
@@ -35,28 +35,25 @@ void	read_circle(t_circle *circle, FILE *file)
 	&nrm.x, &nrm.y, &nrm.z, \
 	&radius) != 7)
 		exit_error("circle object read failed.");
-	circle->center = cnt;
+	circle->pos1 = cnt;
 	circle->normal = nrm;
 	circle->radius = radius;
 }
 
-void	read_triangle(t_triangle *triangle, FILE *file)
+void	read_triangle(t_object *triangle, FILE *file)
 {
 	t_vect	v1;
 	t_vect	v2;
 	t_vect	v3;
-	t_vect	nrm;
 
-	if (fscanf(file, "%lf,%lf,%lf %lf,%lf,%lf %lf,%lf,%lf %lf,%lf,%lf", \
+	if (fscanf(file, "%lf,%lf,%lf %lf,%lf,%lf %lf,%lf,%lf", \
 	&v1.x, &v1.y, &v1.z, \
 	&v2.x, &v2.y, &v2.z, \
-	&v3.x, &v3.y, &v3.z, \
-	&nrm.x, &nrm.y, &nrm.z) != 12)
+	&v3.x, &v3.y, &v3.z) != 9)
 		exit_error("triangle object read failed.");
-	triangle->vert1 = v1;
-	triangle->vert2 = v2;
-	triangle->vert3 = v3;
-	triangle->normal = nrm;
+	triangle->pos1 = v1;
+	triangle->pos2 = v2;
+	triangle->pos3 = v3;
 }
 
 void	read_rtfile(t_data *data, char *filepath)
@@ -74,9 +71,9 @@ void	read_rtfile(t_data *data, char *filepath)
 	while (c < data->count)
 	{
 		if (data->type == CIRCLE)
-			read_circle(&data->circle[c], file);
+			read_circle(&data->object[c], file);
 		if (data->type == TRIANGLE)
-			read_triangle(&data->triangle[c], file);
+			read_triangle(&data->object[c], file);
 		c++;
 	}
 	if (ferror(file))
