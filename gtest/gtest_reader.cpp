@@ -43,13 +43,13 @@ t_object new_circle(t_vect center, t_vect normal, double radius) {
   return (circle);
 }
 
-t_object new_triangle(t_vect vert1, t_vect vert2, t_vect vert3,
+t_object new_triangle(t_vect pos1, t_vect pos2, t_vect pos3,
                         t_vect normal) {
   t_object triangle;
 
-  triangle.pos1 = vert1;
-  triangle.pos2 = vert2;
-  triangle.pos3 = vert3;
+  triangle.pos1 = pos1;
+  triangle.pos2 = pos2;
+  triangle.pos3 = pos3;
   triangle.normal = normal;
   return (triangle);
 }
