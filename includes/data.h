@@ -20,7 +20,7 @@ kawadaさんがEPSILONは 0.000001 くらいがいいって言ってた
 */
 # define EPSILON 0.000001
 
-# define OBJECT_COUNT 100
+# define OBJECT_SIZE_MAX 100
 
 typedef struct s_vect
 {
@@ -29,20 +29,14 @@ typedef struct s_vect
 	double		z;
 }				t_vect;
 
-typedef struct s_circle
+typedef struct s_object
 {
-	t_vect		center;
+	t_vect		pos1;
+	t_vect		pos2;
+	t_vect		pos3;
 	t_vect		normal;
 	double		radius;
-}				t_circle;
-
-typedef struct s_triangle
-{
-	t_vect		vert1;
-	t_vect		vert2;
-	t_vect		vert3;
-	t_vect		normal;
-}				t_triangle;
+}				t_object;
 
 typedef struct s_camera
 {
@@ -60,9 +54,7 @@ typedef enum e_type
 typedef struct s_data
 {
 	t_camera	*camera;
-	t_circle	circle[OBJECT_COUNT];
-	t_triangle	triangle[OBJECT_COUNT];
-	void		*object;
+	t_object	object[OBJECT_SIZE_MAX];
 	int			count;
 	t_type		type;
 }				t_data;

@@ -1,15 +1,15 @@
 #include "reader.h"
 
-void	exit_error(char *errmsg)
+void exit_error(char *errmsg)
 {
 	if (errmsg)
 		fprintf(stderr, "%s\n", errmsg);
 	exit(EXIT_FAILURE);
 }
 
-static void	check_extension(t_data *data, char *filepath)
+static void check_extension(t_data *data, char *filepath)
 {
-	char	*ext;
+	char *ext;
 
 	if (!filepath)
 		exit_error("does not filepath.");
@@ -24,45 +24,54 @@ static void	check_extension(t_data *data, char *filepath)
 		exit_error("file extension error.");
 }
 
-void	read_circle(t_circle *circle, FILE *file)
+double	wrap_strtod(char *str)
 {
-	t_vect	cnt;
-	t_vect	nrm;
-	double	radius;
+	char	*entptr;
+	double	d;
 
-	if (fscanf(file, "%lf,%lf,%lf %lf,%lf,%lf %lf", \
-	&cnt.x, &cnt.y, &cnt.z, \
-	&nrm.x, &nrm.y, &nrm.z, \
-	&radius) != 7)
+	errno = 0;
+	d = strtod(str, &entptr);
+	if (errno == ERANGE)
+		exit_error("number out of range.");
+	if (*entptr != '\0')
+		exit_error("number out of range");
+	if (d == HUGE_VAL)
+		exit_error("huge val");
+	return (d);
+}
+
+void read_circle(t_object *circle, FILE *file)
+{
+	char	cnt[3][10];
+	char	nrm[3][10];
+	char	rad[10];
+
+	if (fscanf(file, " %10s,%10s,%10s %10s,%10s,%10s %10s ",
+	cnt[0], cnt[1], cnt[2], nrm[0], nrm[1], nrm[2], rad) != 7)
 		exit_error("circle object read failed.");
-	circle->center = cnt;
-	circle->normal = nrm;
-	circle->radius = radius;
+	circle->pos1 = vect_new(wrap_strtod(cnt[0]), wrap_strtod(cnt[1]), wrap_strtod(cnt[2]));
+	circle->normal = vect_new(wrap_strtod(nrm[0]), wrap_strtod(nrm[1]), wrap_strtod(nrm[2]));
+	circle->radius = wrap_strtod(rad);
 }
 
-void	read_triangle(t_triangle *triangle, FILE *file)
+void read_triangle(t_object *triangle, FILE *file)
 {
-	t_vect	v1;
-	t_vect	v2;
-	t_vect	v3;
-	t_vect	nrm;
+	char	v1[3][10];
+	char	v2[3][10];
+	char	v3[3][10];
 
-	if (fscanf(file, "%lf,%lf,%lf %lf,%lf,%lf %lf,%lf,%lf %lf,%lf,%lf", \
-	&v1.x, &v1.y, &v1.z, \
-	&v2.x, &v2.y, &v2.z, \
-	&v3.x, &v3.y, &v3.z, \
-	&nrm.x, &nrm.y, &nrm.z) != 12)
+	if (fscanf(file, " %10s,%10s,%10s %10s,%10s,%10s %10s,%10s,%10s ",
+	v1[0], v1[1], v1[2], v2[0], v2[1], v2[2], v3[0], v3[1], v3[2]) != 9)
 		exit_error("triangle object read failed.");
-	triangle->vert1 = v1;
-	triangle->vert2 = v2;
-	triangle->vert3 = v3;
-	triangle->normal = nrm;
+	triangle->pos1 = vect_new(wrap_strtod(v1[0]), wrap_strtod(v1[1]), wrap_strtod(v1[2]));
+	triangle->pos2 = vect_new(wrap_strtod(v2[0]), wrap_strtod(v2[1]), wrap_strtod(v2[2]));
+	triangle->pos3 = vect_new(wrap_strtod(v3[0]), wrap_strtod(v3[1]), wrap_strtod(v3[2]));
 }
 
-void	read_rtfile(t_data *data, char *filepath)
+void read_rtfile(t_data *data, char *filepath)
 {
-	FILE	*file;
-	int		c;
+	FILE *file;
+	int c;
 
 	check_extension(data, filepath);
 	file = fopen(filepath, "r");
@@ -74,9 +83,9 @@ void	read_rtfile(t_data *data, char *filepath)
 	while (c < data->count)
 	{
 		if (data->type == CIRCLE)
-			read_circle(&data->circle[c], file);
+			read_circle(&data->object[c], file);
 		if (data->type == TRIANGLE)
-			read_triangle(&data->triangle[c], file);
+			read_triangle(&data->object[c], file);
 		c++;
 	}
 	if (ferror(file))
