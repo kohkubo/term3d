@@ -80,7 +80,6 @@ bool	is_intersect_with_triangle(t_camera *camera, void *object, int i)
 
 void	rotate_triangle(void *object, int i)
 {
-	double		a;
 	t_triangle	*triangle;
 
 	triangle = &((t_triangle *)object)[i];
@@ -90,19 +89,12 @@ void	rotate_triangle(void *object, int i)
 			radian(2));
 	triangle->vert3 = vect_rotate(triangle->vert3, vect_new(0, 1, 0),
 			radian(2));
-	a = vect_angle_radian(triangle->vert2, vect_new(0, 0, 1));
-	printf("angle: %f\n", degree(a));
 }
 
 void	rotate_circle(void *object, int i)
 {
-	double		a;
 	t_circle	*circle;
 
 	circle = &((t_circle *)object)[i];
 	circle->normal = vect_rotate(circle->normal, vect_new(0, 1, 0), radian(2));
-	a = vect_angle_radian(circle->normal, vect_new(0, 0, 1));
-	printf("angle: %f\n", degree(a));
-	printf("circle normal ");
-	vect_print(circle->normal);
 }

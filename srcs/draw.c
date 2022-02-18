@@ -3,8 +3,7 @@
 static void	init_data(t_data *data)
 {
 	data->camera = (t_camera *)malloc(sizeof(t_camera));
-	data->camera->pos = vect_new(0, 0, -15);
-	data->camera->lookat = vect_new(0, 0, 0);
+	data->camera->pos = vect_new(0, 0, -24);
 	if (data->type == CIRCLE)
 	{
 		data->object = data->circle;
