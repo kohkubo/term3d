@@ -45,18 +45,15 @@ void	read_triangle(t_triangle *triangle, FILE *file)
 	t_vect	v1;
 	t_vect	v2;
 	t_vect	v3;
-	t_vect	nrm;
 
-	if (fscanf(file, "%lf,%lf,%lf %lf,%lf,%lf %lf,%lf,%lf %lf,%lf,%lf", \
+	if (fscanf(file, "%lf,%lf,%lf %lf,%lf,%lf %lf,%lf,%lf", \
 	&v1.x, &v1.y, &v1.z, \
 	&v2.x, &v2.y, &v2.z, \
-	&v3.x, &v3.y, &v3.z, \
-	&nrm.x, &nrm.y, &nrm.z) != 12)
+	&v3.x, &v3.y, &v3.z) != 9)
 		exit_error("triangle object read failed.");
 	triangle->vert1 = v1;
 	triangle->vert2 = v2;
 	triangle->vert3 = v3;
-	triangle->normal = nrm;
 }
 
 void	read_rtfile(t_data *data, char *filepath)
