@@ -29,18 +29,6 @@ typedef struct s_vect
 	double		z;
 }				t_vect;
 
-<<<<<<< HEAD
-typedef struct s_object
-{
-	t_vect		pos1;
-	t_vect		pos2;
-	t_vect		pos3;
-	t_vect		normal;
-	double		radius;
-}				t_object;
-
-=======
->>>>>>> edf7b1dbc3e5951cbb1b297e0cf2926fbb5a52a8
 typedef struct s_camera
 {
 	t_vect		pos;
