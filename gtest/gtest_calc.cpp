@@ -72,9 +72,9 @@ TEST(Calc, intersect_with_plane)
 
 TEST(Calc, is_intersect_with_circle)
 {
-	void *object;
-	t_circle *circle = (t_circle *)malloc(sizeof(t_circle));
-	circle->center = vect_new(0, 0, 0);
+	t_object *object;
+	t_object *circle = (t_object *)malloc(sizeof(t_object));
+	circle->pos1 = vect_new(0, 0, 0);
 	circle->radius = 1;
 	t_camera *camera = (t_camera *)malloc(sizeof(t_camera));
 	camera->pos = vect_new(0, 0, 10);
@@ -92,13 +92,13 @@ TEST(Calc, is_intersect_with_circle)
 	camera->pos = vect_new(0, 0, 10);
 	camera->ray = vect_new(0, 0, 1);
 	object = circle;
-	EXPECT_EQ(is_intersect_with_circle(camera, object, 0), false);
+	EXPECT_EQ(is_intersect_with_circle(camera, object), false);
 	EXPECT_EQ(isinf(vect_distance(camera->lookat, camera->pos)), true);
 
 	camera->pos = vect_new(0, 0, -10);
 	camera->ray = vect_new(0, 0, -1);
 	object = circle;
-	EXPECT_EQ(is_intersect_with_circle(camera, object, 0), false);
+	EXPECT_EQ(is_intersect_with_circle(camera, object), false);
 
 	EXPECT_EQ(isinf(vect_distance(camera->lookat, camera->pos)), true);
 
@@ -108,17 +108,16 @@ TEST(Calc, is_intersect_with_circle)
 
 TEST(Calc, is_intersect_with_triangle)
 {
-	t_triangle triangle;
+	t_object triangle;
 
-	triangle.vert1 = vect_new(0, 2, 0);
-	triangle.vert2 = vect_new(-2, -2, 0);
-	triangle.vert3 = vect_new(2, -2, 0);
+	triangle.pos1 = vect_new(0, 2, 0);
+	triangle.pos2 = vect_new(-2, -2, 0);
+	triangle.pos3 = vect_new(2, -2, 0);
 
 	t_camera *camera = (t_camera *)malloc(sizeof(t_camera));
 	camera->pos = vect_new(0, 0, 15);
 	camera->ray = vect_new(0, 0, -1);
-	void *object = &triangle;
-	EXPECT_EQ(is_intersect_with_triangle(camera, object, 0), true);
+	EXPECT_EQ(is_intersect_with_triangle(camera, &triangle), true);
 	// EXPECT_EQ(is_equal(vect_distance(camera->lookat, camera->pos), 15), true);
   // 中心点がないのでいい感じの距離がつかめないためコメントアウト。概数を目視チェックしていた。
 	// EXPECT_DOUBLE_EQ(vect_distance(camera->lookat, triangle.vect1), 15);
