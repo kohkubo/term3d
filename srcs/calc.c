@@ -28,20 +28,22 @@ less_equal(circle->radius * 0.9, distance))
 	return (false);
 }
 
-enum
+bool	is_intersect_with_plane(t_camera *camera, t_vect *center,
+		t_vect *normal)
 {
-	U,
-	V,
-	T,
-	DET,
-};
+	t_vect	intersect_point;
 
-enum
+	intersect_point = intersect_with_plane(camera, center, normal);
+	if (intersect_point.x == DBL_MAX || intersect_point.y == DBL_MAX || \
+intersect_point.z == DBL_MAX)
+		return (false);
+	return (true);
+}
+
+t_vect	triangle_normal(t_vect *edge1, t_vect *edge2)
 {
-	P,
-	VT,
-	Q,
-};
+	return (vect_cross(*edge1, *edge2));
+}
 
 /*
 Tomas Mollerのアルゴリズムを使用している。
