@@ -34,17 +34,17 @@ void	move_camera(t_camera *camera)
 
 	ch = getch();
 	if (ch == 'z')
-		camera->pos.z += 1;
+		camera->pos.z += 5;
 	else if (ch == 'x')
-		camera->pos.z -= 1;
+		camera->pos.z -= 5;
 	else if (ch == 'a')
-		camera->pos.x -= 0.1;
+		camera->pos.x -= 1;
 	else if (ch == 'd')
-		camera->pos.x += 0.1;
+		camera->pos.x += 1;
 	else if (ch == 'w')
-		camera->pos.y -= 0.1;
+		camera->pos.y -= 1;
 	else if (ch == 's')
-		camera->pos.y += 0.1;
+		camera->pos.y += 1;
 	else if (ch == 'r')
 		camera->pos.z *= -1;
 }
