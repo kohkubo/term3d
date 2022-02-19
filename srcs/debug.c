@@ -29,3 +29,24 @@ void	print_triangle_info(t_data *data)
 	printf("triangle c ");
 	vect_print(data->object->pos3);
 }
+
+void	print_all_object_info(t_data *data)
+{
+	int	c;
+
+	c = 0;
+	printf("object count : %d\n", data->count);
+	while (c < data->count)
+	{
+		printf("%-5d ", c);
+		printf("1: ");
+		vect_print(data->object[c].pos1);
+		printf("      ");
+		printf("2: ");
+		vect_print(data->object[c].pos2);
+		printf("      ");
+		printf("3: ");
+		vect_print(data->object[c].pos3);
+		c++;
+	}
+}

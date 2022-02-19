@@ -1,4 +1,5 @@
 #include "reader.h"
+#include "debug.h"
 
 /*
 Valid Format
@@ -108,24 +109,6 @@ void	read_line(t_object *obj, FILE *file)
 	obj->pos3 = assign_str_to_vector(position[2]);
 }
 
-void	print_all_object(t_data *data)
-{
-	int	c;
-
-	c = 0;
-	printf("object count : %d\n", data->count);
-	while (c < data->count)
-	{
-		printf("%d pos1 : ", c);
-		vect_print(data->object[c].pos1);
-		printf("%d pos2 : ", c);
-		vect_print(data->object[c].pos2);
-		printf("%d pos3 : ", c);
-		vect_print(data->object[c].pos3);
-		c++;
-	}
-}
-
 void	read_rtfile(t_data *data, char *filepath)
 {
 	FILE	*file;
@@ -144,6 +127,6 @@ void	read_rtfile(t_data *data, char *filepath)
 	fclose(file);
 
 	//for debug;
-	print_all_object(data);
+	print_all_object_info(data);
 	exit(0);
 }
