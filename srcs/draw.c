@@ -70,6 +70,6 @@ void	draw(t_data *data)
 			i++;
 		}
 		move_camera(data->camera);
-		usleep(50000);
+		usleep(50);
 	}
 }
