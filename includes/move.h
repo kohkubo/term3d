@@ -4,7 +4,6 @@
 # include "data.h"
 # include <stdbool.h>
 # include <stdio.h>
-# include <stdlib.h>
 # include <termios.h>
 # include <unistd.h>
 # include <fcntl.h>

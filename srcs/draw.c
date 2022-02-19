@@ -2,8 +2,8 @@
 
 static void	init_data(t_data *data)
 {
-	data->camera = (t_camera *)malloc(sizeof(t_camera));
-	data->camera->pos = vect_new(0, 0, -15);
+	data->camera.pos = vect_new(0, 0, -150);
+	data->camera.normal = vect_new(0, 0, -1);
 	if (data->type == CIRCLE)
 	{
 		data->intersect = is_intersect_with_circle;
@@ -20,11 +20,11 @@ static void	draw_point(t_data *data, int x, int y)
 {
 	int		i;
 
-	data->camera->ray = camera_ray(data->camera, x, y);
+	data->camera.ray = camera_ray(&data->camera, x, y);
 	i = 0;
 	while (i < data->count)
 	{
-		if (data->intersect(data->camera, &data->object[i]))
+		if (data->intersect(&data->camera, &data->object[i]))
 			break ;
 		i++;
 	}
@@ -68,7 +68,7 @@ void	draw(t_data *data)
 			data->rotate(&data->object[i]);
 			i++;
 		}
-		move_camera(data->camera);
-		usleep(50000);
+		move_camera(&data->camera);
+		usleep(50);
 	}
 }
