@@ -22,6 +22,7 @@ src =\
 	./vect/vect2.c \
 	./vect/vect3.c \
 	./vect/vect4.c \
+	./vect/vect5.c \
 	./debug.c \
 
 .PHONY: all
@@ -63,6 +64,7 @@ srcs_test = \
 	./$(src_dir)/vect/vect2.c \
 	./$(src_dir)/vect/vect3.c \
 	./$(src_dir)/vect/vect4.c \
+	./$(src_dir)/vect/vect5.c \
 
 $(gtest):
 	mkdir -p $(dir ../test)

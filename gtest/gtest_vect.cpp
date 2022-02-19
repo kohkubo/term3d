@@ -80,3 +80,9 @@ TEST(Vect, vect_inv)
 	t_vect vect1 = vect_new(1, 2, 3);
 	VECTOR_EQ(vect_inv(vect1), vect_new(-1, -2, -3));
 }
+
+TEST(Vect, vect_move)
+{
+	t_vect vect1 = vect_new(1, 2, 3);
+	VECTOR_EQ(vect_move(vect1, vect_new(1, 0, 0), 1), vect_new(2, 2, 3));
+}

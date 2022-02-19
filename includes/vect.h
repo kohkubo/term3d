@@ -25,4 +25,6 @@ double	vect_det(t_vect vect1, t_vect vect2, t_vect vect3);
 t_vect	vect_rotate(t_vect vect, t_vect axis, double radian);
 double	vect_angle_radian(t_vect vect1, t_vect vect2);
 bool	is_right_angle(t_vect vect1, t_vect vect2);
+t_vect	vect_move(t_vect vect, t_vect dir, double len);
+
 #endif
