@@ -32,6 +32,7 @@ typedef struct s_vect
 typedef struct s_camera
 {
 	t_vect		pos;
+	t_vect		normal;
 	t_vect		lookat;
 	t_vect		ray;
 }				t_camera;
