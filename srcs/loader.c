@@ -70,7 +70,9 @@ void	load_file(t_data *data, char *filepath)
 		exit_error("File open failed.");
 	data->count = 0;
 	bzero(buf, sizeof(buf));
-	while (read_line(file, buf, sizeof(buf)) && data->count < OBJECT_SIZE_MAX)
+	while (data->count < OBJECT_SIZE_MAX && read_line(file, buf, sizeof(buf)))
 		assign_line_to_object(buf, &data->object[data->count++]);
+	if (!feof(file))
+		exit_error("The number of objects described exceeds OBJECT_SIZE_MAX.");
 	fclose(file);
 }
