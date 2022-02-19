@@ -38,13 +38,13 @@ void	move_camera(t_camera *camera)
 	else if (ch == 'x')
 		camera->pos.z -= 5;
 	else if (ch == 'a')
-		camera->pos.x -= 1;
-	else if (ch == 'd')
 		camera->pos.x += 1;
+	else if (ch == 'd')
+		camera->pos.x -= 1;
 	else if (ch == 'w')
-		camera->pos.y -= 1;
-	else if (ch == 's')
 		camera->pos.y += 1;
+	else if (ch == 's')
+		camera->pos.y -= 1;
 	else if (ch == 'r')
 		camera->pos.z *= -1;
 }
