@@ -30,7 +30,7 @@ t_object new_triangle(t_vect pos1, t_vect pos2, t_vect pos3) {
   return (triangle);
 }
 
-TEST(Reader, InvalidFile) {
+TEST(gs, InvalidFile) {
   t_data data;
 
   // filepath
@@ -72,7 +72,7 @@ TEST(Reader, InvalidFile) {
               ::testing::ExitedWithCode(EXIT_FAILURE), "");
 }
 
-TEST(DISABLED_Reader, InvalidTriangleFormat) {
+TEST(DISABLED_Loader, InvalidTriangleFormat) {
   t_data data = {0};
 
   EXPECT_EXIT(
@@ -137,7 +137,7 @@ TEST(DISABLED_Reader, InvalidTriangleFormat) {
       ::testing::ExitedWithCode(EXIT_FAILURE), "");
 }
 
-TEST(Reader, ValidTriagleFile) {
+TEST(Loader, ValidTriagleFile) {
   t_data data = {0};
   t_data exp = {0};
 
