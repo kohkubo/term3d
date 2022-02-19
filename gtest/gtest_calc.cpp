@@ -129,7 +129,7 @@ TEST(DISABLED_Calc, is_intersect_with_triangle)
 	free(camera);
 }
 
-TEST(Camera, camera_ray)
+TEST(Calc, camera_ray)
 {
 	int x = WIDTH / 2;
 	int y = HEIGHT / 2;
@@ -140,6 +140,7 @@ TEST(Camera, camera_ray)
 	VECTOR_EQ(ray, vect_new(0,0,-1));
 }
 
+// デバッカーを動かすためのテストケース。テストとしては意味あることしてない。
 TEST(Calc, is_intersect_with_vector)
 {
 	t_camera camera;
@@ -148,5 +149,5 @@ TEST(Calc, is_intersect_with_vector)
 	t_vect pos = vect_new(-1, 0, 0);
 	t_vect line = vect_new(1, 0, 0);
 
-	EXPECT_TRUE(is_intersect_with_vector(&camera, pos, line));
+	EXPECT_FALSE(is_intersect_with_vector(&camera, pos, line));
 }

@@ -9,5 +9,6 @@ void	rotate_triangle(t_object *triangle)
 
 void	rotate_circle(t_object *circle)
 {
-	circle->normal = vect_rotate(circle->normal, vect_normalize(vect_new(1, 1, 1)), radian(5));
+	circle->normal = vect_rotate(circle->normal, \
+vect_normalize(vect_new(1, 1, 1)), radian(5));
 }
