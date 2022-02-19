@@ -1,6 +1,12 @@
 #include <gtest/gtest.h>
 #include "vect.h"
 
+void VECTOR_EQ(t_vect act, t_vect exp) {
+	EXPECT_EQ(act.x, exp.x);
+	EXPECT_EQ(act.y, exp.y);
+	EXPECT_EQ(act.z, exp.z);
+}
+
 TEST(Vect, vect_new)
 {
 	t_vect	vect;
@@ -58,4 +64,19 @@ TEST(Vect, vect_rotate)
 	EXPECT_EQ(is_equal(0, vect1.x), true);
 	EXPECT_EQ(is_equal(0, vect1.y), true);
 	EXPECT_EQ(is_equal(1, vect1.z), true);
+}
+
+TEST(Vect, vect_det)
+{
+	t_vect	vect1 = vect_new(1, 2, 3);
+	t_vect	vect2 = vect_new(4, 2, 6);
+	t_vect	vect3 = vect_new(7, 8, 9);
+
+	EXPECT_EQ(vect_det(vect1, vect2, vect3), 36);
+}
+
+TEST(Vect, vect_inv)
+{
+	t_vect vect1 = vect_new(1, 2, 3);
+	VECTOR_EQ(vect_inv(vect1), vect_new(-1, -2, -3));
 }
