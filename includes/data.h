@@ -20,9 +20,9 @@ kawadaさんがEPSILONは 0.000001 くらいがいいって言ってた
 */
 # define EPSILON 0.000001
 
-#ifndef OBJECT_SIZE_MAX
-# define OBJECT_SIZE_MAX 4200
-#endif
+# ifndef OBJECT_SIZE_MAX
+#  define OBJECT_SIZE_MAX 4200
+# endif
 
 typedef struct s_vect
 {
