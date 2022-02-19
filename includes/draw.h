@@ -8,7 +8,6 @@
 # include "debug.h"
 # include "reader.h"
 # include <stdio.h>
-# include <stdlib.h>
 # include <unistd.h>
 
 void	draw(t_data *data);

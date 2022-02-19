@@ -54,7 +54,7 @@ typedef struct s_object
 
 typedef struct s_data
 {
-	t_camera	*camera;
+	t_camera	camera;
 	t_object	object[OBJECT_SIZE_MAX];
 	int			count;
 	t_type		type;

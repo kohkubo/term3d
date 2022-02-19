@@ -4,5 +4,6 @@
 # include "data.h"
 # include "draw.h"
 # include <stdio.h>
+# include <stdlib.h>
 
 #endif
