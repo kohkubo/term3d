@@ -13,6 +13,7 @@ src =\
 	./term3d.c \
 	./draw.c \
 	./calc.c \
+	./rotate.c \
 	./camera.c \
 	./move.c \
 	./reader.c \
