@@ -5,7 +5,7 @@ src_dir		= srcs
 obj_dir		= objs
 obj			= $(src:%.c=$(src_dir)/%.o)
 CC 			= gcc
-CFLAGS		= -Wall -Wextra -Werror -g $(includes:%=-I%) -MMD -MP -O2
+CFLAGS		= -Wall -Wextra -Werror -g $(includes:%=-I%) -MMD -MP -O2 -D=DOT
 dep			= $(obj:.o=.d)
 
 src =\
