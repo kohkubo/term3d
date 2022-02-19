@@ -4,6 +4,7 @@
 # include "data.h"
 # include "vect.h"
 
+t_vect	camera_ray(t_camera *camera, int x, int y);
 t_vect	intersect_with_plane(t_camera *camera, t_vect *center, t_vect *normal);
 bool	is_intersect_with_circle(t_camera *camera, t_object *object);
 bool	is_intersect_with_triangle(t_camera *camera, t_object *object);

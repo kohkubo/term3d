@@ -1,4 +1,4 @@
-#include "camera.h"
+#include "calc.h"
 
 static t_vect	screen_center(t_camera *camera, t_vect camera_normal)
 {

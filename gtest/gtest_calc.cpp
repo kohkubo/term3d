@@ -1,7 +1,5 @@
 #include <gtest/gtest.h>
 #include "calc.h"
-#include "camera.h"
-
 
 TEST(DISABLED_Calc, intersect_with_plane)
 {
@@ -140,4 +138,15 @@ TEST(Camera, camera_ray)
 	camera.normal = vect_new(0,0,-1);
 	t_vect ray = camera_ray(&camera, x, y);
 	VECTOR_EQ(ray, vect_new(0,0,-1));
+}
+
+TEST(Calc, is_intersect_with_vector)
+{
+	t_camera camera;
+	camera.pos = vect_new(0, 0, 0);
+	camera.ray = vect_new(0, 0, 1);
+	t_vect pos = vect_new(-1, 0, 0);
+	t_vect line = vect_new(1, 0, 0);
+
+	EXPECT_TRUE(is_intersect_with_vector(&camera, pos, line));
 }
