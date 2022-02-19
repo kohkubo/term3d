@@ -35,9 +35,9 @@ TEST(gs, InvalidFile) {
 
   // filepath
   EXPECT_EXIT(load_file(&data, NULL), ::testing::ExitedWithCode(EXIT_FAILURE),
-              "File does not exist.");
+              "Filepath is NULL.");
   EXPECT_EXIT(load_file(&data, "invalidpath.tri"),
-              ::testing::ExitedWithCode(EXIT_FAILURE), "File open failed.");
+              ::testing::ExitedWithCode(EXIT_FAILURE), "File does not exist.");
 
   //.tri extension
   EXPECT_EXIT(load_file(&data, "gtest/reader_testfiles/invalid/test.tr"),
@@ -141,11 +141,13 @@ TEST(Loader, ValidTriagleFile) {
   t_data data = {0};
   t_data exp = {0};
 
+  exp.count = 1;
   exp.object[0] = new_triangle(vect_new(0, 2, 0), vect_new(2, -2, 0),
                                  vect_new(-2, -2, 0));
   load_file(&data, "gtest/reader_testfiles/valid/case1.tri");
   is_equal_triangles(data, exp);
 
+  exp.count = 4;
   exp.object[0] = new_triangle(vect_new(0, 2, 0), vect_new(2, -2, 0),
                                  vect_new(-2, -2, 0));
   exp.object[1] = new_triangle(vect_new(0, 2, 0), vect_new(2, -2, 0),
@@ -157,6 +159,7 @@ TEST(Loader, ValidTriagleFile) {
   load_file(&data, "gtest/reader_testfiles/valid/case2.tri");
   is_equal_triangles(data, exp);
 
+  exp.count = 20;
   for (int i = 0; i < exp.count; i++)
     exp.object[i] = new_triangle(vect_new(0, 2, 0), vect_new(2, -2, 0),
                                    vect_new(-2, -2, 0));

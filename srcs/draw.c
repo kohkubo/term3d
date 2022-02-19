@@ -62,5 +62,6 @@ void	draw(t_data *data)
 		}
 		move_camera(&data->camera);
 		usleep(50);
+		print_triangle_info(data);
 	}
 }

@@ -2,17 +2,17 @@
 
 static double	validatable_strtod(char *str)
 {
-	char	*entptr;
+	char	*endptr;
 	double	d;
 
 	if (!str)
 		return (0);
 	errno = 0;
-	d = strtod(str, &entptr);
+	d = strtod(str, &endptr);
 	if (errno == ERANGE)
 		exit_error(NULL);
-	if (*entptr != '\0')
-		exit_error("Contains characters that cannot be converted");
+	if (*endptr != '\0')
+		exit_error("Contains characters that cannot be converted.");
 	if (d == HUGE_VAL)
 		exit_error("An overflow has occurred.");
 	return (d);
@@ -40,7 +40,10 @@ static t_vect	assign_str_to_vector(char *position)
 	double	y;
 	double	z;
 
+	bzero(vec, 3);
 	str_trichotomy(position, ",", vec);
+	if (!vec[0] || !vec[1] || !vec[2])
+		exit_error("Vector elements are missing.");
 	x = validatable_strtod(vec[0]);
 	y = validatable_strtod(vec[1]);
 	z = validatable_strtod(vec[2]);
@@ -51,6 +54,7 @@ void	assign_line_to_object(char *line, t_object *obj)
 {
 	char	*position[4];
 
+	bzero(position, 4);
 	str_trichotomy(line, " ", position);
 	obj->pos1 = assign_str_to_vector(position[0]);
 	obj->pos2 = assign_str_to_vector(position[1]);
