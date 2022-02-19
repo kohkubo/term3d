@@ -5,14 +5,16 @@ static double	validatable_strtod(char *str)
 	char	*entptr;
 	double	d;
 
+	if (!str)
+		return (0);
 	errno = 0;
 	d = strtod(str, &entptr);
 	if (errno == ERANGE)
-		exit_error("number out of range.");
+		exit_error(NULL);
 	if (*entptr != '\0')
-		exit_error("number out of range.");
+		exit_error("Contains characters that cannot be converted");
 	if (d == HUGE_VAL)
-		exit_error("huge val");
+		exit_error("An overflow has occurred.");
 	return (d);
 }
 
@@ -22,15 +24,13 @@ static void	str_trichotomy(char *str, char *sep, char **token)
 
 	if (!str || !sep || !token)
 		return ;
-	printf("%s\n", str);
 	token[0] = strtok(str, sep);
 	token[1] = strtok(NULL, sep);
 	token[2] = strtok(NULL, sep);
 	token[3] = NULL;
 	leftover = strtok(NULL, sep);
 	if (leftover)
-		exit_error("leftover");
-	printf("%s\n%s\n%s\n\n", token[0], token[1], token[2]);
+		exit_error("There are four or more strings after the split.");
 }
 
 static t_vect	assign_str_to_vector(char *position)
@@ -40,8 +40,6 @@ static t_vect	assign_str_to_vector(char *position)
 	double	y;
 	double	z;
 
-	if (!position)
-		return (vect_new(0, 0, 0));
 	str_trichotomy(position, ",", vec);
 	x = validatable_strtod(vec[0]);
 	y = validatable_strtod(vec[1]);

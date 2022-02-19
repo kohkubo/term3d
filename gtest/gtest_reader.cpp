@@ -34,35 +34,33 @@ TEST(Reader, InvalidFile) {
   t_data data;
 
   // filepath
-  EXPECT_EXIT(read_rtfile(&data, NULL), ::testing::ExitedWithCode(EXIT_FAILURE),
-              "does not filepath.");
-  EXPECT_EXIT(read_rtfile(&data, "invalidpath.cir"),
-              ::testing::ExitedWithCode(EXIT_FAILURE), "");
-  EXPECT_EXIT(read_rtfile(&data, "invalidpath.tri"),
-              ::testing::ExitedWithCode(EXIT_FAILURE), "");
+  EXPECT_EXIT(load_file(&data, NULL), ::testing::ExitedWithCode(EXIT_FAILURE),
+              "File does not exist.");
+  EXPECT_EXIT(load_file(&data, "invalidpath.tri"),
+              ::testing::ExitedWithCode(EXIT_FAILURE), "File open failed.");
 
   //.tri extension
-  EXPECT_EXIT(read_rtfile(&data, "gtest/reader_testfiles/invalid/test.tr"),
-              ::testing::ExitedWithCode(EXIT_FAILURE), "file extension error.");
-  EXPECT_EXIT(read_rtfile(&data, "gtest/reader_testfiles/invalid/test.tria"),
-              ::testing::ExitedWithCode(EXIT_FAILURE), "file extension error.");
-  EXPECT_EXIT(read_rtfile(&data, "gtest/reader_testfiles/invalid/test_tri"),
-              ::testing::ExitedWithCode(EXIT_FAILURE), "file extension error.");
+  EXPECT_EXIT(load_file(&data, "gtest/reader_testfiles/invalid/test.tr"),
+              ::testing::ExitedWithCode(EXIT_FAILURE), "Invalid file extension. valid : .tri");
+  EXPECT_EXIT(load_file(&data, "gtest/reader_testfiles/invalid/test.tria"),
+              ::testing::ExitedWithCode(EXIT_FAILURE), "Invalid file extension. valid : .tri");
+  EXPECT_EXIT(load_file(&data, "gtest/reader_testfiles/invalid/test_tri"),
+              ::testing::ExitedWithCode(EXIT_FAILURE), "Invalid file extension. valid : .tri");
 
   // empty file with valid extension
-  EXPECT_EXIT(read_rtfile(&data, "gtest/reader_testfiles/invalid/test.cir.tri"),
+  EXPECT_EXIT(load_file(&data, "gtest/reader_testfiles/invalid/test.cir.tri"),
               ::testing::ExitedWithCode(EXIT_FAILURE), "");
 
   // no permission
   /*system("touch gtest/reader_testfiles/invalid/test.cir");
   system("chmod 000 gtest/reader_testfiles/invalid/test.cir");
-  EXPECT_EXIT(read_rtfile(&data, "gtest/reader_testfiles/invalid/test.cir.tri"),
+  EXPECT_EXIT(load_file(&data, "gtest/reader_testfiles/invalid/test.cir.tri"),
               ::testing::ExitedWithCode(EXIT_FAILURE), "count read error.");
 
   system("mkdir gtest/reader_testfiles/invalid/nopermdir");
   system("touch gtest/reader_testfiles/invalid/nopermdir/test.cir");
   system("chmod 000 gtest/reader_testfiles/invalid/nopermdir");
-  EXPECT_EXIT(read_rtfile(&data, "gtest/reader_testfiles/invalid/test.cir.tri"),
+  EXPECT_EXIT(load_file(&data, "gtest/reader_testfiles/invalid/test.cir.tri"),
               ::testing::ExitedWithCode(EXIT_FAILURE), "count read error.");
   //注意！！　rmする場所を書き換えないように！
   system("chmod 777 gtest/reader_testfiles/invalid/nopermdir");
@@ -70,7 +68,7 @@ TEST(Reader, InvalidFile) {
   system("rm gtest/reader_testfiles/invalid/test.cir");*/
 
   // directory
-  EXPECT_EXIT(read_rtfile(&data, "gtest/reader_testfiles/invalid/dir.cir"),
+  EXPECT_EXIT(load_file(&data, "gtest/reader_testfiles/invalid/dir.tri"),
               ::testing::ExitedWithCode(EXIT_FAILURE), "");
 }
 
@@ -78,74 +76,74 @@ TEST(DISABLED_Reader, InvalidTriangleFormat) {
   t_data data = {0};
 
   EXPECT_EXIT(
-      read_rtfile(&data,
+      load_file(&data,
                   "gtest/reader_testfiles/invalid/triangle_format/format1.tri"),
       ::testing::ExitedWithCode(EXIT_FAILURE), "");
   EXPECT_EXIT(
-      read_rtfile(&data,
+      load_file(&data,
                   "gtest/reader_testfiles/invalid/triangle_format/format2.tri"),
       ::testing::ExitedWithCode(EXIT_FAILURE), "");
   EXPECT_EXIT(
-      read_rtfile(&data,
+      load_file(&data,
                   "gtest/reader_testfiles/invalid/triangle_format/format3.tri"),
       ::testing::ExitedWithCode(EXIT_FAILURE), "");
   EXPECT_EXIT(
-      read_rtfile(&data,
+      load_file(&data,
                   "gtest/reader_testfiles/invalid/triangle_format/format4.tri"),
       ::testing::ExitedWithCode(EXIT_FAILURE), "");
   EXPECT_EXIT(
-      read_rtfile(&data,
+      load_file(&data,
                   "gtest/reader_testfiles/invalid/triangle_format/format5.tri"),
       ::testing::ExitedWithCode(EXIT_FAILURE), "");
   EXPECT_EXIT(
-      read_rtfile(&data,
+      load_file(&data,
                   "gtest/reader_testfiles/invalid/triangle_format/format6.tri"),
       ::testing::ExitedWithCode(EXIT_FAILURE), "");
   EXPECT_EXIT(
-      read_rtfile(&data,
+      load_file(&data,
                   "gtest/reader_testfiles/invalid/triangle_format/format7.tri"),
       ::testing::ExitedWithCode(EXIT_FAILURE), "");
   EXPECT_EXIT(
-      read_rtfile(&data,
+      load_file(&data,
                   "gtest/reader_testfiles/invalid/triangle_format/format8.tri"),
       ::testing::ExitedWithCode(EXIT_FAILURE), "");
   EXPECT_EXIT(
-      read_rtfile(&data,
+      load_file(&data,
                   "gtest/reader_testfiles/invalid/triangle_format/format9.tri"),
       ::testing::ExitedWithCode(EXIT_FAILURE), "");
   EXPECT_EXIT(
-      read_rtfile(
+      load_file(
           &data, "gtest/reader_testfiles/invalid/triangle_format/format10.tri"),
       ::testing::ExitedWithCode(EXIT_FAILURE), "");
   EXPECT_EXIT(
-      read_rtfile(
+      load_file(
           &data, "gtest/reader_testfiles/invalid/triangle_format/format11.tri"),
       ::testing::ExitedWithCode(EXIT_FAILURE), "");
   EXPECT_EXIT(
-      read_rtfile(
+      load_file(
           &data, "gtest/reader_testfiles/invalid/triangle_format/format12.tri"),
       ::testing::ExitedWithCode(EXIT_FAILURE), "");
   EXPECT_EXIT(
-      read_rtfile(
+      load_file(
           &data, "gtest/reader_testfiles/invalid/triangle_format/format13.tri"),
       ::testing::ExitedWithCode(EXIT_FAILURE), "");
   EXPECT_EXIT(
-      read_rtfile(
+      load_file(
           &data, "gtest/reader_testfiles/invalid/triangle_format/format14.tri"),
       ::testing::ExitedWithCode(EXIT_FAILURE), "");
   EXPECT_EXIT(
-      read_rtfile(
+      load_file(
           &data, "gtest/reader_testfiles/invalid/triangle_format/format15.tri"),
       ::testing::ExitedWithCode(EXIT_FAILURE), "");
 }
 
-TEST(DISABLED_Reader, ValidTriagleFile) {
+TEST(Reader, ValidTriagleFile) {
   t_data data = {0};
   t_data exp = {0};
 
   exp.object[0] = new_triangle(vect_new(0, 2, 0), vect_new(2, -2, 0),
                                  vect_new(-2, -2, 0));
-  read_rtfile(&data, "gtest/reader_testfiles/valid/case1.tri");
+  load_file(&data, "gtest/reader_testfiles/valid/case1.tri");
   is_equal_triangles(data, exp);
 
   exp.object[0] = new_triangle(vect_new(0, 2, 0), vect_new(2, -2, 0),
@@ -156,12 +154,12 @@ TEST(DISABLED_Reader, ValidTriagleFile) {
                                  vect_new(-2, -2, 0));
   exp.object[3] = new_triangle(vect_new(0, 2, 0), vect_new(2, -2, 0),
                                  vect_new(-2, -2, 0));
-  read_rtfile(&data, "gtest/reader_testfiles/valid/case2.tri");
+  load_file(&data, "gtest/reader_testfiles/valid/case2.tri");
   is_equal_triangles(data, exp);
 
   for (int i = 0; i < exp.count; i++)
     exp.object[i] = new_triangle(vect_new(0, 2, 0), vect_new(2, -2, 0),
                                    vect_new(-2, -2, 0));
-  read_rtfile(&data, "gtest/reader_testfiles/valid/case3.tri");
+  load_file(&data, "gtest/reader_testfiles/valid/case3.tri");
   is_equal_triangles(data, exp);
 }
