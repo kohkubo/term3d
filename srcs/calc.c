@@ -19,13 +19,13 @@ t_vect	intersect_with_plane(t_camera *camera, t_vect *center, t_vect *normal)
 
 bool	is_intersect_with_circle(t_camera *camera, t_object *circle)
 {
-	double	distance;
+	double		distance;
 
 	camera->lookat = intersect_with_plane(camera, &circle->pos1,
 			&circle->normal);
 	distance = vect_distance(camera->lookat, circle->pos1);
-	if (less_equal(distance, circle->radius) && less_equal(circle->radius * 0.9,
-			distance))
+	if (less_equal(distance, circle->radius) && \
+less_equal(circle->radius * 0.9, distance))
 		return (true);
 	return (false);
 }

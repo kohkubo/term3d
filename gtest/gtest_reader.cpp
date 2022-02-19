@@ -143,6 +143,8 @@ TEST(Reader, InvalidCircleFormat) {
       read_rtfile(&data,
                   "gtest/reader_testfiles/invalid/circle_format/format8.cir"),
       ::testing::ExitedWithCode(EXIT_FAILURE), "");
+
+  //3つ目の不正なvectorのx値がradiusと解釈されてエラーにならない
   /*EXPECT_EXIT(
       read_rtfile(&data,
                   "gtest/reader_testfiles/invalid/circle_format/format9.cir"),
@@ -212,10 +214,10 @@ TEST(DISABLED_Reader, InvalidTriangleFormat) {
       read_rtfile(&data,
                   "gtest/reader_testfiles/invalid/triangle_format/format7.tri"),
       ::testing::ExitedWithCode(EXIT_FAILURE), "");
-  /*EXPECT_EXIT(
+  EXPECT_EXIT(
       read_rtfile(&data,
                   "gtest/reader_testfiles/invalid/triangle_format/format8.tri"),
-      ::testing::ExitedWithCode(EXIT_FAILURE), "");*/
+      ::testing::ExitedWithCode(EXIT_FAILURE), "");
   EXPECT_EXIT(
       read_rtfile(&data,
                   "gtest/reader_testfiles/invalid/triangle_format/format9.tri"),
