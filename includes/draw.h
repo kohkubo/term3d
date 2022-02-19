@@ -5,7 +5,6 @@
 # include "vect.h"
 # include "calc.h"
 # include "move.h"
-# include "camera.h"
 # include "debug.h"
 # include "reader.h"
 # include <stdio.h>

@@ -5,15 +5,17 @@ src_dir		= srcs
 obj_dir		= objs
 obj			= $(src:%.c=$(src_dir)/%.o)
 CC 			= gcc
-CFLAGS		= -Wall -Wextra -Werror -g $(includes:%=-I%) -MMD -MP
+CFLAGS		= -Wall -Wextra -Werror -g $(includes:%=-I%) -MMD -MP -O2
 dep			= $(obj:.o=.d)
 
 src =\
 	./data.c \
 	./term3d.c \
 	./draw.c \
-	./calc.c \
-	./camera.c \
+	./calc/circle.c \
+	./calc/rotate.c \
+	./calc/camera.c \
+	./calc/triangle.c \
 	./move.c \
 	./reader.c \
 	./read_object.c \
@@ -21,6 +23,7 @@ src =\
 	./vect/vect2.c \
 	./vect/vect3.c \
 	./vect/vect4.c \
+	./vect/vect5.c \
 	./debug.c \
 
 .PHONY: all
@@ -51,16 +54,19 @@ testdir = ./gtest
 srcs_test = \
 	./$(src_dir)/draw.c \
 	./$(src_dir)/data.c \
-	./$(src_dir)/calc.c \
+	./$(src_dir)/calc/rotate.c \
+	./$(src_dir)/calc/camera.c \
+	./$(src_dir)/calc/circle.c \
+	./$(src_dir)/calc/triangle.c \
 	./$(src_dir)/debug.c \
 	./$(src_dir)/move.c \
 	./$(src_dir)/reader.c \
 	./$(src_dir)/read_object.c \
-	./$(src_dir)/camera.c \
 	./$(src_dir)/vect/vect1.c \
 	./$(src_dir)/vect/vect2.c \
 	./$(src_dir)/vect/vect3.c \
 	./$(src_dir)/vect/vect4.c \
+	./$(src_dir)/vect/vect5.c \
 
 $(gtest):
 	mkdir -p $(dir ../test)

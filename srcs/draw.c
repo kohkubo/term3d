@@ -3,7 +3,8 @@
 static void	init_data(t_data *data)
 {
 	data->camera = (t_camera *)malloc(sizeof(t_camera));
-	data->camera->pos = vect_new(0, 0, -15);
+	data->camera->pos = vect_new(0, 0, -150);
+	data->camera->normal = vect_new(0, 0, -1);
 	if (data->type == CIRCLE)
 	{
 		data->intersect = is_intersect_with_circle;
@@ -69,6 +70,6 @@ void	draw(t_data *data)
 			i++;
 		}
 		move_camera(data->camera);
-		usleep(50000);
+		usleep(50);
 	}
 }
