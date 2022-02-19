@@ -38,7 +38,7 @@ void	print_all_object_info(t_data *data)
 	printf("object count : %d\n", data->count);
 	while (c < data->count)
 	{
-		printf("%-5d ", c);
+		printf("%-5d ", c + 1);
 		printf("1: ");
 		vect_print(data->object[c].pos1);
 		printf("      ");

@@ -5,7 +5,7 @@ src_dir		= srcs
 obj_dir		= objs
 obj			= $(src:%.c=$(src_dir)/%.o)
 CC 			= gcc
-CFLAGS		= -Wall -Wextra -Werror -g $(includes:%=-I%) -MMD -MP -O2 -D=DOT
+CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address $(includes:%=-I%) -MMD -MP -O2
 dep			= $(obj:.o=.d)
 
 src =\
@@ -16,7 +16,8 @@ src =\
 	./calc/camera.c \
 	./calc/triangle.c \
 	./move.c \
-	./reader.c \
+	./loader.c \
+	./parse_and_assign.c \
 	./vect/vect1.c \
 	./vect/vect2.c \
 	./vect/vect3.c \
@@ -57,7 +58,8 @@ srcs_test = \
 	./$(src_dir)/calc/triangle.c \
 	./$(src_dir)/debug.c \
 	./$(src_dir)/move.c \
-	./$(src_dir)/reader.c \
+	./$(src_dir)/loader.c \
+	./$(src_dir)/parse_and_assign.c \
 	./$(src_dir)/vect/vect1.c \
 	./$(src_dir)/vect/vect2.c \
 	./$(src_dir)/vect/vect3.c \

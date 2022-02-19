@@ -1,4 +1,4 @@
-#include "reader.h"
+#include "loader.h"
 #include <gtest/gtest.h>
 
 //テスト用便利関数
