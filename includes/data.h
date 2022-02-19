@@ -37,19 +37,11 @@ typedef struct s_camera
 	t_vect		ray;
 }				t_camera;
 
-typedef enum e_type
-{
-	CIRCLE,
-	TRIANGLE,
-}				t_type;
-
 typedef struct s_object
 {
 	t_vect		pos1;
 	t_vect		pos2;
 	t_vect		pos3;
-	t_vect		normal;
-	double		radius;
 }				t_object;
 
 typedef struct s_data
@@ -57,7 +49,6 @@ typedef struct s_data
 	t_camera	camera;
 	t_object	object[OBJECT_SIZE_MAX];
 	int			count;
-	t_type		type;
 	bool		(*intersect)(t_camera *, t_object *);
 	void		(*rotate)(t_object *);
 }				t_data;

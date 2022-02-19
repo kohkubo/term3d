@@ -4,16 +4,8 @@ static void	init_data(t_data *data)
 {
 	data->camera.pos = vect_new(0, 0, -150);
 	data->camera.normal = vect_new(0, 0, -1);
-	if (data->type == CIRCLE)
-	{
-		data->intersect = is_intersect_with_circle;
-		data->rotate = rotate_circle;
-	}
-	if (data->type == TRIANGLE)
-	{
-		data->intersect = is_intersect_with_triangle;
-		data->rotate = rotate_triangle;
-	}
+	data->intersect = is_intersect_with_triangle;
+	data->rotate = rotate_triangle;
 }
 
 static void	draw_point(t_data *data, int x, int y)

@@ -140,7 +140,6 @@ void	read_rtfile(t_data *data, char *filepath)
 		read_line(&data->object[c++], file);
 	if (ferror(file))
 		exit_error("file error.");
-	data->type = TRIANGLE;
 	data->count = (c < OBJECT_SIZE_MAX ? c : OBJECT_SIZE_MAX);
 	fclose(file);
 

@@ -12,7 +12,6 @@ src =\
 	./data.c \
 	./term3d.c \
 	./draw.c \
-	./calc/circle.c \
 	./calc/rotate.c \
 	./calc/camera.c \
 	./calc/triangle.c \
@@ -55,7 +54,6 @@ srcs_test = \
 	./$(src_dir)/data.c \
 	./$(src_dir)/calc/rotate.c \
 	./$(src_dir)/calc/camera.c \
-	./$(src_dir)/calc/circle.c \
 	./$(src_dir)/calc/triangle.c \
 	./$(src_dir)/debug.c \
 	./$(src_dir)/move.c \
