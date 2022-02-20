@@ -46,6 +46,12 @@ typedef struct s_camera
 	double		rotate_angle;
 }				t_camera;
 
+typedef struct s_light
+{
+	t_vect		pos;
+	double		intensity;
+}				t_light;
+
 typedef struct s_object
 {
 	t_vect		pos1;
@@ -56,6 +62,7 @@ typedef struct s_object
 typedef struct s_data
 {
 	t_camera	camera;
+	t_light		light;
 	t_object	object[OBJECT_SIZE_MAX];
 	int			count;
 	bool		(*intersect)(t_camera *, t_object *);

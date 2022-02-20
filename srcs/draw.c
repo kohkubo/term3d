@@ -8,28 +8,35 @@ static void	init_data(t_data *data)
 	data->camera.normal = vect_new(0, 0, -1);
 	data->camera.normal_axis = vect_normalize(vect_new(1, 1, 1));
 	data->camera.rotate_angle = radian(1);
+	data->light.pos = vect_new(15, 15, -150);
+	data->light.intensity = 1.0;
 	data->intersect = is_intersect_with_triangle;
 }
 
-static void	draw_point(t_data *data, int x, int y)
+static int	intersect(t_data *data, int x, int y)
 {
-	int		i;
+	int	i;
 
 	data->camera.ray = camera_ray(&data->camera, x, y);
 	i = 0;
 	while (i < data->count)
 	{
 		if (data->intersect(&data->camera, &data->object[i]))
-			break ;
+			return (i);
 		i++;
 	}
-	t_vect p1 = vect_sub(data->object[i].pos2, data->object[i].pos1);
-	t_vect p2 = vect_sub(data->object[i].pos3, data->object[i].pos1);
-	t_vect normal = vect_normalize(vect_cross(p1, p2));
-	if (i != data->count)
-		printf("%c ", shading(&data->camera.lookat, &normal));
-	else
+	return (-1);
+}
+
+static void	draw_point(t_data *data, int x, int y)
+{
+	int	c;
+
+	c = intersect(data, x, y);
+	if (c == -1)
 		printf(X);
+	else
+		printf("%c ", shading(data, &data->object[c]));
 }
 
 static void	draw_screen(t_data *data)

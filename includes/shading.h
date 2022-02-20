@@ -2,14 +2,9 @@
 # define SHADING_H
 
 #include "vect.h"
+#include "data.h"
 #include <string.h>
 
-typedef struct s_light
-{
-	t_vect		pos;
-	double		intensity;
-}				t_light;
-
-char	shading(t_vect *point, t_vect *normal);
+char	shading(t_data *data, t_object *hit);
 
 #endif
