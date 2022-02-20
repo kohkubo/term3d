@@ -27,10 +27,10 @@ bool	is_intersect_with_vector(t_camera *camera, t_vect pos, t_vect edge)
 		return (false);
 	while (len > 0)
 	{
-		if (is_intersect_with_sphere(camera, pos, 0.5))
+		if (is_intersect_with_sphere(camera, pos, DOT_SIZE))
 			return (true);
-		pos = vect_move(pos, normal, 1);
-		len -= 1;
+		pos = vect_move(pos, normal, DOT_DENSITY);
+		len -= DOT_DENSITY;
 	}
 	return (false);
 }

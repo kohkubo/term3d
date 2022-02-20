@@ -24,6 +24,9 @@ kawadaさんがEPSILONは 0.000001 くらいがいいって言ってた
 #  define OBJECT_SIZE_MAX 42000
 # endif
 
+# define DOT_SIZE 1
+# define DOT_DENSITY 1
+
 typedef struct s_vect
 {
 	double		x;
@@ -34,9 +37,13 @@ typedef struct s_vect
 typedef struct s_camera
 {
 	t_vect		pos;
+	t_vect		up;
+	t_vect		right;
 	t_vect		normal;
 	t_vect		lookat;
 	t_vect		ray;
+	t_vect		normal_axis;
+	double		rotate_angle;
 }				t_camera;
 
 typedef struct s_object
@@ -52,7 +59,6 @@ typedef struct s_data
 	t_object	object[OBJECT_SIZE_MAX];
 	int			count;
 	bool		(*intersect)(t_camera *, t_object *);
-	void		(*rotate)(t_object *);
 }				t_data;
 
 bool			is_equal(double a, double b);

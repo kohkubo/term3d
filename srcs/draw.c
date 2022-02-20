@@ -3,9 +3,12 @@
 static void	init_data(t_data *data)
 {
 	data->camera.pos = vect_new(0, 0, -150);
+	data->camera.up = vect_new(0, 1, 0);
+	data->camera.right = vect_new(1, 0, 0);
 	data->camera.normal = vect_new(0, 0, -1);
+	data->camera.normal_axis = vect_normalize(vect_new(1, 1, 1));
+	data->camera.rotate_angle = radian(1);
 	data->intersect = is_intersect_with_triangle;
-	data->rotate = rotate_triangle;
 }
 
 static void	draw_point(t_data *data, int x, int y)
@@ -26,11 +29,13 @@ static void	draw_point(t_data *data, int x, int y)
 		printf(X);
 }
 
-static void	draw_loop(t_data *data)
+static void	draw_screen(t_data *data)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	char	buf[BUFSIZ];
 
+	setbuf(stdout, buf);
 	printf(TOP_LEFT);
 	y = 0;
 	while (y <= HEIGHT)
@@ -44,24 +49,18 @@ static void	draw_loop(t_data *data)
 		printf("\n");
 		y++;
 	}
+	print_triangle_info(data);
+	fflush(stdout);
 }
 
 void	draw(t_data *data)
 {
-	int	i;
-
 	init_data(data);
 	while (true)
 	{
-		draw_loop(data);
-		i = 0;
-		while (i < data->count)
-		{
-			data->rotate(&data->object[i]);
-			i++;
-		}
+		draw_screen(data);
 		move_camera(&data->camera);
-		usleep(50);
-		print_triangle_info(data);
+		camera_rotate(&data->camera);
+		usleep(5000);
 	}
 }
