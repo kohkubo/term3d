@@ -37,6 +37,7 @@ static void	draw_screen(t_data *data)
 
 	setbuf(stdout, buf);
 	printf(TOP_LEFT);
+	printf(DISABLE_CURSOR);
 	y = 0;
 	while (y <= HEIGHT)
 	{
