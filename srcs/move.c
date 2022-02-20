@@ -19,32 +19,23 @@ static int	getch(void)
 	return (ch);
 }
 
-/*
-zoom in   : z
-zoome out : x
-left      : a
-right     : d
-up        : w
-down      : s
-reset     : r
-*/
+static void	camera_zoom_out(t_camera *camera)
+{
+	camera->pos = vect_move(camera->pos, camera->normal, 5);
+}
+
+static void	camera_zoom_in(t_camera *camera)
+{
+	camera->pos = vect_move(camera->pos, camera->normal, -5);
+}
+
 void	move_camera(t_camera *camera)
 {
 	int	ch;
 
 	ch = getch();
 	if (ch == 'z')
-		camera->pos.z += 5;
+		camera_zoom_in(camera);
 	else if (ch == 'x')
-		camera->pos.z -= 5;
-	else if (ch == 'a')
-		camera->pos.x += 1;
-	else if (ch == 'd')
-		camera->pos.x -= 1;
-	else if (ch == 'w')
-		camera->pos.y += 1;
-	else if (ch == 's')
-		camera->pos.y -= 1;
-	else if (ch == 'r')
-		camera->pos.z *= -1;
+		camera_zoom_out(camera);
 }

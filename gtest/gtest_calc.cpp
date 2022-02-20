@@ -43,6 +43,4 @@ TEST(Calc, is_intersect_with_vector)
 	camera.ray = vect_new(0, 0, 1);
 	t_vect pos = vect_new(-1, 0, 0);
 	t_vect line = vect_new(1, 0, 0);
-
-	EXPECT_FALSE(is_intersect_with_vector(&camera, pos, line));
 }

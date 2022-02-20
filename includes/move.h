@@ -2,6 +2,7 @@
 # define MOVE_H
 
 # include "data.h"
+# include "vect.h"
 # include <stdbool.h>
 # include <stdio.h>
 # include <termios.h>

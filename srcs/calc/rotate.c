@@ -1,8 +1,13 @@
 #include "calc.h"
 
-void	rotate_triangle(t_object *triangle)
+void	camera_rotate(t_camera *camera)
 {
-	triangle->pos1 = vect_rotate(triangle->pos1, vect_new(0, 1, 1), radian(3));
-	triangle->pos2 = vect_rotate(triangle->pos2, vect_new(0, 1, 1), radian(3));
-	triangle->pos3 = vect_rotate(triangle->pos3, vect_new(0, 1, 1), radian(3));
+	camera->pos = vect_rotate(camera->pos, \
+camera->normal_axis, camera->rotate_angle);
+	camera->normal = vect_rotate(camera->normal, \
+camera->normal_axis, camera->rotate_angle);
+	camera->up = vect_rotate(camera->up, \
+camera->normal_axis, camera->rotate_angle);
+	camera->right = vect_rotate(camera->right, \
+camera->normal_axis, camera->rotate_angle);
 }
