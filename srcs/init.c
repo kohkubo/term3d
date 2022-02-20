@@ -9,20 +9,12 @@ static t_vect	center_objects(t_data *data)
 	ret = vect_new(0, 0, 0);
 	while (i < data->count)
 	{
-		ret.x += data->object[i].pos1.x;
-		ret.y += data->object[i].pos1.y;
-		ret.z += data->object[i].pos1.z;
-		ret.x += data->object[i].pos2.x;
-		ret.y += data->object[i].pos2.y;
-		ret.z += data->object[i].pos2.z;
-		ret.x += data->object[i].pos3.x;
-		ret.y += data->object[i].pos3.y;
-		ret.z += data->object[i].pos3.z;
+		ret = vect_add(ret, data->object[i].pos1);
+		ret = vect_add(ret, data->object[i].pos2);
+		ret = vect_add(ret, data->object[i].pos3);
 		i++;
 	}
-	ret.x /= (data->count * 3);
-	ret.y /= (data->count * 3);
-	ret.z /= (data->count * 3);
+	ret = vect_scalar_div(ret, (double)data->count * 3);
 	return (ret);
 }
 
