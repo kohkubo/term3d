@@ -9,7 +9,7 @@ int	main(int ac, char **av)
 		fprintf(stderr, "Usage: %s <filename>\n", av[0]);
 		return (EXIT_FAILURE);
 	}
-	read_rtfile(&data, av[1]);
+	load_file(&data, av[1]);
 	draw(&data);
 	return (EXIT_SUCCESS);
 }

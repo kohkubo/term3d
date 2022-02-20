@@ -9,5 +9,8 @@
 !*.yml
 !*.cir
 !*.tri
+!*.tr
+!*.tria
+!*_tri
 !Makefile
 test
