@@ -14,7 +14,6 @@ static void	init_data(t_data *data)
 static void	draw_point(t_data *data, int x, int y)
 {
 	int		i;
-
 	data->camera.ray = camera_ray(&data->camera, x, y);
 	i = 0;
 	while (i < data->count)
@@ -29,11 +28,13 @@ static void	draw_point(t_data *data, int x, int y)
 		printf(X);
 }
 
-static void	draw_loop(t_data *data)
+static void	draw_screen(t_data *data)
 {
 	int	x;
 	int	y;
+	char buf[BUFSIZ];
 
+	setbuf(stdout, buf);
 	printf(TOP_LEFT);
 	y = 0;
 	while (y <= HEIGHT)
@@ -47,6 +48,8 @@ static void	draw_loop(t_data *data)
 		printf("\n");
 		y++;
 	}
+	print_triangle_info(data);
+	fflush(stdout);
 }
 
 void	draw(t_data *data)
@@ -54,10 +57,9 @@ void	draw(t_data *data)
 	init_data(data);
 	while (true)
 	{
-		draw_loop(data);
+		draw_screen(data);
 		move_camera(&data->camera);
 		camera_rotate(&data->camera);
 		usleep(5000);
-		print_triangle_info(data);
 	}
 }
