@@ -6,7 +6,7 @@
 # include "calc.h"
 # include "move.h"
 # include "debug.h"
-# include "reader.h"
+# include "loader.h"
 # include <stdio.h>
 # include <unistd.h>
 

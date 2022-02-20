@@ -12,13 +12,12 @@ src =\
 	./data.c \
 	./term3d.c \
 	./draw.c \
-	./calc/circle.c \
 	./calc/rotate.c \
 	./calc/camera.c \
 	./calc/triangle.c \
 	./move.c \
-	./reader.c \
-	./read_object.c \
+	./loader.c \
+	./parse_and_assign.c \
 	./vect/vect1.c \
 	./vect/vect2.c \
 	./vect/vect3.c \
@@ -56,12 +55,11 @@ srcs_test = \
 	./$(src_dir)/data.c \
 	./$(src_dir)/calc/rotate.c \
 	./$(src_dir)/calc/camera.c \
-	./$(src_dir)/calc/circle.c \
 	./$(src_dir)/calc/triangle.c \
 	./$(src_dir)/debug.c \
 	./$(src_dir)/move.c \
-	./$(src_dir)/reader.c \
-	./$(src_dir)/read_object.c \
+	./$(src_dir)/loader.c \
+	./$(src_dir)/parse_and_assign.c \
 	./$(src_dir)/vect/vect1.c \
 	./$(src_dir)/vect/vect2.c \
 	./$(src_dir)/vect/vect3.c \
@@ -81,6 +79,7 @@ test: $(gtest) fclean
 	clang++ -std=c++11 \
 	$(testdir)/gtest.cpp $(gtestdir)/googletest-release-1.11.0/googletest/src/gtest_main.cc $(gtestdir)/gtest/gtest-all.cc \
 	-g -fsanitize=address -fsanitize=undefined \
+	-D OBJECT_SIZE_MAX=42 \
 	-I$(gtestdir) -I/usr/local/opt/llvm/include -I$(includes) -lpthread $(srcs_test) -o tester
 	./tester
 	rm -rf tester

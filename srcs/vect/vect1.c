@@ -2,7 +2,7 @@
 
 void	vect_print(t_vect vect)
 {
-	printf("%f, %f, %f\n", vect.x, vect.y, vect.z);
+	printf("%16f, %16f, %16f\n", vect.x, vect.y, vect.z);
 }
 
 t_vect	vect_new(double x, double y, double z)
