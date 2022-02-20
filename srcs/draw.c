@@ -1,18 +1,16 @@
 #include "draw.h"
 
-static void	draw_point(t_data *data, int x, int y)
+static int	intersect(t_data *data, int x, int y)
 {
 	int	i;
 
 	data->camera.ray = camera_ray(&data->camera, x, y);
 	i = 0;
-	while (i < data->count)
-	{
-		if (data->intersect(&data->camera, &data->object[i]))
-			return (i);
+	while (!data->intersect(&data->camera, &data->object[i]) && i < data->count)
 		i++;
-	}
-	return (-1);
+	if (i == data->count)
+		return (-1);
+	return (i);
 }
 
 static void	draw_point(t_data *data, int x, int y)

@@ -2,7 +2,7 @@
 
 double	diffuse_reflection(double intensity, t_vect *n, t_vect *l)
 {
-	return (intensity * fmax(vect_dot(*n, *l), 0));
+	return (KD * intensity * fmax(vect_dot(*n, *l), 0));
 }
 
 double	specular_reflection(double intensity, t_vect *n, t_vect *l, t_vect *d)
@@ -15,15 +15,17 @@ double	specular_reflection(double intensity, t_vect *n, t_vect *l, t_vect *d)
 	v = vect_normalize(vect_inv(*d));
 	r = vect_scalar_mul(*n, 2 * vect_dot(*n, *l));
 	r = vect_normalize(vect_sub(r, *l));
-	return (intensity * pow(fmax(vect_dot(v, r), 0), 8));
+	return (KS * intensity * pow(fmax(vect_dot(v, r), 0), 8));
 }
 
 static char	get_density(double radiance)
 {
-	const char	*density = ".,:;-~+=!?*#$&@";
+	const char	*density = ".,:;-~=!*#$@";
 
 	if (less_equal(radiance, 0))
 		return (' ');
+	if (less_equal(1, radiance))
+		return (density[strlen(density)]);
 	return (density[(int)(radiance * strlen(density))]);
 }
 
@@ -41,14 +43,16 @@ char	shading(t_camera *camera, t_light *light, t_object *hit)
 {
 	t_vect	l;
 	t_vect	n;
+	double	ra;
 	double	rd;
 	double	rs;
 
 	l = vect_normalize(vect_sub(light->pos, camera->lookat));
 	n = get_triangle_normal(hit);
+	if (less(vect_dot(l, n), 0))
+		n = vect_inv(n);
+	ra = KA * IA;
 	rd = diffuse_reflection(light->intensity, &n, &l);
 	rs = specular_reflection(light->intensity, &n, &l, &camera->lookat);
-	if (less_equal(1, rd + rs))
-		return (get_density(0));
-	return (get_density(rd + rs));
+	return (get_density(ra + rd + rs));
 }
