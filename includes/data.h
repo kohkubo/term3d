@@ -14,6 +14,8 @@ TOP_LEFTは標準出力の位置を固定するためのものです
 これを出力の最初に行うことで、標準出力を使ったアニメーションができます
 */
 # define TOP_LEFT "\x1b[H"
+# define DISABLE_CURSOR "\033[?25l"
+# define ENABLE_CURSOR "\033[?25h"
 /*
 最大制度 DBL_EPSILON
 kawadaさんがEPSILONは 0.000001 くらいがいいって言ってた

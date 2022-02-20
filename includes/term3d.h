@@ -3,6 +3,7 @@
 
 # include "data.h"
 # include "draw.h"
+# include "init.h"
 # include <stdio.h>
 # include <stdlib.h>
 

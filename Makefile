@@ -11,6 +11,7 @@ dep			= $(obj:.o=.d)
 src =\
 	./data.c \
 	./term3d.c \
+	./init.c \
 	./draw.c \
 	./calc/rotate.c \
 	./calc/camera.c \
