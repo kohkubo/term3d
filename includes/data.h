@@ -4,8 +4,8 @@
 # include <stdbool.h>
 # include <float.h>
 # include <math.h>
-# define WIDTH 30
-# define HEIGHT 30
+# define WIDTH 100
+# define HEIGHT 100
 # define FOCUS_DISTANCE 20
 # define O ". "
 # define X "  "

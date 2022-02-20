@@ -23,8 +23,11 @@ static void	draw_point(t_data *data, int x, int y)
 			break ;
 		i++;
 	}
+	t_vect p1 = vect_sub(data->object[i].pos2, data->object[i].pos1);
+	t_vect p2 = vect_sub(data->object[i].pos3, data->object[i].pos1);
+	t_vect normal = vect_normalize(vect_cross(p1, p2));
 	if (i != data->count)
-		printf(O);
+		printf("%c ", shading(&data->camera.lookat, &normal));
 	else
 		printf(X);
 }

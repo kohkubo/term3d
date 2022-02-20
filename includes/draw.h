@@ -7,6 +7,7 @@
 # include "move.h"
 # include "debug.h"
 # include "loader.h"
+# include "shading.h"
 # include <stdio.h>
 # include <unistd.h>
 
