@@ -36,7 +36,7 @@ static void	draw_point(t_data *data, int x, int y)
 	if (c == -1)
 		printf(X);
 	else
-		printf("%c ", shading(data, &data->object[c]));
+		printf("%c ", shading(&data->camera, &data->light, &data->object[c]));
 }
 
 static void	draw_screen(t_data *data)
