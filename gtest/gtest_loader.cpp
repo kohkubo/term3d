@@ -138,6 +138,7 @@ TEST(DISABLED_Loader, InvalidTriangleFormat) {
 }
 
 TEST(Loader, ValidTriagleFile) {
+  fflush(stdout);
   t_data data = {0};
   t_data exp = {0};
 
