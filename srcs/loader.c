@@ -22,10 +22,10 @@ static void	is_valid_file(char *filepath)
 //between the presence or absence of a line feed at the end.
 static bool	read_line(FILE *file, char *buf)
 {
-	bzero(buf, 1025);
-	if (fscanf(file, " %1025[^\n]", buf) == EOF && !feof(file))
+	bzero(buf, LINE_MAX + 1);
+	if (fscanf(file, FORMAT, buf) == EOF && !feof(file))
 		exit_error("Failed to read file.");
-	if (buf[1024] != '\0')
+	if (buf[LINE_MAX - 1] != '\0')
 		exit_error("Line is too long.");
 	if (feof(file) && buf[0] == '\0')
 		return (false);
@@ -46,7 +46,7 @@ FILE	*fopen_wrapper(char *filepath)
 
 void	read_assign_to_object(FILE *file, t_data *data)
 {
-	char	buf[1026];
+	char	buf[LINE_MAX + 1];
 
 	data->count = 0;
 	while (data->count < OBJECT_SIZE_MAX && read_line(file, buf))
