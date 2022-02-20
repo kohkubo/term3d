@@ -1,6 +1,6 @@
 #include "loader.h"
 
-static double	validatable_strtod(char *str)
+static double	strtod_wrapper(char *str)
 {
 	char	*endptr;
 	double	d;
@@ -44,10 +44,19 @@ static t_vect	assign_str_to_vector(char *position)
 	str_trichotomy(position, ",", vec);
 	if (!vec[0] || !vec[1] || !vec[2])
 		exit_error("Vector elements are missing.");
-	x = validatable_strtod(vec[0]);
-	y = validatable_strtod(vec[1]);
-	z = validatable_strtod(vec[2]);
+	x = strtod_wrapper(vec[0]);
+	y = strtod_wrapper(vec[1]);
+	z = strtod_wrapper(vec[2]);
 	return (vect_new(x, y, z));
+}
+
+void	exit_error(char *errmsg)
+{
+	if (errno != 0)
+		perror(errmsg);
+	if (errmsg)
+		fprintf(stderr, "%s\n", errmsg);
+	exit(EXIT_FAILURE);
 }
 
 void	assign_line_to_object(char *line, t_object *obj)

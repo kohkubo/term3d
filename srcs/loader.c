@@ -1,15 +1,4 @@
 #include "loader.h"
-#include "debug.h"
-#include <sys/stat.h>
-
-void	exit_error(char *errmsg)
-{
-	if (errno != 0)
-		perror(errmsg);
-	if (errmsg)
-		fprintf(stderr, "%s\n", errmsg);
-	exit(EXIT_FAILURE);
-}
 
 static void	is_valid_file(char *filepath)
 {
@@ -29,16 +18,41 @@ static void	is_valid_file(char *filepath)
 		exit_error("Invalid file extension. valid : .tri .");
 }
 
+//No distinction is made
+//between the presence or absence of a line feed at the end.
 static bool	read_line(FILE *file, char *buf)
 {
-	bzero(buf, 1024);
-	if (fscanf(file, " %1024[^\n]", buf) == EOF && !feof(file))
+	bzero(buf, 1025);
+	if (fscanf(file, " %1025[^\n]", buf) == EOF && !feof(file))
 		exit_error("Failed to read file.");
-	if (feof(file))
+	if (buf[1024] != '\0')
+		exit_error("Line is too long.");
+	if (feof(file) && buf[0] == '\0')
 		return (false);
 	if (ferror(file))
 		exit_error("ferror() has occurred.");
 	return (true);
+}
+
+FILE	*fopen_wrapper(char *filepath)
+{
+	FILE	*file;
+
+	file = fopen(filepath, "r");
+	if (!file)
+		exit_error("File open failed.");
+	return (file);
+}
+
+void	read_assign_to_object(FILE *file, t_data *data)
+{
+	char	buf[1026];
+
+	data->count = 0;
+	while (data->count < OBJECT_SIZE_MAX && read_line(file, buf))
+		assign_line_to_object(buf, &data->object[data->count++]);
+	if (!feof(file))
+		exit_error("The number of objects described exceeds OBJECT_SIZE_MAX.");
 }
 
 /*
@@ -64,16 +78,9 @@ How to implement?
 void	load_file(t_data *data, char *filepath)
 {
 	FILE	*file;
-	char	buf[1025];
 
 	is_valid_file(filepath);
-	file = fopen(filepath, "r");
-	if (!file)
-		exit_error("File open failed.");
-	data->count = 0;
-	while (data->count < OBJECT_SIZE_MAX && read_line(file, buf))
-		assign_line_to_object(buf, &data->object[data->count++]);
-	if (!feof(file))
-		exit_error("The number of objects described exceeds OBJECT_SIZE_MAX.");
+	file = fopen_wrapper(filepath);
+	read_assign_to_object(file, data);
 	fclose(file);
 }
