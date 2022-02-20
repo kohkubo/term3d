@@ -14,6 +14,7 @@ static void	init_data(t_data *data)
 static void	draw_point(t_data *data, int x, int y)
 {
 	int		i;
+
 	data->camera.ray = camera_ray(&data->camera, x, y);
 	i = 0;
 	while (i < data->count)
@@ -30,9 +31,9 @@ static void	draw_point(t_data *data, int x, int y)
 
 static void	draw_screen(t_data *data)
 {
-	int	x;
-	int	y;
-	char buf[BUFSIZ];
+	int		x;
+	int		y;
+	char	buf[BUFSIZ];
 
 	setbuf(stdout, buf);
 	printf(TOP_LEFT);
