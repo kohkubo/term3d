@@ -12,13 +12,13 @@ TEST(DISABLED_Calc, is_intersect_with_triangle)
 	t_camera *camera = (t_camera *)malloc(sizeof(t_camera));
 	camera->pos = vect_new(0, 0, 15); // プラス方向から、マイナスに向くと交点あり
 	camera->ray = vect_new(0, 0, -1);
-	EXPECT_EQ(is_intersect_with_triangle(camera, &triangle), true);
+	EXPECT_EQ(intersect_with_triangle(camera, &triangle), 15);
 	EXPECT_EQ(is_equal(vect_distance(camera->lookat, camera->pos), 15), true);
 	EXPECT_NEAR(vect_distance(camera->pos, camera->lookat), 15, EPSILON);
 
-	camera->pos = vect_new(0, 0, -15); // プラス方向から、マイナスに向くと交点あり
-	camera->ray = vect_new(0, 0, 1);
-	EXPECT_EQ(is_intersect_with_triangle(camera, &triangle), true);
+	camera->pos = vect_new(0, 0, 15); // プラス方向から、マイナスに向くと交点あり
+	camera->ray = vect_new(0, 0, -1);
+	EXPECT_EQ(intersect_with_triangle(camera, &triangle), 15);
 	EXPECT_EQ(is_equal(vect_distance(camera->lookat, camera->pos), 15), true);
 	EXPECT_NEAR(vect_distance(camera->pos, camera->lookat), 15, EPSILON);
 	free(camera);
