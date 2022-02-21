@@ -66,6 +66,9 @@ typedef struct s_data
 	t_camera	camera;
 	t_light		light;
 	t_object	object[OBJECT_SIZE_MAX];
+	int			x;
+	int			y;
+	char		canvas[HEIGHT][WIDTH];
 	int			count;
 	double		(*intersect)(t_camera *, t_object *);
 }				t_data;

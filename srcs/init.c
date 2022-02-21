@@ -29,4 +29,8 @@ void	init_data(t_data *data)
 	data->light.pos = vect_new(15, 15, -150);
 	data->light.intensity = 1.0;
 	data->intersect = intersect_with_triangle;
+
+	for (int y = 0; y < HEIGHT; y++)
+		for (int x = 0; x < WIDTH; x++)
+		data->canvas[y][x] = ' ';
 }
