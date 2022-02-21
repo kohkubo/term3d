@@ -1,5 +1,11 @@
 #include "calc.h"
 
+void	light_rotate(t_light *light, t_camera *camera)
+{
+	light->pos = vect_rotate(\
+	light->pos, camera->normal_axis, camera->rotate_angle);
+}
+
 void	camera_rotate(t_camera *camera)
 {
 	camera->pos = vect_rotate(camera->pos, \

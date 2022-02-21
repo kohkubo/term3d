@@ -10,5 +10,6 @@ double	intersect_with_triangle(t_camera *camera, t_object *object);
 double	intersect_with_sphere(t_camera *camera, t_vect pos, double radius);
 double	intersect_with_vector(t_camera *camera, t_vect pos, t_vect edge);
 void	camera_rotate(t_camera *camera);
+void	light_rotate(t_light *light, t_camera *camera);
 
 #endif

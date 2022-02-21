@@ -67,6 +67,7 @@ void	draw(t_data *data)
 		draw_screen(data);
 		move_camera(&data->camera);
 		camera_rotate(&data->camera);
+		light_rotate(&data->light, &data->camera);
 		usleep(5000);
 	}
 }
