@@ -4,8 +4,8 @@
 # include <stdbool.h>
 # include <float.h>
 # include <math.h>
-# define WIDTH 30
-# define HEIGHT 30
+# define WIDTH 100
+# define HEIGHT 100
 # define FOCUS_DISTANCE 20
 # define O ". "
 # define X "  "
@@ -14,6 +14,8 @@ TOP_LEFTは標準出力の位置を固定するためのものです
 これを出力の最初に行うことで、標準出力を使ったアニメーションができます
 */
 # define TOP_LEFT "\x1b[H"
+# define DISABLE_CURSOR "\033[?25l"
+# define ENABLE_CURSOR "\033[?25h"
 /*
 最大制度 DBL_EPSILON
 kawadaさんがEPSILONは 0.000001 くらいがいいって言ってた
@@ -46,6 +48,12 @@ typedef struct s_camera
 	double		rotate_angle;
 }				t_camera;
 
+typedef struct s_light
+{
+	t_vect		pos;
+	double		intensity;
+}				t_light;
+
 typedef struct s_object
 {
 	t_vect		pos1;
@@ -56,6 +64,7 @@ typedef struct s_object
 typedef struct s_data
 {
 	t_camera	camera;
+	t_light		light;
 	t_object	object[OBJECT_SIZE_MAX];
 	int			count;
 	bool		(*intersect)(t_camera *, t_object *);

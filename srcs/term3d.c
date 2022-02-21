@@ -10,6 +10,7 @@ int	main(int ac, char **av)
 		return (EXIT_FAILURE);
 	}
 	load_file(&data, av[1]);
+	init_data(&data);
 	draw(&data);
 	return (EXIT_SUCCESS);
 }

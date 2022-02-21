@@ -1,41 +1,38 @@
 #include "draw.h"
 
-static void	init_data(t_data *data)
+static int	intersect(t_data *data, int x, int y)
 {
-	data->camera.pos = vect_new(0, 0, -150);
-	data->camera.up = vect_new(0, 1, 0);
-	data->camera.right = vect_new(1, 0, 0);
-	data->camera.normal = vect_new(0, 0, -1);
-	data->camera.normal_axis = vect_normalize(vect_new(1, 1, 1));
-	data->camera.rotate_angle = radian(1);
-	data->intersect = is_intersect_with_triangle;
+	int	i;
+
+	data->camera.ray = camera_ray(&data->camera, x, y);
+	i = 0;
+	while (!data->intersect(&data->camera, &data->object[i]) && i < data->count)
+		i++;
+	if (i == data->count)
+		return (-1);
+	return (i);
 }
 
 static void	draw_point(t_data *data, int x, int y)
 {
-	int		i;
-	data->camera.ray = camera_ray(&data->camera, x, y);
-	i = 0;
-	while (i < data->count)
-	{
-		if (data->intersect(&data->camera, &data->object[i]))
-			break ;
-		i++;
-	}
-	if (i != data->count)
-		printf(O);
-	else
+	int	c;
+
+	c = intersect(data, x, y);
+	if (c == -1)
 		printf(X);
+	else
+		printf("%c ", shading(&data->camera, &data->light, &data->object[c]));
 }
 
 static void	draw_screen(t_data *data)
 {
-	int	x;
-	int	y;
-	char buf[BUFSIZ];
+	int		x;
+	int		y;
+	char	buf[BUFSIZ];
 
 	setbuf(stdout, buf);
 	printf(TOP_LEFT);
+	printf(DISABLE_CURSOR);
 	y = 0;
 	while (y <= HEIGHT)
 	{
@@ -54,7 +51,6 @@ static void	draw_screen(t_data *data)
 
 void	draw(t_data *data)
 {
-	init_data(data);
 	while (true)
 	{
 		draw_screen(data);
