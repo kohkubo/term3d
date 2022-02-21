@@ -4,8 +4,8 @@
 # include <stdbool.h>
 # include <float.h>
 # include <math.h>
-# define WIDTH 100
-# define HEIGHT 100
+# define WIDTH 50
+# define HEIGHT 50
 # define FOCUS_DISTANCE 20
 # define O ". "
 # define X "  "
@@ -67,7 +67,7 @@ typedef struct s_data
 	t_light		light;
 	t_object	object[OBJECT_SIZE_MAX];
 	int			count;
-	bool		(*intersect)(t_camera *, t_object *);
+	double		(*intersect)(t_camera *, t_object *);
 }				t_data;
 
 bool			is_equal(double a, double b);

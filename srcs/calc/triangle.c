@@ -1,6 +1,15 @@
 #include "calc.h"
 
-double solve_quadratic(double a, double b, double c)
+double	update_t(double shortest, double t)
+{
+	if (t < 0)
+		return (shortest);
+	if (t < shortest)
+		return (t);
+	return (shortest);
+}
+
+double	solve_quadratic(double a, double b, double c)
 {
 	double d;
 	double t;
@@ -14,7 +23,7 @@ double solve_quadratic(double a, double b, double c)
 	return (t);
 }
 
-double intersect_with_sphere(t_camera *camera, t_vect pos, double radius)
+double	intersect_with_sphere(t_camera *camera, t_vect pos, double radius)
 {
 	double a;
 	double b;
@@ -31,49 +40,41 @@ double intersect_with_sphere(t_camera *camera, t_vect pos, double radius)
 	return solve_quadratic(a, b, c);
 }
 
-bool is_intersect_with_sphere(t_camera *camera, t_vect pos, double radius)
-{
-	double t;
-
-	t = intersect_with_sphere(camera, pos, radius);
-	if (t < 0)
-		return (false);
-	return (true);
-}
-
-bool	is_intersect_with_vector(t_camera *camera, t_vect pos, t_vect edge)
+double	intersect_with_vector(t_camera *camera, t_vect pos, t_vect edge)
 {
 	double	len;
 	t_vect	normal;
+	double	t;
 
 	len = vect_len(edge);
 	normal = vect_normalize(edge);
+	t = DBL_MAX;
 	if (len == 0)
-		return (false);
+		return (t);
 	while (len > 0)
 	{
-		if (is_intersect_with_sphere(camera, pos, DOT_SIZE))
-			return (true);
+		t = update_t(t, intersect_with_sphere(camera, pos, DOT_SIZE));
 		pos = vect_move(pos, normal, DOT_DENSITY);
 		len -= DOT_DENSITY;
 	}
-	return (false);
+	return (t);
 }
 
 #ifndef DOT
 
-bool	is_intersect_with_triangle(t_camera *camera, t_object *triangle)
+double	intersect_with_triangle(t_camera *camera, t_object *triangle)
 {
 	t_vect	edge[3];
-	bool	ret[3];
+	double	t;
 
 	edge[0] = vect_sub(triangle->pos2, triangle->pos1);
 	edge[1] = vect_sub(triangle->pos3, triangle->pos1);
 	edge[2] = vect_sub(triangle->pos3, triangle->pos2);
-	ret[0] = is_intersect_with_vector(camera, triangle->pos1, edge[0]);
-	ret[1] = is_intersect_with_vector(camera, triangle->pos1, edge[1]);
-	ret[2] = is_intersect_with_vector(camera, triangle->pos2, edge[2]);
-	return (ret[0] || ret[1] || ret[2]);
+	t = DBL_MAX;
+	t = update_t(t, intersect_with_vector(camera, triangle->pos1, edge[0]));
+	t = update_t(t, intersect_with_vector(camera, triangle->pos1, edge[1]));
+	t = update_t(t, intersect_with_vector(camera, triangle->pos2, edge[2]));
+	return (t);
 }
 
 #else
