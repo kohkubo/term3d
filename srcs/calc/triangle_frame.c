@@ -15,7 +15,7 @@ double	intersect_with_vector(t_camera *camera, t_vect pos, t_vect edge)
 	t_vect	normal;
 	double	t;
 
-	len = vect_len(edge);
+	len = vect_len(&edge);
 	normal = vect_normalize(edge);
 	t = DBL_MAX;
 	if (len == 0)
@@ -23,7 +23,7 @@ double	intersect_with_vector(t_camera *camera, t_vect pos, t_vect edge)
 	while (len > 0)
 	{
 		t = update_t(t, intersect_with_sphere(camera, pos, DOT_SIZE));
-		pos = vect_move(pos, normal, DOT_DENSITY);
+		pos = vect_move(&pos, &normal, DOT_DENSITY);
 		len -= DOT_DENSITY;
 	}
 	return (t);

@@ -22,18 +22,18 @@ t_camera *camera, t_vect *pos, t_vect *edge1, t_vect *edge2)
 	t_vect	vect[3];
 
 	vect[P] = vect_cross(camera->ray, *edge2);
-	val[DET] = vect_dot(vect[P], *edge1);
+	val[DET] = vect_dot(&vect[P], edge1);
 	if (val[DET] > EPSILON)
 	{
-		vect[TMP] = vect_sub(camera->pos, *pos);
-		val[U] = vect_dot(vect[P], vect[TMP]);
+		vect[TMP] = vect_sub(&camera->pos, pos);
+		val[U] = vect_dot(&vect[P], &vect[TMP]);
 		if ((val[U] >= 0) && (val[U] <= 1 * val[DET]))
 		{
 			vect[Q] = vect_cross(vect[TMP], *edge1);
-			val[V] = vect_dot(vect[Q], camera->ray);
+			val[V] = vect_dot(&vect[Q], &camera->ray);
 			if ((val[V] >= 0) && (val[U] + val[V] <= 1 * val[DET]))
 			{
-				val[T] = vect_dot(vect[Q], *edge2) / val[DET];
+				val[T] = vect_dot(&vect[Q], edge2) / val[DET];
 				return (val[T]);
 			}
 		}
