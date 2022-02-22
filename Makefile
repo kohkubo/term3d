@@ -95,4 +95,16 @@ test: $(gtest) fclean
 	rm -rf tester
 	rm -rf tester.dSYM
 
+.PHONY: cave
+cave: CFLAGS = $(includes:%=-I%) -fprofile-arcs -ftest-coverage -O0
+cave: re
+	./term3d ./sample/42.tri
+	lcov -c -b . -d . -o cov_test.info
+	genhtml cov_test.info -o cov_test
+	rm -rf cov_test.info
+	rm -rf *.gcda
+	rm -rf *.gcno
+	rm -rf *.info
+	open cov_test/index-sort-f.html
+
 -include $(dep)

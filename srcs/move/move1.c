@@ -46,4 +46,6 @@ void	move_camera(t_camera *camera)
 		camera_move_left(camera);
 	else if (ch == 'd')
 		camera_move_right(camera);
+	else if (ch == 'q')
+		exit(0);
 }
