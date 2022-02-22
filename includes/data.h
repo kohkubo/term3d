@@ -38,6 +38,8 @@ typedef struct s_vect
 
 typedef struct s_camera
 {
+	int			width;
+	int			height;
 	t_vect		pos;
 	t_vect		up;
 	t_vect		right;
