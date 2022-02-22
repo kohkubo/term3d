@@ -1,6 +1,5 @@
 #include "draw.h"
 
-<<<<<<< HEAD
 static t_object	*intersect(t_data *data)
 {
 	int			i;
@@ -10,12 +9,6 @@ static t_object	*intersect(t_data *data)
 
 	t = DBL_MAX;
 	hit = NULL;
-=======
-static void	draw_point(t_data *data, int x, int y)
-{
-	int		i;
-	data->camera.ray = camera_ray(&data->camera, x, y);
->>>>>>> screen_size
 	i = 0;
 	while (i < data->count)
 	{
@@ -51,8 +44,8 @@ static void	draw_screen(t_data *data)
 	setbuf(stdout, buf);
 	printf(TOP_LEFT);
 	printf(DISABLE_CURSOR);
-	y = 0;
-	while (y <= data->camera.height)
+	y = data->camera.height;
+	while (y >= 0)
 	{
 		x = 0;
 		while (x <= data->camera.width)
@@ -61,7 +54,7 @@ static void	draw_screen(t_data *data)
 			x++;
 		}
 		printf("\n");
-		y++;
+		y--;
 	}
 	fflush(stdout);
 }

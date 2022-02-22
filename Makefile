@@ -16,6 +16,8 @@ src =\
 	./calc/rotate.c \
 	./calc/camera.c \
 	./calc/sphere.c \
+	./calc/triangle_surface.c \
+	./calc/triangle_frame.c \
 	./move/move1.c \
 	./move/move2.c \
 	./loader.c \
@@ -56,13 +58,16 @@ testdir = ./gtest
 srcs_test = \
 	./$(src_dir)/draw.c \
 	./$(src_dir)/data.c \
+	./$(src_dir)/init.c \
 	./$(src_dir)/calc/rotate.c \
 	./$(src_dir)/calc/camera.c \
 	./$(src_dir)/calc/sphere.c \
-	./$(src_dir)/calc/triangle.c \
+	./$(src_dir)/calc/triangle_surface.c \
+	./$(src_dir)/calc/triangle_frame.c \
 	./$(src_dir)/debug.c \
-	./$(src_dir)/move.c \
 	./$(src_dir)/loader.c \
+	./$(src_dir)/move/move1.c \
+	./$(src_dir)/move/move2.c \
 	./$(src_dir)/parse_and_assign.c \
 	./$(src_dir)/shading.c \
 	./$(src_dir)/vect/vect1.c \
