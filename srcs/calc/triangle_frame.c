@@ -31,16 +31,15 @@ double	intersect_with_vector(t_camera *camera, t_vect pos, t_vect edge)
 
 double	intersect_with_triangle_frame(t_camera *camera, t_object *triangle)
 {
-	t_vect	edge[3];
 	double	t;
 
-	edge[0] = vect_sub(triangle->pos2, triangle->pos1);
-	edge[1] = vect_sub(triangle->pos3, triangle->pos1);
-	edge[2] = vect_sub(triangle->pos3, triangle->pos2);
 	t = DBL_MAX;
-	t = update_t(t, intersect_with_vector(camera, triangle->pos1, edge[0]));
-	t = update_t(t, intersect_with_vector(camera, triangle->pos1, edge[1]));
-	t = update_t(t, intersect_with_vector(camera, triangle->pos2, edge[2]));
+	t = update_t(t, \
+intersect_with_vector(camera, triangle->pos1, triangle->edge1));
+	t = update_t(t, \
+intersect_with_vector(camera, triangle->pos1, triangle->edge2));
+	t = update_t(t, \
+intersect_with_vector(camera, triangle->pos2, triangle->edge3));
 	return (t);
 }
 
@@ -49,8 +48,8 @@ double	intersect_with_triangle_dot(t_camera *camera, t_object *triangle)
 	double	t;
 
 	t = DBL_MAX;
-	t = update_t(t, intersect_with_sphere(camera, triangle->pos1, 0.8));
-	t = update_t(t, intersect_with_sphere(camera, triangle->pos2, 0.8));
-	t = update_t(t, intersect_with_sphere(camera, triangle->pos3, 0.8));
+	t = update_t(t, intersect_with_sphere(camera, triangle->pos1, DOT_SIZE));
+	t = update_t(t, intersect_with_sphere(camera, triangle->pos2, DOT_SIZE));
+	t = update_t(t, intersect_with_sphere(camera, triangle->pos3, DOT_SIZE));
 	return (t);
 }

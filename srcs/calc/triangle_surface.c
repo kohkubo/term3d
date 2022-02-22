@@ -10,29 +10,30 @@ enum
 
 enum
 {
-	TRI_POS,
-	INV_RAY,
+	P,
+	TMP,
+	Q,
 };
 
 static double	intersect_with_triangle_surface_sub(\
-t_camera *camera, t_vect edge1, t_vect edge2, t_vect vect[2])
+t_camera *camera, t_vect *pos, t_vect *edge1, t_vect *edge2)
 {
 	double	val[4];
-	t_vect	d;
+	t_vect	vect[3];
 
-	val[DET] = vect_det(edge1, edge2, vect[INV_RAY]);
-	if (0 < val[DET])
+	vect[P] = vect_cross(camera->ray, *edge2);
+	val[DET] = vect_dot(vect[P], *edge1);
+	if (val[DET] > EPSILON)
 	{
-		d = vect_sub(camera->pos, vect[TRI_POS]);
-		val[U] = vect_det(d, edge2, vect[INV_RAY]) / val[DET];
-		if (0 <= val[U] && val[U] <= 1)
+		vect[TMP] = vect_sub(camera->pos, *pos);
+		val[U] = vect_dot(vect[P], vect[TMP]);
+		if ((val[U] >= 0) && (val[U] <= 1 * val[DET]))
 		{
-			val[V] = vect_det(edge1, d, vect[INV_RAY]) / val[DET];
-			if ((0 <= val[V]) && (val[U] + val[V] <= 1))
+			vect[Q] = vect_cross(vect[TMP], *edge1);
+			val[V] = vect_dot(vect[Q], camera->ray);
+			if ((val[V] >= 0) && (val[U] + val[V] <= 1 * val[DET]))
 			{
-				val[T] = vect_det(edge1, edge2, d) / val[DET];
-				if (val[T] <= 0)
-					return (DBL_MAX);
+				val[T] = vect_dot(vect[Q], *edge2) / val[DET];
 				return (val[T]);
 			}
 		}
@@ -42,19 +43,12 @@ t_camera *camera, t_vect edge1, t_vect edge2, t_vect vect[2])
 
 double	intersect_with_triangle_surface(t_camera *camera, t_object *triangle)
 {
-	t_vect	edge1;
-	t_vect	edge2;
-	t_vect	vect[2];
 	double	t;
 
 	t = DBL_MAX;
-	edge1 = vect_sub(triangle->pos2, triangle->pos1);
-	edge2 = vect_sub(triangle->pos3, triangle->pos1);
-	vect[TRI_POS] = triangle->pos1;
-	vect[INV_RAY] = vect_inv(camera->ray);
-	t = update_t(t, \
-intersect_with_triangle_surface_sub(camera, edge1, edge2, vect));
-	t = update_t(t, \
-intersect_with_triangle_surface_sub(camera, edge2, edge1, vect));
+	t = update_t(t, intersect_with_triangle_surface_sub(\
+camera, &triangle->pos1, &triangle->edge1, &triangle->edge2));
+	t = update_t(t, intersect_with_triangle_surface_sub(\
+camera, &triangle->pos1, &triangle->edge2, &triangle->edge1));
 	return (t);
 }

@@ -31,8 +31,26 @@ static void	set_screen_size(t_data *data)
 	}
 }
 
+static void	preprocess_triangle(t_data *data)
+{
+	int			i;
+	t_object	*object;
+
+	i = 0;
+	while (i < data->count)
+	{
+		object = &data->object[i];
+		object->edge1 = vect_sub(object->pos2, object->pos1);
+		object->edge2 = vect_sub(object->pos3, object->pos1);
+		object->edge3 = vect_sub(object->pos3, object->pos2);
+		object->normal = vect_cross(object->edge1, object->edge2);
+		i++;
+	}
+}
+
 void	init_data(t_data *data)
 {
+	preprocess_triangle(data);
 	set_screen_size(data);
 	data->camera.pos = vect_add(vect_new(0, 0, -150), center_objects(data));
 	data->camera.up = vect_new(0, 1, 0);
