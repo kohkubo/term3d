@@ -3,7 +3,6 @@
 static void	draw_point(t_data *data, int x, int y)
 {
 	int		i;
-
 	data->camera.ray = camera_ray(&data->camera, x, y);
 	i = 0;
 	while (i < data->count)
@@ -44,6 +43,7 @@ static void	draw_screen(t_data *data)
 
 void	draw(t_data *data)
 {
+	init_data(data);
 	while (true)
 	{
 		draw_screen(data);

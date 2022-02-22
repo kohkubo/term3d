@@ -36,11 +36,22 @@ TEST(Calc, camera_ray)
 }
 
 // デバッカーを動かすためのテストケース。テストとしては意味あることしてない。
-TEST(Calc, is_intersect_with_vector)
+TEST(DISABLED_Calc, is_intersect_with_vector)
 {
 	t_camera camera;
 	camera.pos = vect_new(0, 0, 0);
 	camera.ray = vect_new(0, 0, 1);
 	t_vect pos = vect_new(-1, 0, 0);
 	t_vect line = vect_new(1, 0, 0);
+}
+
+TEST(Calc, intersect_with_sphere)
+{
+	t_camera camera;
+
+	camera.pos = vect_new(0, 0, -150);
+	camera.ray = vect_new(0, 0, 1);
+	t_vect pos = vect_new(0, 0, 0);
+	double radius = 1;
+	EXPECT_EQ(intersect_with_sphere(&camera, pos, radius), 149);
 }
