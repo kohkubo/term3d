@@ -4,8 +4,6 @@
 # include <stdbool.h>
 # include <float.h>
 # include <math.h>
-# define WIDTH 30
-# define HEIGHT 30
 # define FOCUS_DISTANCE 20
 # define O ". "
 # define X "  "
@@ -38,6 +36,8 @@ typedef struct s_vect
 
 typedef struct s_camera
 {
+	int			width;
+	int			height;
 	t_vect		pos;
 	t_vect		up;
 	t_vect		right;

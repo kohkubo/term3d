@@ -18,8 +18,22 @@ static t_vect	center_objects(t_data *data)
 	return (ret);
 }
 
+static void	set_screen_size(t_data *data)
+{
+	struct winsize	ws;
+	int				tmp;
+
+	if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws) != -1)
+	{
+		tmp = fmin(ws.ws_col, ws.ws_row) * 0.8;
+		data->camera.width = tmp;
+		data->camera.height = tmp;
+	}
+}
+
 void	init_data(t_data *data)
 {
+	set_screen_size(data);
 	data->camera.pos = vect_add(vect_new(0, 0, -150), center_objects(data));
 	data->camera.up = vect_new(0, 1, 0);
 	data->camera.right = vect_new(1, 0, 0);

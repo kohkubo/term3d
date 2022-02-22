@@ -28,10 +28,10 @@ static void	draw_screen(t_data *data)
 	printf(TOP_LEFT);
 	printf(DISABLE_CURSOR);
 	y = 0;
-	while (y <= HEIGHT)
+	while (y <= data->camera.height)
 	{
 		x = 0;
-		while (x <= WIDTH)
+		while (x <= data->camera.width)
 		{
 			draw_point(data, x, y);
 			x++;
@@ -39,7 +39,6 @@ static void	draw_screen(t_data *data)
 		printf("\n");
 		y++;
 	}
-	print_triangle_info(data);
 	fflush(stdout);
 }
 
