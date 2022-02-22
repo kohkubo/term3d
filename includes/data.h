@@ -23,7 +23,7 @@ kawadaさんがEPSILONは 0.000001 くらいがいいって言ってた
 # define EPSILON 0.000001
 
 # ifndef OBJECT_SIZE_MAX
-#  define OBJECT_SIZE_MAX 42000
+#  define OBJECT_SIZE_MAX 420
 # endif
 
 # define DOT_SIZE 1
@@ -66,12 +66,17 @@ typedef struct s_data
 	t_camera	camera;
 	t_light		light;
 	t_object	object[OBJECT_SIZE_MAX];
-	int			x;
-	int			y;
 	char		canvas[HEIGHT][WIDTH];
 	int			count;
 	double		(*intersect)(t_camera *, t_object *);
 }				t_data;
+
+typedef struct s_canvas
+{
+	t_data		data;
+	int			y;
+	char		line[WIDTH];
+}				t_canvas;
 
 bool			is_equal(double a, double b);
 bool			less(double a, double b);

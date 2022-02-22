@@ -1,70 +1,71 @@
 #include "draw.h"
 #include <pthread.h>
 
-static t_object	*intersect(t_data *data)
-{
-	int			i;
-	double		shortest;
-	double		t;
-	t_object	*hit;
-
-	t = DBL_MAX;
-	hit = NULL;
-	i = 0;
-	while (i < data->count)
-	{
-		shortest = t;
-		t = update_t(t, data->intersect(&data->camera, &data->object[i]));
-		if (t < shortest)
-			hit = &data->object[i];
-		i++;
-	}
-	data->camera.lookat = vect_add(\
-	data->camera.pos, vect_scalar_mul(data->camera.ray, t));
-	return (hit);
-}
-
-static void	draw_point(t_data *data, int x, int y)
+void	draw_point(t_canvas *canvas, int x, int y)
 {
 	t_object	*hit;
 
-	data->camera.ray = camera_ray(&data->camera, x, y);
-	hit = intersect(data);
+	canvas->data.camera.ray = camera_ray(&canvas->data.camera, x, y);
+	hit = intersect(&canvas->data);
 	if (hit == NULL)
-		data->canvas[y][x] = ' ';
+		canvas->line[x] = ' ';
 	else
-		data->canvas[y][x] = shading(&data->camera, &data->light, hit);
+		canvas->line[x] = shading(\
+		&canvas->data.camera, &canvas->data.light, hit);
 }
 
-static void *draw_line(void *arg)
+void	*draw_line(void *arg)
 {
-	t_data *data = (t_data *)arg;
+	t_canvas	*canvas;
+	int			x;
 
-	for (int x = 0; x < WIDTH; x++)
-		draw_point(data, x, data->y);
+	canvas = (t_canvas *)arg;
+	x = 0;
+	while (x < WIDTH)
+		draw_point(canvas, x++, canvas->y);
 	return (NULL);
 }
 
-static void	draw_screen(t_data *data)
+void	put_canvas(t_data *data)
 {
-	char		buf[BUFSIZ];
 	pthread_t	thread[HEIGHT];
+	t_canvas	canvas[HEIGHT];
+	int			y;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		memcpy(&canvas[y].y, &y, sizeof(y));
+		memcpy(&canvas[y].data, data, sizeof(*data));
+		pthread_create(&thread[y], NULL, draw_line, (void *)&canvas[y]);
+		y++;
+	}
+	y = 0;
+	while (y < HEIGHT)
+	{
+		pthread_join(thread[y], NULL);
+		memcpy(data->canvas[y], canvas[y].line, sizeof(canvas[y].line));
+		y++;
+	}
+}
+
+void	draw_screen(t_data *data)
+{
+	char	buf[BUFSIZ];
+	int		x;
+	int		y;
 
 	setbuf(stdout, buf);
 	printf(TOP_LEFT);
 	printf(DISABLE_CURSOR);
-	for (int y = 0; y < HEIGHT; y++)
+	y = HEIGHT - 1;
+	while (y >= 0)
 	{
-		data->y = y;
-		pthread_create(&thread[y], NULL, draw_line, (void *)data);
-	}
-	for (int y = 0; y < HEIGHT; y++)
-		pthread_join(thread[y], NULL);
-	for (int y = 0; y < HEIGHT; y++)
-	{
-		for (int x = 0; x < WIDTH; x++)
-			printf("%c ", data->canvas[y][x]);
+		x = 0;
+		while (x < WIDTH)
+			printf("%c ", data->canvas[y][x++]);
 		printf("\n");
+		y--;
 	}
 	print_triangle_info(data);
 	fflush(stdout);
@@ -74,6 +75,7 @@ void	draw(t_data *data)
 {
 	while (true)
 	{
+		put_canvas(data);
 		draw_screen(data);
 		move_camera(&data->camera);
 		camera_rotate(&data->camera);
