@@ -29,6 +29,26 @@ static void	camera_zoom_in(t_camera *camera)
 	camera->pos = vect_move(camera->pos, camera->normal, -5);
 }
 
+static void camera_move_left(t_camera *camera)
+{
+	camera->pos = vect_move(camera->pos, camera->right, -0.1);
+}
+
+static void camera_move_right(t_camera *camera)
+{
+	camera->pos = vect_move(camera->pos, camera->right, 0.1);
+}
+
+static void camera_move_up(t_camera *camera)
+{
+	camera->pos = vect_move(camera->pos, camera->up, 0.1);
+}
+
+static void camera_move_down(t_camera *camera)
+{
+	camera->pos = vect_move(camera->pos, camera->up, -0.1);
+}
+
 void	move_camera(t_camera *camera)
 {
 	int	ch;
@@ -38,4 +58,13 @@ void	move_camera(t_camera *camera)
 		camera_zoom_in(camera);
 	else if (ch == 'x')
 		camera_zoom_out(camera);
+	else if (ch == 'w')
+		camera_move_up(camera);
+	else if (ch == 's')
+		camera_move_down(camera);
+	else if (ch == 'a')
+		camera_move_left(camera);
+	else if (ch == 'd')
+		camera_move_right(camera);
+
 }
