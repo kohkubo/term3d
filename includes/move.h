@@ -9,6 +9,13 @@
 # include <unistd.h>
 # include <fcntl.h>
 
+# define MOVE_SCALE 5
+# define MOVE_DISTANCE 0.1
+
 void	move_camera(t_camera *camera);
+void	camera_move_left(t_camera *camera);
+void	camera_move_right(t_camera *camera);
+void	camera_move_up(t_camera *camera);
+void	camera_move_down(t_camera *camera);
 
 #endif

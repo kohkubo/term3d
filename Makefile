@@ -16,8 +16,8 @@ src =\
 	./calc/rotate.c \
 	./calc/camera.c \
 	./calc/sphere.c \
-	./calc/triangle.c \
-	./move.c \
+	./move/move1.c \
+	./move/move2.c \
 	./loader.c \
 	./parse_and_assign.c \
 	./shading.c \
