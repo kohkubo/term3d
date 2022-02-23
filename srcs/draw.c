@@ -44,11 +44,11 @@ static void	draw_screen(t_data *data)
 	setbuf(stdout, buf);
 	printf(TOP_LEFT);
 	printf(DISABLE_CURSOR);
-	y = data->camera.height;
+	y = data->camera.height - 1;
 	while (y >= 0)
 	{
 		x = 0;
-		while (x <= data->camera.width)
+		while (x < data->camera.width)
 		{
 			draw_point(data, x, y);
 			x++;
