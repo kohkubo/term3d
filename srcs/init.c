@@ -66,4 +66,5 @@ void	init_data(t_data *data)
 	data->intersect = intersect_with_triangle_surface;
 	data->canvas = (char *)ft_xcalloc(\
 	data->camera.width * data->camera.height, sizeof(char));
+	receiver(end_handler);
 }
