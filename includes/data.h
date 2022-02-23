@@ -26,8 +26,8 @@ kawadaさんがEPSILONは 0.000001 くらいがいいって言ってた
 #  define OBJECT_SIZE_MAX 42000
 # endif
 
-# define DOT_SIZE 1
-# define DOT_DENSITY 1
+# define DOT_SIZE 0.5
+# define DOT_DENSITY 0.5
 
 typedef struct s_vect
 {
@@ -38,6 +38,8 @@ typedef struct s_vect
 
 typedef struct s_camera
 {
+	int			width;
+	int			height;
 	t_vect		pos;
 	t_vect		up;
 	t_vect		right;

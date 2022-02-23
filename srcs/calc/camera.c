@@ -22,8 +22,8 @@ t_vect	camera_ray(t_camera *camera, int x, int y)
 	double	pixel_y;
 	t_vect	ret;
 
-	pixel_x = (double)x / (double)WIDTH - 0.5;
-	pixel_y = (double)y / (double)HEIGHT - 0.5;
+	pixel_x = (double)x / (double)camera->width - 0.5;
+	pixel_y = (double)y / (double)camera->height - 0.5;
 	ret = vect_add(screen_center(camera, camera->normal), \
 vect_add(\
 screen_right(&camera->right, pixel_x), \

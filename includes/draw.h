@@ -8,6 +8,7 @@
 # include "debug.h"
 # include "loader.h"
 # include "shading.h"
+# include "init.h"
 # include <stdio.h>
 # include <unistd.h>
 
