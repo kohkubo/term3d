@@ -1,55 +1,38 @@
 #include "draw.h"
 
-static void	draw_point(t_data *data, int x, int y)
-{
-	int		i;
-
-	data->camera.ray = camera_ray(&data->camera, x, y);
-	i = 0;
-	while (i < data->count)
-	{
-		if (data->intersect(&data->camera, &data->object[i]))
-			break ;
-		i++;
-	}
-	if (i != data->count)
-		printf(O);
-	else
-		printf(X);
-}
-
 static void	draw_screen(t_data *data)
 {
+	char	buf[BUFSIZ];
 	int		x;
 	int		y;
-	char	buf[BUFSIZ];
 
 	setbuf(stdout, buf);
 	printf(TOP_LEFT);
 	printf(DISABLE_CURSOR);
-	y = 0;
-	while (y <= HEIGHT)
+	y = data->camera.height - 1;
+	while (y >= 0)
 	{
 		x = 0;
-		while (x <= WIDTH)
-		{
-			draw_point(data, x, y);
-			x++;
-		}
+		while (x < data->camera.width)
+			printf("%c ", data->canvas[y * data->camera.width + x++]);
 		printf("\n");
-		y++;
+		y--;
 	}
-	print_triangle_info(data);
 	fflush(stdout);
 }
 
 void	draw(t_data *data)
 {
+	t_thread_line	*thread_line;
+
+	thread_line = (t_thread_line *)ft_xcalloc(\
+	data->camera.height, sizeof(t_thread_line));
 	while (true)
 	{
+		thread_store_canvas(data, thread_line);
 		draw_screen(data);
 		move_camera(&data->camera);
 		camera_rotate(&data->camera);
-		usleep(5000);
+		light_rotate(&data->light, &data->camera);
 	}
 }
