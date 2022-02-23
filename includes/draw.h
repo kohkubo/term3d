@@ -9,6 +9,7 @@
 # include "loader.h"
 # include "shading.h"
 # include "init.h"
+# include "thread.h"
 # include <stdio.h>
 # include <unistd.h>
 

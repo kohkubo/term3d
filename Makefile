@@ -15,6 +15,7 @@ src =\
 	./calc/rotate.c \
 	./calc/camera.c \
 	./calc/sphere.c \
+	./calc/intersect.c \
 	./calc/triangle_surface.c \
 	./calc/triangle_frame.c \
 	./move/move1.c \
@@ -22,6 +23,7 @@ src =\
 	./loader.c \
 	./parse_and_assign.c \
 	./shading.c \
+	./thread.c \
 	./vect/vect1.c \
 	./vect/vect2.c \
 	./vect/vect3.c \
@@ -61,6 +63,7 @@ srcs_test = \
 	./$(src_dir)/calc/rotate.c \
 	./$(src_dir)/calc/camera.c \
 	./$(src_dir)/calc/sphere.c \
+	./$(src_dir)/calc/intersect.c \
 	./$(src_dir)/calc/triangle_surface.c \
 	./$(src_dir)/calc/triangle_frame.c \
 	./$(src_dir)/debug.c \
@@ -69,6 +72,7 @@ srcs_test = \
 	./$(src_dir)/move/move2.c \
 	./$(src_dir)/parse_and_assign.c \
 	./$(src_dir)/shading.c \
+	./$(src_dir)/thread.c \
 	./$(src_dir)/vect/vect1.c \
 	./$(src_dir)/vect/vect2.c \
 	./$(src_dir)/vect/vect3.c \
