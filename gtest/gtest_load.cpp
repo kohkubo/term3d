@@ -167,5 +167,6 @@ TEST(Load, ValidTriagleFile) {
                                  vect_new(-2, -2, 0));
   load_file(&data, "gtest/reader_testfiles/valid/case3.tri");
   is_equal_triangles(data, exp);
+  free(data.object);
   free(exp.object);
 }
