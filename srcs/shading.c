@@ -20,7 +20,7 @@ double	specular_reflection(double intensity, t_vect *n, t_vect *l, t_vect *d)
 
 static char	get_density(double radiance)
 {
-	const char	*density = ".,:;-~=!*#$@";
+	const char	*density = "-~=cxFX8NNNNN";
 
 	if (less_equal(radiance, 0))
 		return (' ');
