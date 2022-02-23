@@ -7,9 +7,9 @@ static void thread_draw_point(t_thread_line *line, int x, int y)
 	line->data.camera.ray = camera_ray(&line->data.camera, x, y);
 	hit = intersect(&line->data);
 	if (hit == NULL)
-		line->buf[x] = ' ';
+		line->data.canvas[x + y * line->data.camera.width] = ' ';
 	else
-		line->buf[x] = shading(&line->data.camera, &line->data.light, hit);
+		line->data.canvas[x + y * line->data.camera.width] = shading(&line->data.camera, &line->data.light, hit);
 }
 
 static void *thread_draw_line(void *arg)
@@ -42,7 +42,6 @@ void thread_store_canvas(t_data *data)
 	while (y < data->camera.height)
 	{
 		pthread_join(thread[y], NULL);
-		memcpy(&data->canvas[y * data->camera.width], line[y].buf, data->camera.width);
 		y++;
 	}
 }

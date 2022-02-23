@@ -79,7 +79,6 @@ typedef struct s_thread_line
 {
 	t_data		data;
 	int			y;
-	char		buf[100];
 }				t_thread_line;
 
 bool			is_equal(double a, double b);
