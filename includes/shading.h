@@ -7,9 +7,9 @@
 
 # define IA 0.1 //環境光の強度
 # define KA 0.01 //環境光反射係数
-# define KD 0.69 //拡散反射係数
-# define KS 0.3 //鏡面反射係数
-# define SHININESS 8 //光沢度
+# define KD 0.8 //拡散反射係数
+# define KS 0.5 //鏡面反射係数
+# define SHININESS 32 //光沢度
 
 char	shading(t_camera *camera, t_light *light, t_object *hit);
 
