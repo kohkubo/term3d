@@ -1,4 +1,3 @@
-
 NAME		= term3d
 includes	= ./includes
 src_dir		= srcs
@@ -94,5 +93,16 @@ test: $(gtest) fclean
 	./tester
 	rm -rf tester
 	rm -rf tester.dSYM
+
+.PHONY: cave
+cave: CFLAGS = $(includes:%=-I%) -fprofile-arcs -ftest-coverage -O0
+cave: re
+	./term3d ./sample/42.tri
+	lcov -c -b . -d . -o cov_test.info
+	genhtml cov_test.info -o cov_test
+	find . -name "*.gcda" -delete
+	find . -name "*.gcno" -delete
+	find . -name "*.info" -delete
+	open cov_test/index-sort-f.html
 
 -include $(dep)

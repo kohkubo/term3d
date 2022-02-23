@@ -19,7 +19,7 @@ static t_object	*intersect(t_data *data)
 		i++;
 	}
 	data->camera.lookat = vect_add(\
-	data->camera.pos, vect_scalar_mul(data->camera.ray, t));
+	data->camera.pos, vect_scalar_mul(&data->camera.ray, t));
 	return (hit);
 }
 

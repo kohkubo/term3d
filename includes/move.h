@@ -8,6 +8,10 @@
 # include <termios.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdlib.h>
+
+# define MOVE_SCALE 5
+# define MOVE_DISTANCE 0.1
 
 # define MOVE_SCALE 5
 # define MOVE_DISTANCE 0.1

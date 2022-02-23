@@ -21,12 +21,12 @@ static int	getch(void)
 
 void	camera_zoom_out(t_camera *camera)
 {
-	camera->pos = vect_move(camera->pos, camera->normal, MOVE_SCALE);
+	camera->pos = vect_move(&camera->pos, &camera->normal, MOVE_SCALE);
 }
 
 void	camera_zoom_in(t_camera *camera)
 {
-	camera->pos = vect_move(camera->pos, camera->normal, -MOVE_SCALE);
+	camera->pos = vect_move(&camera->pos, &camera->normal, -MOVE_SCALE);
 }
 
 void	move_camera(t_camera *camera)
@@ -46,4 +46,6 @@ void	move_camera(t_camera *camera)
 		camera_move_left(camera);
 	else if (ch == 'd')
 		camera_move_right(camera);
+	else if (ch == 'q')
+		exit(0);
 }

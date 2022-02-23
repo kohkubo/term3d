@@ -24,10 +24,10 @@ double	intersect_with_sphere(t_camera *camera, t_vect pos, double radius)
 	t_vect	s;
 	t_vect	d;
 
-	s = vect_sub(camera->pos, pos);
+	s = vect_sub(&camera->pos, &pos);
 	d = camera->ray;
-	a = vect_dot(d, d);
-	b = 2 * vect_dot(s, d);
-	c = vect_dot(s, s) - radius * radius;
+	a = vect_dot(&d, &d);
+	b = 2 * vect_dot(&s, &d);
+	c = vect_dot(&s, &s) - radius * radius;
 	return (solve_quadratic(a, b, c));
 }
