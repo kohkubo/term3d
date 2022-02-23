@@ -17,7 +17,6 @@ src =\
 	./calc/sphere.c \
 	./calc/intersect.c \
 	./calc/triangle_surface.c \
-	./calc/triangle_frame.c \
 	./move/move1.c \
 	./move/move2.c \
 	./load/load.c \
@@ -66,7 +65,6 @@ srcs_test = \
 	./$(src_dir)/calc/sphere.c \
 	./$(src_dir)/calc/intersect.c \
 	./$(src_dir)/calc/triangle_surface.c \
-	./$(src_dir)/calc/triangle_frame.c \
 	./$(src_dir)/debug.c \
 	./$(src_dir)/load/load.c \
 	./$(src_dir)/load/store.c \
