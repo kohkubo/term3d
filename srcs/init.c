@@ -26,5 +26,7 @@ void	init_data(t_data *data)
 	data->camera.normal = vect_new(0, 0, -1);
 	data->camera.normal_axis = vect_normalize(vect_new(1, 1, 1));
 	data->camera.rotate_angle = radian(1);
+	data->light.pos = vect_new(15, 15, -150);
+	data->light.intensity = 1.0;
 	data->intersect = is_intersect_with_triangle;
 }

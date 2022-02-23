@@ -1,21 +1,27 @@
 #include "draw.h"
 
-static void	draw_point(t_data *data, int x, int y)
+static int	intersect(t_data *data, int x, int y)
 {
-	int		i;
+	int	i;
 
 	data->camera.ray = camera_ray(&data->camera, x, y);
 	i = 0;
-	while (i < data->count)
-	{
-		if (data->intersect(&data->camera, &data->object[i]))
-			break ;
+	while (!data->intersect(&data->camera, &data->object[i]) && i < data->count)
 		i++;
-	}
-	if (i != data->count)
-		printf(O);
-	else
+	if (i == data->count)
+		return (-1);
+	return (i);
+}
+
+static void	draw_point(t_data *data, int x, int y)
+{
+	int	c;
+
+	c = intersect(data, x, y);
+	if (c == -1)
 		printf(X);
+	else
+		printf("%c ", shading(&data->camera, &data->light, &data->object[c]));
 }
 
 static void	draw_screen(t_data *data)
