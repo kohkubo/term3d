@@ -29,7 +29,7 @@ void	camera_zoom_in(t_camera *camera)
 	camera->pos = vect_move(&camera->pos, &camera->normal, -MOVE_SCALE);
 }
 
-void	move_camera(t_camera *camera)
+void	key_control(t_camera *camera)
 {
 	int	ch;
 

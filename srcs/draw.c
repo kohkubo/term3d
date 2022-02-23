@@ -34,8 +34,7 @@ void	draw(t_data *data)
 	{
 		thread_store_canvas(data, thread_line);
 		draw_screen(data);
-		move_camera(&data->camera);
-		camera_rotate(&data->camera);
-		light_rotate(&data->light, &data->camera);
+		key_control(&data->camera);
+		rotate(data);
 	}
 }
