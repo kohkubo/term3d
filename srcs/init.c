@@ -43,8 +43,8 @@ static void	preprocess_triangle(t_data *data)
 		object->edge1 = vect_sub(&object->pos2, &object->pos1);
 		object->edge2 = vect_sub(&object->pos3, &object->pos1);
 		object->edge3 = vect_sub(&object->pos3, &object->pos2);
-		object->normal = \
-vect_normalize(vect_cross(object->edge1, object->edge2));
+		object->normal = vect_normalize(\
+		vect_cross(object->edge1, object->edge2));
 		i++;
 	}
 }
@@ -62,4 +62,8 @@ void	init_data(t_data *data)
 	data->light.pos = vect_new(150, 150, -150);
 	data->light.intensity = 1.0;
 	data->intersect = intersect_with_triangle_surface;
+	data->canvas = xcalloc(\
+	data->camera.width * data->camera.height, sizeof(char));
+	printf("%d %d\n", data->camera.width, data->camera.height);
+	fflush(stdout);
 }

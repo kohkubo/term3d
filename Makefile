@@ -4,7 +4,7 @@ src_dir		= srcs
 obj_dir		= objs
 obj			= $(src:%.c=$(src_dir)/%.o)
 CC 			= gcc
-CFLAGS		= -Wall -Wextra -Werror -g $(includes:%=-I%) -MMD -MP -O2
+CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address $(includes:%=-I%) -MMD -MP -O2
 dep			= $(obj:.o=.d)
 
 src =\
@@ -20,10 +20,11 @@ src =\
 	./calc/triangle_frame.c \
 	./move/move1.c \
 	./move/move2.c \
-	./loader.c \
-	./parse_and_assign.c \
+	./load/load.c \
+	./load/store.c \
 	./shading.c \
 	./thread.c \
+	./utils.c \
 	./vect/vect1.c \
 	./vect/vect2.c \
 	./vect/vect3.c \
@@ -67,12 +68,13 @@ srcs_test = \
 	./$(src_dir)/calc/triangle_surface.c \
 	./$(src_dir)/calc/triangle_frame.c \
 	./$(src_dir)/debug.c \
-	./$(src_dir)/loader.c \
+	./$(src_dir)/load/load.c \
+	./$(src_dir)/load/store.c \
 	./$(src_dir)/move/move1.c \
 	./$(src_dir)/move/move2.c \
-	./$(src_dir)/parse_and_assign.c \
 	./$(src_dir)/shading.c \
 	./$(src_dir)/thread.c \
+	./$(src_dir)/utils.c \
 	./$(src_dir)/vect/vect1.c \
 	./$(src_dir)/vect/vect2.c \
 	./$(src_dir)/vect/vect3.c \
@@ -92,7 +94,6 @@ test: $(gtest) fclean
 	clang++ -std=c++11 \
 	$(testdir)/gtest.cpp $(gtestdir)/googletest-release-1.11.0/googletest/src/gtest_main.cc $(gtestdir)/gtest/gtest-all.cc \
 	-g -fsanitize=address -fsanitize=undefined \
-	-D OBJECT_SIZE_MAX=42 \
 	-I$(gtestdir) -I/usr/local/opt/llvm/include -I$(includes) -lpthread $(srcs_test) -o tester
 	./tester
 	rm -rf tester

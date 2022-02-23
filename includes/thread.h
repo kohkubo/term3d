@@ -6,6 +6,6 @@
 # include "calc.h"
 # include <pthread.h>
 
-void	thread_store_canvas(t_data *data, char *canvas);
+void	thread_store_canvas(t_data *data);
 
 #endif // THREAD_H

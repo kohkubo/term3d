@@ -1,6 +1,6 @@
 #include "draw.h"
 
-static void	draw_screen(t_data *data, char *canvas)
+static void	draw_screen(t_data *data)
 {
 	char	buf[BUFSIZ];
 	int		x;
@@ -14,7 +14,7 @@ static void	draw_screen(t_data *data, char *canvas)
 	{
 		x = 0;
 		while (x < data->camera.width)
-			printf("%c ", canvas[y * data->camera.width + x++]);
+			printf("%c ", data->canvas[y * data->camera.width + x++]);
 		printf("\n");
 		y--;
 	}
@@ -23,12 +23,10 @@ static void	draw_screen(t_data *data, char *canvas)
 
 void	draw(t_data *data)
 {
-	char	canvas[HEIGHT * WIDTH];
-
 	while (true)
 	{
-		thread_store_canvas(data, canvas);
-		draw_screen(data, canvas);
+		thread_store_canvas(data);
+		draw_screen(data);
 		move_camera(&data->camera);
 		camera_rotate(&data->camera);
 		light_rotate(&data->light, &data->camera);
