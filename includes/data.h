@@ -66,17 +66,16 @@ typedef struct s_data
 	t_camera	camera;
 	t_light		light;
 	t_object	object[OBJECT_SIZE_MAX];
-	char		canvas[HEIGHT][WIDTH];
 	int			count;
 	double		(*intersect)(t_camera *, t_object *);
 }				t_data;
 
-typedef struct s_canvas
+typedef struct s_thread_line
 {
 	t_data		data;
 	int			y;
-	char		line[WIDTH];
-}				t_canvas;
+	char		buf[WIDTH];
+}				t_thread_line;
 
 bool			is_equal(double a, double b);
 bool			less(double a, double b);
