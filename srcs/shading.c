@@ -18,7 +18,7 @@ double	specular_reflection(double intensity, t_vect *n, t_vect *l, t_vect *d)
 	return (KS * intensity * pow(fmax(vect_dot(&v, &r), 0), SHININESS));
 }
 
-static char	get_density(double radiance)
+static char	radiance_to_char(double radiance)
 {
 	const char	*density = "-~=cxFX8NNNNN";
 
@@ -44,5 +44,5 @@ char	shading(t_camera *camera, t_light *light, t_object *hit)
 	ra = KA * IA;
 	rd = diffuse_reflection(light->intensity, &n, &l);
 	rs = specular_reflection(light->intensity, &n, &l, &camera->lookat);
-	return (get_density(ra + rd + rs));
+	return (radiance_to_char(ra + rd + rs));
 }
