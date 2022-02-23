@@ -57,11 +57,11 @@ void	init_data(t_data *data)
 	data->camera.up = vect_new(0, 1, 0);
 	data->camera.right = vect_new(1, 0, 0);
 	data->camera.normal = vect_new(0, 0, 1);
-	data->camera.normal_axis = vect_normalize(vect_new(1, 1, 1));
+	data->camera.normal_axis = vect_normalize(vect_new(0, 1, 0));
 	data->camera.rotate_angle = radian(1);
 	data->light.pos = vect_new(150, 150, -150);
 	data->light.intensity = 1.0;
-	data->intersect = intersect_with_triangle_frame;
+	data->intersect = intersect_with_triangle_surface;
 	data->canvas = (char *)ft_xcalloc(\
 	data->camera.width * data->camera.height, sizeof(char));
 }

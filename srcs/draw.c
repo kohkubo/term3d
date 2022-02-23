@@ -9,6 +9,8 @@ static void	draw_screen(t_data *data)
 	setbuf(stdout, buf);
 	printf(TOP_LEFT);
 	printf(DISABLE_CURSOR);
+	printf(BOLD);
+	printf(BLUE);
 	y = data->camera.height - 1;
 	while (y >= 0)
 	{
@@ -19,6 +21,7 @@ static void	draw_screen(t_data *data)
 		y--;
 	}
 	fflush(stdout);
+	printf(END);
 }
 
 void	draw(t_data *data)
