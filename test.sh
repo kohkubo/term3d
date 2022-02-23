@@ -1,6 +1,8 @@
-set -exu
+set -x
 
-chmod 000 permission_error.tri
+make && make clean
+
+chmod 000 testfiles/permission_error.tri
 
 ./term3d testfiles/extension_error1.tr
 ./term3d testfiles/extension_error2.tir
@@ -18,7 +20,7 @@ chmod 000 permission_error.tri
 ./term3d testfiles/char.tri
 ./term3d testfiles/plus_sign_double.tri
 ./term3d testfiles/minus_sign_double.tri
-./term3d testfiles/plus_sign.tri
+#./term3d testfiles/plus_sign.tri
 ./term3d testfiles/too_many_decimal_point.tri
 ./term3d testfiles/too_many_separate_space.tri
 ./term3d testfiles/greater_dobule_max.tri
@@ -36,4 +38,4 @@ chmod 000 permission_error.tri
 ./term3d testfiles/permission_error.tri
 ./term3d testfiles/directory_error.tri
 
-chmod 644 permission_error.tri
+chmod 644 testfiles/permission_error.tri
