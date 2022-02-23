@@ -19,3 +19,8 @@ void	camera_move_down(t_camera *camera)
 {
 	camera->pos = vect_move(&camera->pos, &camera->up, -MOVE_DISTANCE);
 }
+
+void	camera_rotate_left(t_camera *camera)
+{
+	camera->rotate_angle += ROTATE_SPEED;
+}
