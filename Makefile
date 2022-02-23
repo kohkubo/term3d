@@ -1,4 +1,3 @@
-
 NAME		= term3d
 includes	= ./includes
 src_dir		= srcs
@@ -101,10 +100,9 @@ cave: re
 	./term3d ./sample/42.tri
 	lcov -c -b . -d . -o cov_test.info
 	genhtml cov_test.info -o cov_test
-	rm -rf cov_test.info
-	rm -rf *.gcda
-	rm -rf *.gcno
-	rm -rf *.info
+	find . -name "*.gcda" -delete
+	find . -name "*.gcno" -delete
+	find . -name "*.info" -delete
 	open cov_test/index-sort-f.html
 
 -include $(dep)
