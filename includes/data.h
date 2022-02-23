@@ -4,8 +4,11 @@
 # include <stdbool.h>
 # include <float.h>
 # include <math.h>
-# define WIDTH 50
-# define HEIGHT 50
+# include <errno.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <limits.h>
+# include <pthread.h>
 # define FOCUS_DISTANCE 20
 # define O ". "
 # define X "  "
@@ -21,11 +24,7 @@ TOP_LEFTは標準出力の位置を固定するためのものです
 kawadaさんがEPSILONは 0.000001 くらいがいいって言ってた
 */
 # define EPSILON 0.000001
-
-# ifndef OBJECT_SIZE_MAX
-#  define OBJECT_SIZE_MAX 42000
-# endif
-
+# define OBJECT_SIZE_MAX INT_MAX
 # define DOT_SIZE 0.5
 # define DOT_DENSITY 0.5
 
@@ -71,15 +70,28 @@ typedef struct s_data
 {
 	t_camera	camera;
 	t_light		light;
-	t_object	object[OBJECT_SIZE_MAX];
+	t_object	*object;
+	char		*canvas;
 	int			count;
 	double		(*intersect)(t_camera *, t_object *);
 }				t_data;
+
+typedef struct s_thread_line
+{
+	pthread_t	thread;
+	t_data		data;
+	int			y;
+}				t_thread_line;
 
 bool			is_equal(double a, double b);
 bool			less(double a, double b);
 bool			less_equal(double a, double b);
 double			radian(double degree);
 double			degree(double radian);
+
+void			*ft_xcalloc(size_t count, size_t size);
+void			exit_error(char *errmsg);
+FILE			*fopen_wrapper(char *filepath);
+double			strtod_wrapper(char *str);
 
 #endif

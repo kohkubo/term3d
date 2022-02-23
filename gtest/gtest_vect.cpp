@@ -1,12 +1,6 @@
 #include <gtest/gtest.h>
 #include "vect.h"
 
-void VECTOR_EQ(t_vect act, t_vect exp) {
-	EXPECT_EQ(act.x, exp.x);
-	EXPECT_EQ(act.y, exp.y);
-	EXPECT_EQ(act.z, exp.z);
-}
-
 TEST(Vect, vect_new)
 {
 	t_vect	vect;
