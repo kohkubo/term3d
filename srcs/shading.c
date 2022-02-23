@@ -1,11 +1,12 @@
 #include "shading.h"
 
-double	diffuse_reflection(double intensity, t_vect *n, t_vect *l)
+static double	diffuse_reflection(double intensity, t_vect *n, t_vect *l)
 {
 	return (KD * intensity * fmax(vect_dot(n, l), 0));
 }
 
-double	specular_reflection(double intensity, t_vect *n, t_vect *l, t_vect *d)
+static double	specular_reflection(\
+double intensity, t_vect *n, t_vect *l, t_vect *d)
 {
 	t_vect	v;
 	t_vect	r;
@@ -18,10 +19,8 @@ double	specular_reflection(double intensity, t_vect *n, t_vect *l, t_vect *d)
 	return (KS * intensity * pow(fmax(vect_dot(&v, &r), 0), SHININESS));
 }
 
-static char	radiance_to_char(double radiance)
+char	radiance_to_density(char *density, double radiance)
 {
-	const char	*density = "-~=cxFX8NNNNN";
-
 	if (less_equal(radiance, 0))
 		return (' ');
 	if (less_equal(1, radiance))
@@ -29,7 +28,7 @@ static char	radiance_to_char(double radiance)
 	return (density[(int)(radiance * strlen(density))]);
 }
 
-char	shading(t_camera *camera, t_light *light, t_object *hit)
+double	shading(t_camera *camera, t_light *light, t_object *hit)
 {
 	t_vect	l;
 	t_vect	n;
@@ -44,5 +43,5 @@ char	shading(t_camera *camera, t_light *light, t_object *hit)
 	ra = KA * IA;
 	rd = diffuse_reflection(light->intensity, &n, &l);
 	rs = specular_reflection(light->intensity, &n, &l, &camera->lookat);
-	return (radiance_to_char(ra + rd + rs));
+	return (ra + rd + rs);
 }
