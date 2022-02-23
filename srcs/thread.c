@@ -3,14 +3,19 @@
 static void	thread_draw_point(t_thread_line *line, int x, int y)
 {
 	t_object	*hit;
+	double		radiance;
+	char		c;
 
 	line->data.camera.ray = camera_ray(&line->data.camera, x, y);
 	hit = intersect(&line->data);
 	if (hit == NULL)
 		line->data.canvas[x + y * line->data.camera.width] = ' ';
 	else
-		line->data.canvas[x + y * line->data.camera.width] = shading(\
-		&line->data.camera, &line->data.light, hit);
+	{
+		radiance = shading(&line->data.camera, &line->data.light, hit);
+		c = radiance_to_density(line->data.config.charset, radiance);
+		line->data.canvas[x + y * line->data.camera.width] = c;
+	}
 }
 
 static void	*thread_draw_line(void *arg)

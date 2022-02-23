@@ -27,7 +27,7 @@ t_object new_triangle(t_vect pos1, t_vect pos2, t_vect pos3) {
   return (triangle);
 }
 
-TEST(gs, InvalidFile) {
+TEST(DISABLED_Road, InvalidFile) {
   t_data data;
 
   // filepath
@@ -39,13 +39,13 @@ TEST(gs, InvalidFile) {
   //.tri extension
   EXPECT_EXIT(load_file(&data, "gtest/reader_testfiles/invalid/test.tr"),
               ::testing::ExitedWithCode(EXIT_FAILURE),
-              "Invalid file extension. valid : .tri");
+              "Invalid file extension. valid : .tri .");
   EXPECT_EXIT(load_file(&data, "gtest/reader_testfiles/invalid/test.tria"),
               ::testing::ExitedWithCode(EXIT_FAILURE),
-              "Invalid file extension. valid : .tri");
+              "Invalid file extension. valid : .tri .");
   EXPECT_EXIT(load_file(&data, "gtest/reader_testfiles/invalid/test_tri"),
               ::testing::ExitedWithCode(EXIT_FAILURE),
-              "Invalid file extension. valid : .tri");
+              "Invalid file extension. valid : .tri .");
 
   // empty file with valid extension
   EXPECT_EXIT(load_file(&data, "gtest/reader_testfiles/invalid/test.cir.tri"),

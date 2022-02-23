@@ -10,7 +10,7 @@ static void	draw_screen(t_data *data)
 	printf(TOP_LEFT);
 	printf(DISABLE_CURSOR);
 	printf(BOLD);
-	printf(BLUE);
+	printf("%s", data->config.color);
 	y = data->camera.height - 1;
 	while (y >= 0)
 	{

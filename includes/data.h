@@ -78,6 +78,12 @@ typedef struct s_object
 	t_vect		normal;
 }				t_object;
 
+typedef struct s_config
+{
+	char		*charset;
+	char		*color;
+}				t_config;
+
 typedef struct s_data
 {
 	t_camera	camera;
@@ -86,6 +92,7 @@ typedef struct s_data
 	char		*canvas;
 	int			count;
 	double		(*intersect)(t_camera *, t_object *);
+	t_config	config;
 }				t_data;
 
 typedef struct s_thread_line

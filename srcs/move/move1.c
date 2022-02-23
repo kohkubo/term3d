@@ -29,6 +29,7 @@ void	camera_zoom_in(t_camera *camera)
 	camera->pos = vect_move(&camera->pos, &camera->normal, -MOVE_SCALE);
 }
 
+
 static void	key_control2(t_camera *camera, int ch)
 {
 	if (ch == 'j')
@@ -46,6 +47,7 @@ static void	key_control2(t_camera *camera, int ch)
 	else if (ch == 'r')
 		camera_reset(camera);
 }
+
 
 void	key_control(t_camera *camera)
 {
