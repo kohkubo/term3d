@@ -45,10 +45,9 @@ double	intersect_with_triangle_surface(t_camera *camera, t_object *triangle)
 {
 	double	t;
 
-	t = DBL_MAX;
-	t = update_t(t, intersect_with_triangle_surface_sub(\
-camera, &triangle->pos1, &triangle->edge1, &triangle->edge2));
-	t = update_t(t, intersect_with_triangle_surface_sub(\
+	t = intersect_with_triangle_surface_sub(\
+camera, &triangle->pos1, &triangle->edge1, &triangle->edge2);
+	t = fmin(t, intersect_with_triangle_surface_sub(\
 camera, &triangle->pos1, &triangle->edge2, &triangle->edge1));
 	return (t);
 }
