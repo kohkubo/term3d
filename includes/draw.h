@@ -12,6 +12,7 @@
 # include "thread.h"
 # include <stdio.h>
 # include <unistd.h>
+# include <pthread.h>
 
 void	draw(t_data *data);
 

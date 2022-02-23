@@ -62,7 +62,6 @@ void	init_data(t_data *data)
 	data->light.pos = vect_new(150, 150, -150);
 	data->light.intensity = 1.0;
 	data->intersect = intersect_with_triangle_surface;
-	data->canvas = xcalloc(data->camera.width * data->camera.height, sizeof(char));
-	printf("%d %d\n", data->camera.width, data->camera.height);
-	fflush(stdout);
+	data->canvas = (char *)ft_xcalloc(\
+	data->camera.width * data->camera.height, sizeof(char));
 }

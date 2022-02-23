@@ -66,7 +66,7 @@ void	store_object_from_file(char *filepath, t_data *data)
 	int		c;
 
 	file = fopen_wrapper(filepath);
-	data->object = xcalloc(data->count, sizeof(t_object));
+	data->object = (t_object *)ft_xcalloc(data->count, sizeof(t_object));
 	c = 0;
 	while (c < data->count && read_line(file, buf))
 		store_object_from_line(buf, &data->object[c++]);

@@ -15,7 +15,7 @@ double	specular_reflection(double intensity, t_vect *n, t_vect *l, t_vect *d)
 	v = vect_normalize(vect_inv(d));
 	r = vect_scalar_mul(n, 2 * vect_dot(n, l));
 	r = vect_normalize(vect_sub(&r, l));
-	return (KS * intensity * pow(fmax(vect_dot(&v, &r), 0), 8));
+	return (KS * intensity * pow(fmax(vect_dot(&v, &r), 0), SHININESS));
 }
 
 static char	get_density(double radiance)

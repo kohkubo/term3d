@@ -72,7 +72,7 @@ TEST(gs, InvalidFile) {
               ::testing::ExitedWithCode(EXIT_FAILURE), "");
 }
 
-TEST(DISABLED_Loader, InvalidTriangleFormat) {
+TEST(DISABLED_Load, InvalidTriangleFormat) {
   t_data data = {0};
 
   EXPECT_EXIT(
@@ -137,11 +137,12 @@ TEST(DISABLED_Loader, InvalidTriangleFormat) {
       ::testing::ExitedWithCode(EXIT_FAILURE), "");
 }
 
-TEST(Loader, ValidTriagleFile) {
+TEST(Load, ValidTriagleFile) {
   fflush(stdout);
   t_data data = {0};
   t_data exp = {0};
 
+  exp.object = (t_object *)ft_xcalloc(20, sizeof(t_object));
   exp.count = 1;
   exp.object[0] =
       new_triangle(vect_new(0, 2, 0), vect_new(2, -2, 0), vect_new(-2, -2, 0));

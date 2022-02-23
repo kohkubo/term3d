@@ -8,6 +8,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <limits.h>
+# include <pthread.h>
 # define FOCUS_DISTANCE 20
 # define O ". "
 # define X "  "
@@ -77,6 +78,7 @@ typedef struct s_data
 
 typedef struct s_thread_line
 {
+	pthread_t	thread;
 	t_data		data;
 	int			y;
 }				t_thread_line;
@@ -87,7 +89,7 @@ bool			less_equal(double a, double b);
 double			radian(double degree);
 double			degree(double radian);
 
-void			*xcalloc(size_t count, size_t size);
+void			*ft_xcalloc(size_t count, size_t size);
 void			exit_error(char *errmsg);
 FILE			*fopen_wrapper(char *filepath);
 double			strtod_wrapper(char *str);

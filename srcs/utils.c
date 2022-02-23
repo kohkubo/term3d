@@ -1,6 +1,6 @@
 #include "data.h"
 
-void	*xcalloc(size_t count, size_t size)
+void	*ft_xcalloc(size_t count, size_t size)
 {
 	void	*ptr;
 

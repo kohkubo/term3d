@@ -23,9 +23,13 @@ static void	draw_screen(t_data *data)
 
 void	draw(t_data *data)
 {
+	t_thread_line	*thread_line;
+
+	thread_line = (t_thread_line *)ft_xcalloc(\
+	data->camera.height, sizeof(t_thread_line));
 	while (true)
 	{
-		thread_store_canvas(data);
+		thread_store_canvas(data, thread_line);
 		draw_screen(data);
 		move_camera(&data->camera);
 		camera_rotate(&data->camera);
