@@ -4,7 +4,7 @@
 # include "data.h"
 # include "draw.h"
 # include "init.h"
-# include "setting.h"
+# include "config.h"
 # include <stdio.h>
 # include <stdlib.h>
 
