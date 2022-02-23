@@ -1,4 +1,3 @@
-
 NAME		= term3d
 includes	= ./includes
 src_dir		= srcs
@@ -16,8 +15,15 @@ src =\
 	./calc/rotate.c \
 	./calc/camera.c \
 	./calc/sphere.c \
+<<<<<<< HEAD
 	./calc/triangle.c \
 	./move.c \
+=======
+	./calc/triangle_surface.c \
+	./calc/triangle_frame.c \
+	./move/move1.c \
+	./move/move2.c \
+>>>>>>> d69cab9eab0f22eee1f74742afba48522ce73ccf
 	./loader.c \
 	./parse_and_assign.c \
 	./shading.c \
@@ -56,13 +62,20 @@ testdir = ./gtest
 srcs_test = \
 	./$(src_dir)/draw.c \
 	./$(src_dir)/data.c \
+	./$(src_dir)/init.c \
 	./$(src_dir)/calc/rotate.c \
 	./$(src_dir)/calc/camera.c \
 	./$(src_dir)/calc/sphere.c \
+<<<<<<< HEAD
 	./$(src_dir)/calc/triangle.c \
+=======
+	./$(src_dir)/calc/triangle_surface.c \
+	./$(src_dir)/calc/triangle_frame.c \
+>>>>>>> d69cab9eab0f22eee1f74742afba48522ce73ccf
 	./$(src_dir)/debug.c \
-	./$(src_dir)/move.c \
 	./$(src_dir)/loader.c \
+	./$(src_dir)/move/move1.c \
+	./$(src_dir)/move/move2.c \
 	./$(src_dir)/parse_and_assign.c \
 	./$(src_dir)/shading.c \
 	./$(src_dir)/vect/vect1.c \
@@ -89,5 +102,16 @@ test: $(gtest) fclean
 	./tester
 	rm -rf tester
 	rm -rf tester.dSYM
+
+.PHONY: cave
+cave: CFLAGS = $(includes:%=-I%) -fprofile-arcs -ftest-coverage -O0
+cave: re
+	./term3d ./sample/42.tri
+	lcov -c -b . -d . -o cov_test.info
+	genhtml cov_test.info -o cov_test
+	find . -name "*.gcda" -delete
+	find . -name "*.gcno" -delete
+	find . -name "*.info" -delete
+	open cov_test/index-sort-f.html
 
 -include $(dep)

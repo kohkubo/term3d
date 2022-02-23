@@ -5,6 +5,10 @@
 # include "vect.h"
 # include "calc.h"
 
+# include <sys/ioctl.h>
+# include <unistd.h>
+# include <math.h>
+
 void	init_data(t_data *data);
 
 #endif

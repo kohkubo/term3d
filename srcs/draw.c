@@ -49,7 +49,7 @@ void	put_thread_canvas(t_data *data, char *canvas)
 	}
 }
 
-void	draw_screen(char *canvas)
+void	draw_screen(t_data *data, char *canvas)
 {
 	char	buf[BUFSIZ];
 	int		x;
@@ -58,12 +58,15 @@ void	draw_screen(char *canvas)
 	setbuf(stdout, buf);
 	printf(TOP_LEFT);
 	printf(DISABLE_CURSOR);
-	y = HEIGHT - 1;
+	y = data->camera.height - 1;
 	while (y >= 0)
 	{
 		x = 0;
-		while (x < WIDTH)
-			printf("%c ", canvas[y * WIDTH + x++]);
+		while (x < data->camera.width)
+		{
+			draw_point(data, x, y);
+			x++;
+		}
 		printf("\n");
 		y--;
 	}
@@ -77,7 +80,7 @@ void	draw(t_data *data)
 	while (true)
 	{
 		put_thread_canvas(data, canvas);
-		draw_screen(canvas);
+		draw_screen(data, canvas);
 		move_camera(&data->camera);
 		camera_rotate(&data->camera);
 		light_rotate(&data->light, &data->camera);
