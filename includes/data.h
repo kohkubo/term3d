@@ -25,8 +25,6 @@ kawadaさんがEPSILONは 0.000001 くらいがいいって言ってた
 */
 # define EPSILON 0.000001
 # define OBJECT_SIZE_MAX INT_MAX
-# define DOT_SIZE 0.5
-# define DOT_DENSITY 0.5
 
 # define END			"\033[0m"
 # define BOLD			"\033[1m"
@@ -59,6 +57,7 @@ typedef struct s_camera
 	t_vect		lookat;
 	t_vect		ray;
 	t_vect		normal_axis;
+	t_vect		center_object_pos;
 	double		rotate_angle;
 }				t_camera;
 
