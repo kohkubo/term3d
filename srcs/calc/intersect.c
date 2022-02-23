@@ -13,7 +13,7 @@ t_object	*intersect(t_data *data)
 	while (i < data->count)
 	{
 		shortest = t;
-		t = update_t(t, data->intersect(&data->camera, &data->object[i]));
+		t = fmin(t, data->intersect(&data->camera, &data->object[i]));
 		if (t < shortest)
 			hit = &data->object[i];
 		i++;
