@@ -1,5 +1,7 @@
 set -exu
 
+chmod 000 permission_error.tri
+
 ./term3d testfiles/extension_error1.tr
 ./term3d testfiles/extension_error2.tir
 ./term3d testfiles/extension_error3.itr
@@ -33,3 +35,5 @@ set -exu
 ./term3d testfiles/vector_elem_only_sign.tri
 ./term3d testfiles/permission_error.tri
 ./term3d testfiles/directory_error.tri
+
+chmod 644 permission_error.tri
