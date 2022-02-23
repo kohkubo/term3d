@@ -55,6 +55,8 @@ void	store_object_count_from_file(char *filepath, t_data *data)
 		count++;
 	if (!feof(file))
 		exit_error("The number of objects described exceeds INT_MAX");
+	if (count == 0)
+		exit_error("File is Only Empty Line.");
 	fclose(file);
 	data->count = count;
 }

@@ -38,6 +38,8 @@ double	strtod_wrapper(char *str)
 		return (0);
 	errno = 0;
 	d = strtod(str, &endptr);
+	if (isnan(d))
+		exit_error("Nan is invalid.");
 	if (errno == ERANGE)
 		exit_error(NULL);
 	if (*endptr != '\0')
