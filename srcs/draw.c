@@ -1,27 +1,38 @@
 #include "draw.h"
 
-static int	intersect(t_data *data, int x, int y)
+static t_object	*intersect(t_data *data)
 {
-	int	i;
+	int			i;
+	double		shortest;
+	double		t;
+	t_object	*hit;
 
-	data->camera.ray = camera_ray(&data->camera, x, y);
+	t = DBL_MAX;
+	hit = NULL;
 	i = 0;
-	while (!data->intersect(&data->camera, &data->object[i]) && i < data->count)
+	while (i < data->count)
+	{
+		shortest = t;
+		t = update_t(t, data->intersect(&data->camera, &data->object[i]));
+		if (t < shortest)
+			hit = &data->object[i];
 		i++;
-	if (i == data->count)
-		return (-1);
-	return (i);
+	}
+	data->camera.lookat = vect_add(\
+	data->camera.pos, vect_scalar_mul(data->camera.ray, t));
+	return (hit);
 }
 
 static void	draw_point(t_data *data, int x, int y)
 {
-	int	c;
+	t_object	*hit;
 
-	c = intersect(data, x, y);
-	if (c == -1)
+	data->camera.ray = camera_ray(&data->camera, x, y);
+	hit = intersect(data);
+	if (hit == NULL)
 		printf(X);
 	else
-		printf("%c ", shading(&data->camera, &data->light, &data->object[c]));
+		printf("%c ", shading(&data->camera, &data->light, hit));
 }
 
 static void	draw_screen(t_data *data)
@@ -56,6 +67,7 @@ void	draw(t_data *data)
 		draw_screen(data);
 		move_camera(&data->camera);
 		camera_rotate(&data->camera);
+		light_rotate(&data->light, &data->camera);
 		usleep(5000);
 	}
 }
