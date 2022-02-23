@@ -148,6 +148,7 @@ TEST(Load, ValidTriagleFile) {
       new_triangle(vect_new(0, 2, 0), vect_new(2, -2, 0), vect_new(-2, -2, 0));
   load_file(&data, "gtest/reader_testfiles/valid/case1.tri");
   is_equal_triangles(data, exp);
+  free(data.object);
 
   exp.count = 4;
   exp.object[0] =
@@ -160,6 +161,7 @@ TEST(Load, ValidTriagleFile) {
       new_triangle(vect_new(0, 2, 0), vect_new(2, -2, 0), vect_new(-2, -2, 0));
   load_file(&data, "gtest/reader_testfiles/valid/case2.tri");
   is_equal_triangles(data, exp);
+  free(data.object);
 
   exp.count = 20;
   for (int i = 0; i < exp.count; i++)
