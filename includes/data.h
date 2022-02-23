@@ -114,4 +114,7 @@ void			exit_error(char *errmsg);
 FILE			*fopen_wrapper(char *filepath);
 double			strtod_wrapper(char *str);
 
+void			end_handler(int sig, siginfo_t *info, void *ucontext);
+void			receiver(void handler(int, siginfo_t *, void *));
+
 #endif
