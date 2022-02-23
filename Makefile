@@ -10,6 +10,7 @@ dep			= $(obj:.o=.d)
 src =\
 	./data.c \
 	./term3d.c \
+	./setting.c \
 	./init.c \
 	./draw.c \
 	./calc/rotate.c \
@@ -61,6 +62,7 @@ srcs_test = \
 	./$(src_dir)/draw.c \
 	./$(src_dir)/data.c \
 	./$(src_dir)/init.c \
+	./$(src_dir)/setting.c \
 	./$(src_dir)/calc/rotate.c \
 	./$(src_dir)/calc/camera.c \
 	./$(src_dir)/calc/sphere.c \

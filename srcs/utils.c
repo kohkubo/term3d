@@ -13,8 +13,8 @@ void	*ft_xcalloc(size_t count, size_t size)
 void	exit_error(char *errmsg)
 {
 	if (errno != 0)
-		perror(errmsg);
-	if (errmsg)
+		perror(NULL);
+	else if (errmsg)
 		fprintf(stderr, "%s\n", errmsg);
 	exit(EXIT_FAILURE);
 }

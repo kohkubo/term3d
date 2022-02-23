@@ -11,6 +11,7 @@
 # define KS 0.5 //鏡面反射係数
 # define SHININESS 32 //光沢度
 
-char	shading(t_camera *camera, t_light *light, t_object *hit);
+double	shading(t_camera *camera, t_light *light, t_object *hit);
+char	radiance_to_density(char *density, double radiance);
 
 #endif

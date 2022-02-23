@@ -4,11 +4,7 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
-	if (ac != 2)
-	{
-		fprintf(stderr, "Usage: %s <filename>\n", av[0]);
-		return (EXIT_FAILURE);
-	}
+	setting(&data, ac, av);
 	load_file(&data, av[1]);
 	init_data(&data);
 	draw(&data);
