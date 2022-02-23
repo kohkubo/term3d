@@ -1,12 +1,12 @@
 #include "calc.h"
 
-void	light_rotate(t_light *light, t_camera *camera)
+static void	light_rotate(t_camera *camera, t_light *light)
 {
 	light->pos = vect_rotate(\
 	&light->pos, &camera->normal_axis, camera->rotate_angle);
 }
 
-void	camera_rotate(t_camera *camera)
+static void	camera_rotate(t_camera *camera)
 {
 	camera->pos = vect_rotate(&camera->pos, \
 &camera->normal_axis, camera->rotate_angle);
@@ -16,4 +16,10 @@ void	camera_rotate(t_camera *camera)
 &camera->normal_axis, camera->rotate_angle);
 	camera->right = vect_rotate(&camera->right, \
 &camera->normal_axis, camera->rotate_angle);
+}
+
+void	rotate(t_data *data)
+{
+	camera_rotate(&data->camera);
+	light_rotate(&data->camera, &data->light);
 }
