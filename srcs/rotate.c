@@ -1,4 +1,4 @@
-#include "calc.h"
+#include "ray.h"
 
 static void	light_rotate(t_camera *camera, t_light *light)
 {
