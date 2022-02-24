@@ -85,12 +85,6 @@ typedef struct s_config
 	char		*color;
 }				t_config;
 
-typedef struct s_control
-{
-	void		(*control)(t_camera *);
-	char		key;
-}				t_control;
-
 typedef struct s_data
 {
 	t_camera	camera;
