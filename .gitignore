@@ -8,10 +8,7 @@
 !*.sh
 !*.cpp
 !*.yml
-!*.cir
 !*.tri
-!*.tr
-!*.tria
-!*_tri
+!*.py
 !Makefile
 test

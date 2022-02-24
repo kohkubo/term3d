@@ -21,9 +21,9 @@ double intensity, t_vect *n, t_vect *l, t_vect *d)
 
 char	radiance_to_density(char *density, double radiance)
 {
-	if (less_equal(radiance, 0))
+	if (radiance <= 0)
 		return (' ');
-	if (less_equal(1, radiance))
+	if (1 <= radiance)
 		return (density[strlen(density)]);
 	return (density[(int)(radiance * strlen(density))]);
 }

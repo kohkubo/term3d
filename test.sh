@@ -2,8 +2,6 @@ set -x
 
 make && make clean
 
-chmod 000 testfiles/permission_error.tri
-
 ./term3d testfiles/extension_error1.tr
 ./term3d testfiles/extension_error2.tir
 ./term3d testfiles/extension_error3.itr
@@ -35,7 +33,8 @@ chmod 000 testfiles/permission_error.tri
 ./term3d testfiles/vector_elem_four.tri
 ./term3d testfiles/vector_elem_only_dot.tri
 ./term3d testfiles/vector_elem_only_sign.tri
-./term3d testfiles/permission_error.tri
 ./term3d testfiles/directory_error.tri
 
+chmod 000 testfiles/permission_error.tri
+./term3d testfiles/permission_error.tri
 chmod 644 testfiles/permission_error.tri
