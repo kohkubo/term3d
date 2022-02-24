@@ -30,5 +30,5 @@ void	set_config(t_data *data, int ac, char **av)
 		set_color(&data->config, av[2]);
 	if (ac >= 4)
 		data->config.charset = av[3];
-	data->config.charset_size = strlen(data->config.charset) - 1;
+	data->config.charset_size = fmax(strlen(data->config.charset) - 1, 0);
 }
