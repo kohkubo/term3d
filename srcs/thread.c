@@ -51,7 +51,7 @@ void	thread_store_canvas(t_data *data, t_thread_line *line)
 		memcpy(&line[y].data, data, sizeof(*data));
 		if (pthread_create(\
 		&line[y].thread, NULL, thread_draw_line, (void *)&line[y]) != 0)
-			thread_error(data, y);
+			thread_error(line, y);
 		y++;
 	}
 	y = 0;
