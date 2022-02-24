@@ -1,5 +1,7 @@
 #include "draw.h"
 
+extern bool	g_draw_flg;
+
 static void	draw_screen(t_data *data)
 {
 	char	buf[BUFSIZ];
@@ -22,6 +24,7 @@ static void	draw_screen(t_data *data)
 	}
 	fflush(stdout);
 	printf(END);
+	printf(ENABLE_CURSOR);
 }
 
 void	draw(t_data *data)
@@ -30,7 +33,7 @@ void	draw(t_data *data)
 
 	thread_line = (t_thread_line *)ft_xcalloc(\
 	data->camera.height, sizeof(t_thread_line));
-	while (true)
+	while (g_draw_flg)
 	{
 		thread_store_canvas(data, thread_line);
 		draw_screen(data);

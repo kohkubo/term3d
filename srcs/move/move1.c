@@ -42,7 +42,7 @@ static void	key_control2(t_camera *camera, int ch)
 	else if (ch == ' ')
 		camera_stop(camera);
 	else if (ch == 'q')
-		exit(0);
+		exit(EXIT_SUCCESS);
 	else if (ch == 'r')
 		camera_reset(camera);
 }
