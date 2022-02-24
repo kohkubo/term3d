@@ -1,4 +1,5 @@
 #include "move.h"
+#include <string.h>
 
 static int	getch(void)
 {
@@ -19,50 +20,31 @@ static int	getch(void)
 	return (ch);
 }
 
-void	camera_zoom_out(t_camera *camera)
-{
-	camera->pos = vect_move(&camera->pos, &camera->normal, MOVE_SCALE);
-}
-
-void	camera_zoom_in(t_camera *camera)
-{
-	camera->pos = vect_move(&camera->pos, &camera->normal, -MOVE_SCALE);
-}
-
-static void	key_control2(t_camera *camera, int ch)
-{
-	if (ch == 'j')
-		camera_rotate_left(camera);
-	else if (ch == 'l')
-		camera_rotate_right(camera);
-	else if (ch == 'k')
-		camera_rotate_down(camera);
-	else if (ch == 'i')
-		camera_rotate_up(camera);
-	else if (ch == ' ')
-		camera_stop(camera);
-	else if (ch == 'q')
-		exit(EXIT_SUCCESS);
-	else if (ch == 'r')
-		camera_reset(camera);
-}
-
 void	key_control(t_camera *camera)
 {
-	int	ch;
+	int				i;
+	char			ch;
+	const t_control	control[] = {{camera_move_up,			'w'},
+								 {camera_move_down,			's'},
+								 {camera_move_left,			'a'},
+								 {camera_move_right,		'd'},
+								 {camera_rotate_up,			'i'},
+								 {camera_rotate_down,		'k'},
+								 {camera_rotate_left,		'j'},
+								 {camera_rotate_right,		'l'},
+								 {camera_rotate_speed_up,	'm'},
+								 {camera_rotate_speed_down,	'n'},
+								 {camera_zoom_in,			'z'},
+								 {camera_zoom_out,			'x'},
+								 {camera_reset,				'r'},
+								 {camera_stop,				' '},
+								 {quit,						'q'}};
+	const int		count = (sizeof(control) / sizeof(*control));
 
 	ch = getch();
-	if (ch == 'z')
-		camera_zoom_in(camera);
-	else if (ch == 'x')
-		camera_zoom_out(camera);
-	else if (ch == 'w')
-		camera_move_up(camera);
-	else if (ch == 's')
-		camera_move_down(camera);
-	else if (ch == 'a')
-		camera_move_left(camera);
-	else if (ch == 'd')
-		camera_move_right(camera);
-	key_control2(camera, ch);
+	i = 0;
+	while (i < count && ch != control[i].key)
+		i++;
+	if (i < count)
+		control[i].control(camera);
 }

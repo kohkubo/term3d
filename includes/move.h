@@ -15,15 +15,20 @@
 # define ROTATE_SPEED 0.01
 
 void	key_control(t_camera *camera);
-void	camera_move_left(t_camera *camera);
-void	camera_move_right(t_camera *camera);
 void	camera_move_up(t_camera *camera);
 void	camera_move_down(t_camera *camera);
-void	camera_rotate_left(t_camera *camera);
-void	camera_rotate_right(t_camera *camera);
+void	camera_move_left(t_camera *camera);
+void	camera_move_right(t_camera *camera);
 void	camera_rotate_up(t_camera *camera);
 void	camera_rotate_down(t_camera *camera);
+void	camera_rotate_left(t_camera *camera);
+void	camera_rotate_right(t_camera *camera);
+void	camera_rotate_speed_up(t_camera *camera);
+void	camera_rotate_speed_down(t_camera *camera);
+void	camera_zoom_in(t_camera *camera);
+void	camera_zoom_out(t_camera *camera);
 void	camera_stop(t_camera *camera);
 void	camera_reset(t_camera *camera);
+void	quit(t_camera *camera);
 
 #endif
