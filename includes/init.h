@@ -3,7 +3,7 @@
 
 # include "data.h"
 # include "vect.h"
-# include "calc.h"
+# include "ray.h"
 
 # include <sys/ioctl.h>
 # include <unistd.h>

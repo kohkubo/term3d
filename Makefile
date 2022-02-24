@@ -13,11 +13,9 @@ src =\
 	./config.c \
 	./init.c \
 	./draw.c \
-	./calc/rotate.c \
-	./calc/camera.c \
-	./calc/sphere.c \
-	./calc/intersect.c \
-	./calc/triangle_surface.c \
+	./rotate.c \
+	./ray/camera.c \
+	./ray/intersect.c \
 	./move/move1.c \
 	./move/move2.c \
 	./move/move3.c \
@@ -64,11 +62,9 @@ srcs_test = \
 	./$(src_dir)/data.c \
 	./$(src_dir)/init.c \
 	./$(src_dir)/config.c \
-	./$(src_dir)/calc/rotate.c \
-	./$(src_dir)/calc/camera.c \
-	./$(src_dir)/calc/sphere.c \
-	./$(src_dir)/calc/intersect.c \
-	./$(src_dir)/calc/triangle_surface.c \
+	./$(src_dir)/rotate.c \
+	./$(src_dir)/ray/camera.c \
+	./$(src_dir)/ray/intersect.c \
 	./$(src_dir)/debug.c \
 	./$(src_dir)/load/load.c \
 	./$(src_dir)/load/store.c \
