@@ -25,7 +25,7 @@ void	set_config(t_data *data, int ac, char **av)
 	data->config.color = BLUE;
 	data->config.charset = "-~=cxFX8NNNNN";
 	if (ac <= 1 || ac >= 5)
-		exit_error("Usage: ./term3d <filename> [color : -rbgymc] [charset]");
+		exit_error("Usage: ./term3d <filename> [color : -rbgymcw] [charset]");
 	if (ac >= 3)
 		set_color(&data->config, av[2]);
 	if (ac >= 4)
