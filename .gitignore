@@ -9,5 +9,6 @@
 !*.cpp
 !*.yml
 !*.tri
+!*.py
 !Makefile
 test
