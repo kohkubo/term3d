@@ -1,5 +1,4 @@
 #include "move.h"
-#include <string.h>
 
 static int	getch(void)
 {
@@ -20,7 +19,7 @@ static int	getch(void)
 	return (ch);
 }
 
-void	other_control(t_camera *camera, int ch)
+static void	other_control(t_camera *camera, int ch)
 {
 	if (ch == 'z')
 		camera_zoom_in(camera);
@@ -34,7 +33,7 @@ void	other_control(t_camera *camera, int ch)
 		quit(camera);
 }
 
-void	rotate_control(t_camera *camera, int ch)
+static void	rotate_control(t_camera *camera, int ch)
 {
 	if (ch == 'i')
 		camera_rotate_up(camera);
