@@ -81,6 +81,7 @@ typedef struct s_object
 typedef struct s_config
 {
 	char		*charset;
+	size_t		charset_size;
 	char		*color;
 }				t_config;
 
