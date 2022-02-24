@@ -12,6 +12,6 @@
 # define SHININESS 32 //光沢度
 
 double	shading(t_camera *camera, t_light *light, t_object *hit);
-char	radiance_to_density(char *density, double radiance);
+char	radiance_to_density(t_config *conf, double radiance);
 
 #endif
