@@ -40,4 +40,5 @@ void	draw(t_data *data)
 		key_control(&data->camera);
 		rotate(data);
 	}
+	free(thread_line);
 }

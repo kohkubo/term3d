@@ -30,6 +30,16 @@ static void	*thread_draw_line(void *arg)
 	return (NULL);
 }
 
+static void	thread_error(t_thread_line *line, int y)
+{
+	int	i;
+
+	i = 0;
+	while (i < y)
+		pthread_join(line[i++].thread, NULL);
+	exit_error(NULL);
+}
+
 void	thread_store_canvas(t_data *data, t_thread_line *line)
 {
 	int	y;
@@ -39,14 +49,12 @@ void	thread_store_canvas(t_data *data, t_thread_line *line)
 	{
 		memcpy(&line[y].y, &y, sizeof(y));
 		memcpy(&line[y].data, data, sizeof(*data));
-		pthread_create(\
-		&line[y].thread, NULL, thread_draw_line, (void *)&line[y]);
+		if (pthread_create(\
+		&line[y].thread, NULL, thread_draw_line, (void *)&line[y]) != 0)
+			thread_error(line, y);
 		y++;
 	}
 	y = 0;
 	while (y < data->camera.height)
-	{
-		pthread_join(line[y].thread, NULL);
-		y++;
-	}
+		pthread_join(line[y++].thread, NULL);
 }

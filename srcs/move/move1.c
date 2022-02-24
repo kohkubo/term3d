@@ -19,32 +19,36 @@ static int	getch(void)
 	return (ch);
 }
 
-void	camera_zoom_out(t_camera *camera)
+static void	other_control(t_camera *camera, int ch)
 {
-	camera->pos = vect_move(&camera->pos, &camera->normal, MOVE_SCALE);
+	if (ch == 'z')
+		camera_zoom_in(camera);
+	else if (ch == 'x')
+		camera_zoom_out(camera);
+	else if (ch == ' ')
+		camera_stop(camera);
+	else if (ch == 'r')
+		camera_reset(camera);
+	else if (ch == 'q')
+		quit(camera);
 }
 
-void	camera_zoom_in(t_camera *camera)
+static void	rotate_control(t_camera *camera, int ch)
 {
-	camera->pos = vect_move(&camera->pos, &camera->normal, -MOVE_SCALE);
-}
-
-static void	key_control2(t_camera *camera, int ch)
-{
-	if (ch == 'j')
+	if (ch == 'i')
+		camera_rotate_up(camera);
+	else if (ch == 'k')
+		camera_rotate_down(camera);
+	else if (ch == 'j')
 		camera_rotate_left(camera);
 	else if (ch == 'l')
 		camera_rotate_right(camera);
-	else if (ch == 'k')
-		camera_rotate_down(camera);
-	else if (ch == 'i')
-		camera_rotate_up(camera);
-	else if (ch == ' ')
-		camera_stop(camera);
-	else if (ch == 'q')
-		exit(EXIT_SUCCESS);
-	else if (ch == 'r')
-		camera_reset(camera);
+	else if (ch == 'm')
+		camera_rotate_speed_up(camera);
+	else if (ch == 'n')
+		camera_rotate_speed_down(camera);
+	else
+		other_control(camera, ch);
 }
 
 void	key_control(t_camera *camera)
@@ -52,11 +56,7 @@ void	key_control(t_camera *camera)
 	int	ch;
 
 	ch = getch();
-	if (ch == 'z')
-		camera_zoom_in(camera);
-	else if (ch == 'x')
-		camera_zoom_out(camera);
-	else if (ch == 'w')
+	if (ch == 'w')
 		camera_move_up(camera);
 	else if (ch == 's')
 		camera_move_down(camera);
@@ -64,5 +64,6 @@ void	key_control(t_camera *camera)
 		camera_move_left(camera);
 	else if (ch == 'd')
 		camera_move_right(camera);
-	key_control2(camera, ch);
+	else
+		rotate_control(camera, ch);
 }

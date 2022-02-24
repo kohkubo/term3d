@@ -20,6 +20,8 @@ static void	camera_rotate(t_camera *camera)
 
 void	rotate(t_data *data)
 {
+	if (data->camera.rotate_angle == 0)
+		return ;
 	camera_rotate(&data->camera);
 	light_rotate(&data->camera, &data->light);
 }
