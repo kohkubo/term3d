@@ -1,6 +1,6 @@
 #include "draw.h"
 
-extern bool	g_play;
+extern bool	g_draw_flg;
 
 static void	draw_screen(t_data *data)
 {
@@ -33,7 +33,7 @@ void	draw(t_data *data)
 
 	thread_line = (t_thread_line *)ft_xcalloc(\
 	data->camera.height, sizeof(t_thread_line));
-	while (g_play)
+	while (g_draw_flg)
 	{
 		thread_store_canvas(data, thread_line);
 		draw_screen(data);
