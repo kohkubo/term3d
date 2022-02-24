@@ -3,13 +3,14 @@
 #include <sys/types.h>
 #include <strings.h>
 
+bool	g_play = true;
+
 void	end_handler(int sig, siginfo_t *info, void *ucontext)
 {
 	(void)ucontext;
 	(void)info;
 	(void)sig;
-	printf(ENABLE_CURSOR);
-	exit(0);
+	g_play = false;
 }
 
 void	receiver(void handler(int, siginfo_t *, void *))
