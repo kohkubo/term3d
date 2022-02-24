@@ -3,13 +3,14 @@
 
 # include "data.h"
 # include "vect.h"
-# include "calc.h"
+# include "ray.h"
 # include "move.h"
 # include "debug.h"
 # include "load.h"
 # include "shading.h"
 # include "init.h"
 # include "thread.h"
+# include "rotate.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <pthread.h>
