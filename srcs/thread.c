@@ -13,7 +13,7 @@ static void	thread_draw_point(t_thread_line *line, int x, int y)
 	else
 	{
 		radiance = shading(&line->data.camera, &line->data.light, hit);
-		c = radiance_to_density(line->data.config.charset, radiance);
+		c = radiance_to_density(&line->data.config, radiance);
 		line->data.canvas[x + y * line->data.camera.width] = c;
 	}
 }
