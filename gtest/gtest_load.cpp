@@ -36,6 +36,7 @@ void ft_split_test(char *str, char **exp) {
   for (int i = 0; exp[i] && split[i]; i++) {
     EXPECT_STREQ(exp[i], split[i]);
   }
+  free_string_array(split);
 }
 
 TEST(Load, ft_split) {
@@ -45,12 +46,52 @@ TEST(Load, ft_split) {
   char *array1[2] = {{"0"}, NULL};
 
   ft_split_test("0,0,0,0", array4);
+  ft_split_test("0,,0,0,0", array4);
+  ft_split_test("0,0,,0,0", array4);
+  ft_split_test("0,0,0,0,", array4);
+  ft_split_test("0,0,0,0", array4);
+  ft_split_test("0,0,0,,,,0", array4);
+  ft_split_test(",,,,,,0,0,0,0", array4);
   ft_split_test("0,0,0", array3);
   ft_split_test("0,0", array2);
   ft_split_test("0", array1);
+  ft_split_test("0,", array1);
+  ft_split_test(",0,", array1);
+  ft_split_test("0,,,", array1);
 }
 
-TEST(Load, str_to_vector) {
+TEST(Load, char_count)
+{
+  EXPECT_EQ(0, char_count("", ','));
+  EXPECT_EQ(0, char_count("0", ','));
+  EXPECT_EQ(1, char_count("0,0", ','));
+  EXPECT_EQ(1, char_count(",00", ','));
+  EXPECT_EQ(1, char_count("00,", ','));
+  EXPECT_EQ(2, char_count("0,0,0", ','));
+  EXPECT_EQ(2, char_count("0,,0", ','));
+  EXPECT_EQ(2, char_count("0,,", ','));
+  EXPECT_EQ(3, char_count("0,0,0,0", ','));
+  EXPECT_EQ(4, char_count("0,0,0,0,0", ','));
+  EXPECT_EQ(5, char_count("0,0,0,0,0,0", ','));
+}
+
+TEST(Load, str_to_vector)
+{
+  //カンマが３つ以上
+  str_to_vector_fail_test("0,,,,0,,,0");
+  str_to_vector_fail_test(",,,");
+  str_to_vector_fail_test("0,,,");
+  str_to_vector_fail_test(",,,0");
+  str_to_vector_fail_test("0,,,0");
+  str_to_vector_fail_test("0,0,0,");
+
+  //カンマが２つ
+  str_to_vector_fail_test("0,,0");
+
+  //カンマが１つ
+  str_to_vector_fail_test(",0");
+  str_to_vector_fail_test("0,");
+  str_to_vector_fail_test(",");
 
   //区切る要素の数が異なる
   str_to_vector_fail_test("0");
@@ -61,17 +102,6 @@ TEST(Load, str_to_vector) {
   str_to_vector_fail_test("0,0,0,");
   str_to_vector_fail_test(",0,0,0");
   str_to_vector_fail_test(",0,0,0,");
-  str_to_vector_fail_test(",0,0,");
-
-  //カンマが３つ以上
-  str_to_vector_fail_test("0,,,,0,,,0");
-  str_to_vector_fail_test(",,,");
-  str_to_vector_fail_test("0,,,");
-  str_to_vector_fail_test(",,,0");
-  str_to_vector_fail_test("0,,,0");
-
-  //カンマが２つ
-  str_to_vector_fail_test("0,,0");
 
   str_to_vector_success_test("0,0,0", vect_new(0, 0, 0));
   str_to_vector_success_test("0.0,0.0,0.0", vect_new(0, 0, 0));
@@ -83,6 +113,13 @@ TEST(Load, strtod_wrapper) {
   EXPECT_EQ(strtod_wrapper("0.0"), 0);
   EXPECT_EQ(strtod_wrapper("-0.0"), 0);
   EXPECT_EQ(strtod_wrapper("-0"), 0);
+
+  // 注意するケース
+  EXPECT_EQ(strtod_wrapper(".0"), 0);
+  EXPECT_EQ(strtod_wrapper("0."), 0);
+  EXPECT_EQ(strtod_wrapper("-0."), 0);
+  EXPECT_EQ(strtod_wrapper("+0."), 0);
+  EXPECT_DEATH(strtod_wrapper("+0f"), "");
 
   // NG case
   EXPECT_DEATH(strtod_wrapper(""), "");
@@ -100,4 +137,6 @@ TEST(Load, strtod_wrapper) {
   EXPECT_DEATH(strtod_wrapper("-+0"), "");
   EXPECT_DEATH(strtod_wrapper("\0"), "");
   EXPECT_DEATH(strtod_wrapper("\n"), "");
+  EXPECT_DEATH(strtod_wrapper("0..0"), "");
+  EXPECT_DEATH(strtod_wrapper("0.0."), "");
 }
