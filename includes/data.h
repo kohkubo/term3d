@@ -9,7 +9,7 @@
 # include <stdio.h>
 # include <limits.h>
 # include <pthread.h>
-# define FOCUS_DISTANCE 20
+# define FOCUS_DISTANCE 8
 # define O ". "
 # define X "  "
 /*
