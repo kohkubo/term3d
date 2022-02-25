@@ -1,6 +1,6 @@
 #include "ray.h"
 
-static void	light_rotate(t_data *data)
+void	light_rotate(t_data *data)
 {
 	data->light.pos = vect_rotate(&data->light.pos, \
 	&data->base_info.normal_axis, data->base_info.rotate_angle);
@@ -23,5 +23,4 @@ void	rotate(t_data *data)
 	if (data->base_info.rotate_angle == 0)
 		return ;
 	camera_rotate(data);
-	light_rotate(data);
 }

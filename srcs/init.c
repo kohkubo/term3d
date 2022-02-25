@@ -58,7 +58,7 @@ void	init_base_info(t_data *data)
 	data->base_info.normal = vect_new(0, 0, 1);
 	data->base_info.normal_axis = vect_normalize(vect_new(0, 1, 0));
 	data->base_info.rotate_angle = radian(1);
-	data->light.pos = vect_new(32, 32, -32);
+	data->light.pos = vect_new(8, 64, -8);
 	data->light.intensity = 1.0;
 	data->intersect = intersect_with_triangle_surface;
 }

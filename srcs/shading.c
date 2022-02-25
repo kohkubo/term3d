@@ -6,30 +6,32 @@ enum
 	L,
 };
 
-static double	diffuse_reflection(double intensity, double l_n_dot)
+static double	diffuse_reflection(double intensity, double ln_dot)
 {
-	return (KD * intensity * fmax(l_n_dot, 0));
+	return (KD * intensity * ln_dot);
 }
 
 static double	specular_reflection(\
-double intensity, t_vect vect[2], t_vect *d, double l_n_dot)
+double intensity, t_vect vect[2], t_vect *d, double ln_dot)
 {
 	t_vect	v;
 	t_vect	r;
+	double	vr_dot;
 
-	if (less(l_n_dot, 0))
-		return (0);
-	v = vect_normalize(vect_inv(d));
-	r = vect_scalar_mul(&vect[N], 2 * l_n_dot);
+	v = vect_inv(d);
+	r = vect_scalar_mul(&vect[N], 2 * ln_dot);
 	r = vect_normalize(vect_sub(&r, &vect[L]));
-	return (KS * intensity * pow(fmax(vect_dot(&v, &r), 0), SHININESS));
+	vr_dot = vect_dot(&v, &r);
+	if (vr_dot < 0)
+		return (0);
+	return (KS * intensity * pow(vr_dot, SHININESS));
 }
 
 char	radiance_to_density(t_config *conf, double radiance)
 {
 	if (radiance <= 0)
 		return (' ');
-	if (1 <= radiance)
+	if (radiance >= 1)
 		return (conf->charset[conf->charset_size]);
 	return (conf->charset[(int)(radiance * conf->charset_size)]);
 }
@@ -37,16 +39,16 @@ char	radiance_to_density(t_config *conf, double radiance)
 double	shading(t_camera *camera, t_light *light, t_object *hit)
 {
 	t_vect	vect[2];
-	double	l_n_dot;
+	double	ln_dot;
 	double	rd;
 	double	rs;
 
 	vect[L] = vect_normalize(vect_sub(&light->pos, &camera->lookat));
 	vect[N] = hit->normal;
-	l_n_dot = vect_dot(&hit->normal, &vect[L]);
-	if (less(l_n_dot, 0))
-		vect[N] = vect_inv(&hit->normal);
-	rd = diffuse_reflection(light->intensity, l_n_dot);
-	rs = specular_reflection(light->intensity, vect, &camera->lookat, l_n_dot);
+	ln_dot = vect_dot(&hit->normal, &vect[L]);
+	if (ln_dot < 0)
+		return (KA * IA);
+	rd = diffuse_reflection(light->intensity, ln_dot);
+	rs = specular_reflection(light->intensity, vect, &camera->lookat, ln_dot);
 	return (KA * IA + rd + rs);
 }
