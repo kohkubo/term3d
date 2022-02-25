@@ -13,7 +13,7 @@ void	end_handler(int sig, siginfo_t *info, void *ucontext)
 	g_draw_flg = false;
 }
 
-void	receiver(void handler(int, siginfo_t *, void *))
+void	set_sigaction(int sig, void handler(int, siginfo_t *, void *))
 {
 	struct sigaction	act;
 
@@ -21,5 +21,5 @@ void	receiver(void handler(int, siginfo_t *, void *))
 	act.sa_sigaction = handler;
 	sigemptyset(&act.sa_mask);
 	act.sa_flags = SA_SIGINFO;
-	sigaction(SIGINT, &act, NULL);
+	sigaction(sig, &act, NULL);
 }

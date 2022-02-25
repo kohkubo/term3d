@@ -2,6 +2,7 @@
 # define ROTATE_H
 
 # include "data.h"
+# include "vect.h"
 
 void		rotate(t_data *data);
 

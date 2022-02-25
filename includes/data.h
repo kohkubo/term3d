@@ -113,6 +113,6 @@ size_t			char_count(char *str, char c);
 size_t			arraylen(char **array);
 
 void			end_handler(int sig, siginfo_t *info, void *ucontext);
-void			receiver(void handler(int, siginfo_t *, void *));
+void			set_sigaction(int sig, void handler(int, siginfo_t *, void *));
 
 #endif
