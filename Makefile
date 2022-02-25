@@ -22,7 +22,6 @@ src =\
 	./control/control4.c \
 	./control/control5.c \
 	./control/control6.c \
-	./control/control7.c \
 	./load/load.c \
 	./load/store.c \
 	./load/ft_split.c \
@@ -81,7 +80,6 @@ srcs_test = \
 	./$(src_dir)/control/control4.c \
 	./$(src_dir)/control/control5.c \
 	./$(src_dir)/control/control6.c \
-	./$(src_dir)/control/control7.c \
 	./$(src_dir)/shading.c \
 	./$(src_dir)/thread.c \
 	./$(src_dir)/signal.c \
