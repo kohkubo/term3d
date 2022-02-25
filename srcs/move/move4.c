@@ -1,21 +1,23 @@
 #include "move.h"
 
-void	camera_rotate_speed_up(t_camera *camera)
+void	camera_rotate_speed_up(t_data *data)
 {
-	camera->rotate_angle += ROTATE_SPEED;
+	data->base_info.rotate_angle += ROTATE_SPEED;
 }
 
-void	camera_rotate_speed_down(t_camera *camera)
+void	camera_rotate_speed_down(t_data *data)
 {
-	camera->rotate_angle -= ROTATE_SPEED;
+	data->base_info.rotate_angle -= ROTATE_SPEED;
 }
 
-void	camera_zoom_in(t_camera *camera)
+void	camera_zoom_in(t_data *data)
 {
-	camera->pos = vect_move(&camera->pos, &camera->normal, MOVE_SCALE);
+	data->camera.pos = \
+	vect_move(&data->camera.pos, &data->base_info.normal, MOVE_SCALE);
 }
 
-void	camera_zoom_out(t_camera *camera)
+void	camera_zoom_out(t_data *data)
 {
-	camera->pos = vect_move(&camera->pos, &camera->normal, -MOVE_SCALE);
+	data->camera.pos = \
+	vect_move(&data->camera.pos, &data->base_info.normal, -MOVE_SCALE);
 }

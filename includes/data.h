@@ -9,7 +9,7 @@
 # include <stdio.h>
 # include <limits.h>
 # include <pthread.h>
-# define FOCUS_DISTANCE 20
+# define FOCUS_DISTANCE 8
 # define O ". "
 # define X "  "
 /*
@@ -48,18 +48,21 @@ typedef struct s_vect
 
 typedef struct s_camera
 {
+	t_vect		pos;
+	t_vect		lookat;
+	t_vect		ray;
+}				t_camera;
+
+typedef struct base_info
+{
 	int			width;
 	int			height;
-	t_vect		pos;
 	t_vect		up;
 	t_vect		right;
 	t_vect		normal;
-	t_vect		lookat;
-	t_vect		ray;
 	t_vect		normal_axis;
-	t_vect		center_object_pos;
 	double		rotate_angle;
-}				t_camera;
+}				t_base_info;
 
 typedef struct s_light
 {
@@ -91,17 +94,12 @@ typedef struct s_data
 	t_light		light;
 	t_object	*object;
 	char		*canvas;
-	int			count;
+	int			object_count;
 	double		(*intersect)(t_camera *, t_object *);
 	t_config	config;
+	t_vect		center_object_pos;
+	t_base_info	base_info;
 }				t_data;
-
-typedef struct s_thread_line
-{
-	pthread_t	thread;
-	t_data		data;
-	int			y;
-}				t_thread_line;
 
 bool			is_equal(double a, double b);
 bool			less(double a, double b);

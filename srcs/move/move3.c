@@ -1,25 +1,25 @@
 #include "move.h"
 
-void	camera_rotate_up(t_camera *camera)
+void	camera_rotate_up(t_data *data)
 {
-	camera->normal_axis = vect_normalize(\
-	vect_sub(&camera->normal_axis, &camera->right));
+	data->base_info.normal_axis = vect_normalize(\
+	vect_sub(&data->base_info.normal_axis, &data->base_info.right));
 }
 
-void	camera_rotate_down(t_camera *camera)
+void	camera_rotate_down(t_data *data)
 {
-	camera->normal_axis = vect_normalize(\
-	vect_add(camera->normal_axis, camera->right));
+	data->base_info.normal_axis = vect_normalize(\
+	vect_add(data->base_info.normal_axis, data->base_info.right));
 }
 
-void	camera_rotate_left(t_camera *camera)
+void	camera_rotate_left(t_data *data)
 {
-	camera->normal_axis = vect_normalize(\
-	vect_sub(&camera->normal_axis, &camera->up));
+	data->base_info.normal_axis = vect_normalize(\
+	vect_sub(&data->base_info.normal_axis, &data->base_info.up));
 }
 
-void	camera_rotate_right(t_camera *camera)
+void	camera_rotate_right(t_data *data)
 {
-	camera->normal_axis = vect_normalize(\
-	vect_add(camera->normal_axis, camera->up));
+	data->base_info.normal_axis = vect_normalize(\
+	vect_add(data->base_info.normal_axis, data->base_info.up));
 }
