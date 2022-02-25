@@ -7,14 +7,14 @@ static t_vect	center_objects(t_data *data)
 
 	i = 0;
 	ret = vect_new(0, 0, 0);
-	while (i < data->count)
+	while (i < data->object_count)
 	{
 		ret = vect_add(ret, data->object[i].pos1);
 		ret = vect_add(ret, data->object[i].pos2);
 		ret = vect_add(ret, data->object[i].pos3);
 		i++;
 	}
-	ret = vect_scalar_div(&ret, (double)data->count * 3);
+	ret = vect_scalar_div(&ret, (double)data->object_count * 3);
 	return (ret);
 }
 
@@ -37,7 +37,7 @@ static void	preprocess_triangle(t_data *data)
 	t_object	*object;
 
 	i = 0;
-	while (i < data->count)
+	while (i < data->object_count)
 	{
 		object = &data->object[i];
 		object->edge1 = vect_sub(&object->pos2, &object->pos1);

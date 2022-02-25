@@ -47,18 +47,16 @@ void	store_object_count_from_file(char *filepath, t_data *data)
 {
 	FILE	*file;
 	char	buf[TERM3D_LINE_SIZE + 1];
-	int		count;
 
 	file = fopen_wrapper(filepath);
-	count = 0;
-	while (count < OBJECT_SIZE_MAX && read_line(file, buf))
-		count++;
+	data->object_count = 0;
+	while (data->object_count < OBJECT_SIZE_MAX && read_line(file, buf))
+		data->object_count++;
 	if (!feof(file))
 		exit_error("The number of objects described exceeds INT_MAX");
-	if (count == 0)
+	if (data->object_count == 0)
 		exit_error("File is Only Empty Line.");
 	fclose(file);
-	data->count = count;
 }
 
 void	store_object_from_file(char *filepath, t_data *data)
@@ -68,9 +66,9 @@ void	store_object_from_file(char *filepath, t_data *data)
 	int		c;
 
 	file = fopen_wrapper(filepath);
-	data->object = (t_object *)ft_xcalloc(data->count, sizeof(t_object));
+	data->object = (t_object *)ft_xcalloc(data->object_count, sizeof(t_object));
 	c = 0;
-	while (c < data->count && read_line(file, buf))
+	while (c < data->object_count && read_line(file, buf))
 		store_object_from_line(buf, &data->object[c++]);
 	fclose(file);
 }

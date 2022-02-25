@@ -10,7 +10,7 @@ t_object	*intersect(t_data *data)
 	t = DBL_MAX;
 	hit = NULL;
 	i = 0;
-	while (i < data->count)
+	while (i < data->object_count)
 	{
 		shortest = t;
 		t = fmin(t, data->intersect(&data->camera, &data->object[i]));

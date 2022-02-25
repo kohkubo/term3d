@@ -91,7 +91,7 @@ typedef struct s_data
 	t_light		light;
 	t_object	*object;
 	char		*canvas;
-	int			count;
+	int			object_count;
 	double		(*intersect)(t_camera *, t_object *);
 	t_config	config;
 }				t_data;

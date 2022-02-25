@@ -23,8 +23,8 @@ void	print_all_object_info(t_data *data)
 	int	c;
 
 	c = 0;
-	printf("object count : %d\n", data->count);
-	while (c < data->count)
+	printf("object count : %d\n", data->object_count);
+	while (c < data->object_count)
 	{
 		printf("%-5d ", c + 1);
 		printf("1: ");
