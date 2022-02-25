@@ -21,13 +21,13 @@ static int	getch(void)
 
 static void light_move(t_data *data, int ch)
 {
-	if (ch == 'r')
+	if (ch == 't')
 		light_move_up(data);
-	else if (ch == 'f')
+	else if (ch == 'g')
 		light_move_down(data);
-	else if (ch == 'e')
+	else if (ch == 'f')
 		light_move_left(data);
-	else if (ch == 't')
+	else if (ch == 'h')
 		light_move_right(data);
 }
 
