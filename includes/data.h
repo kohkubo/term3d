@@ -96,13 +96,6 @@ typedef struct s_data
 	t_config	config;
 }				t_data;
 
-typedef struct s_thread_line
-{
-	pthread_t	thread;
-	t_data		data;
-	int			y;
-}				t_thread_line;
-
 bool			is_equal(double a, double b);
 bool			less(double a, double b);
 bool			less_equal(double a, double b);

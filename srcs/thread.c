@@ -6,15 +6,15 @@ static void	thread_draw_point(t_thread_line *line, int x, int y)
 	double		radiance;
 	char		c;
 
-	line->data.camera.ray = camera_ray(&line->data.camera, x, y);
-	hit = intersect(&line->data);
+	line->camera.ray = camera_ray(&line->camera, x, y);
+	hit = intersect(line->data, &line->camera);
 	if (hit == NULL)
-		line->data.canvas[x + y * line->data.camera.width] = ' ';
+		line->data->canvas[x + y * line->camera.width] = ' ';
 	else
 	{
-		radiance = shading(&line->data.camera, &line->data.light, hit);
-		c = radiance_to_density(&line->data.config, radiance);
-		line->data.canvas[x + y * line->data.camera.width] = c;
+		radiance = shading(&line->camera, &line->data->light, hit);
+		c = radiance_to_density(&line->data->config, radiance);
+		line->data->canvas[x + y * line->camera.width] = c;
 	}
 }
 
@@ -25,7 +25,7 @@ static void	*thread_draw_line(void *arg)
 
 	line = (t_thread_line *)arg;
 	x = 0;
-	while (x < line->data.camera.width)
+	while (x < line->data->camera.width)
 		thread_draw_point(line, x++, line->y);
 	return (NULL);
 }
@@ -47,8 +47,9 @@ void	thread_store_canvas(t_data *data, t_thread_line *line)
 	y = 0;
 	while (y < data->camera.height)
 	{
-		memcpy(&line[y].y, &y, sizeof(y));
-		memcpy(&line[y].data, data, sizeof(*data));
+		line[y].y = y;
+		line[y].data = data;
+		memcpy(&line[y].camera, &data->camera, sizeof(t_camera));
 		if (pthread_create(\
 		&line[y].thread, NULL, thread_draw_line, (void *)&line[y]) != 0)
 			thread_error(line, y);
