@@ -60,14 +60,6 @@ void	init_base_info(t_data *data)
 	data->base_info.rotate_angle = radian(1);
 	data->light.pos = vect_new(32, 32, -32);
 	data->light.intensity = 1.0;
-}
-
-void	init_data(t_data *data)
-{
-	preprocess_triangle(data);
-	set_screen_size(data);
-	data->base_info.center_object_pos = center_objects(data);
-	init_base_info(data);
 	data->intersect = intersect_with_triangle_surface;
 }
 
