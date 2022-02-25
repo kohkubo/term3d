@@ -3,6 +3,7 @@
 
 # include "data.h"
 # include "vect.h"
+# include "init.h"
 # include <stdbool.h>
 # include <stdio.h>
 # include <termios.h>
