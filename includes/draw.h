@@ -4,7 +4,7 @@
 # include "data.h"
 # include "vect.h"
 # include "ray.h"
-# include "move.h"
+# include "control.h"
 # include "debug.h"
 # include "load.h"
 # include "shading.h"

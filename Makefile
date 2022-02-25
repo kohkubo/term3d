@@ -16,13 +16,13 @@ src =\
 	./rotate.c \
 	./ray/camera.c \
 	./ray/intersect.c \
-	./move/move1.c \
-	./move/move2.c \
-	./move/move3.c \
-	./move/move4.c \
-	./move/move5.c \
-	./move/move6.c \
-	./move/move7.c \
+	./control/control1.c \
+	./control/control2.c \
+	./control/control3.c \
+	./control/control4.c \
+	./control/control5.c \
+	./control/control6.c \
+	./control/control7.c \
 	./load/load.c \
 	./load/store.c \
 	./load/ft_split.c \
@@ -74,13 +74,14 @@ srcs_test = \
 	./$(src_dir)/load/load.c \
 	./$(src_dir)/load/store.c \
 	./$(src_dir)/load/ft_split.c \
-	./$(src_dir)/move/move1.c \
-	./$(src_dir)/move/move2.c \
-	./$(src_dir)/move/move3.c \
-	./$(src_dir)/move/move4.c \
-	./$(src_dir)/move/move5.c \
-	./$(src_dir)/move/move6.c \
-	./$(src_dir)/move/move7.c \
+	./$(src_dir)/control/getch.c \
+	./$(src_dir)/control/control1.c \
+	./$(src_dir)/control/control2.c \
+	./$(src_dir)/control/control3.c \
+	./$(src_dir)/control/control4.c \
+	./$(src_dir)/control/control5.c \
+	./$(src_dir)/control/control6.c \
+	./$(src_dir)/control/control7.c \
 	./$(src_dir)/shading.c \
 	./$(src_dir)/thread.c \
 	./$(src_dir)/signal.c \

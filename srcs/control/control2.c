@@ -1,4 +1,4 @@
-#include "move.h"
+#include "control.h"
 
 void	camera_move_up(t_data *data)
 {

@@ -1,5 +1,5 @@
-#ifndef MOVE_H
-# define MOVE_H
+#ifndef CONTROL_H
+# define CONTROL_H
 
 # include "data.h"
 # include "vect.h"
@@ -13,8 +13,10 @@
 
 # define MOVE_SCALE 5
 # define MOVE_DISTANCE 0.1
+# define MOVE_LIGHT 1000
 # define ROTATE_SPEED 0.01
 
+int		getch(void);
 void	key_control(t_data *data);
 void	camera_move_up(t_data *data);
 void	camera_move_down(t_data *data);
@@ -35,5 +37,8 @@ void	light_move_down(t_data *data);
 void	light_move_left(t_data *data);
 void	light_move_right(t_data *data);
 void	change_color(t_data *data, char ch);
+void	light_move_front(t_data *data);
+void	light_move_back(t_data *data);
+void	print_info(void);
 
 #endif

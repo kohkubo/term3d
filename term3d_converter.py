@@ -20,7 +20,7 @@ def get_triangle(line, d):
     vertex1 = ','.join((d[i1]['x'], d[i1]['y'], d[i1]['z']))
     vertex2 = ','.join((d[i2]['x'], d[i2]['y'], d[i2]['z']))
     vertex3 = ','.join((d[i3]['x'], d[i3]['y'], d[i3]['z']))
-    triangle.append(' '.join((vertex1, vertex2, vertex3)) + ' ')
+    triangle.append(' '.join((vertex1, vertex2, vertex3)))
     # if a face line has more than 5 params then its a quad not a tris therefor
     # we transform the quad into a tris.. still have to implement other polyons.
     # 4-------3
@@ -34,7 +34,7 @@ def get_triangle(line, d):
         i4 = i[4].split('/')[0]
         vertex4 = ','.join((d[i4]['x'], d[i4]['y'], d[i4]['z']))
         triangle.append('\n')
-        triangle.append(' '.join((vertex1, vertex3, vertex4)) + ' ')
+        triangle.append(' '.join((vertex1, vertex3, vertex4)))
     return triangle
 
 
