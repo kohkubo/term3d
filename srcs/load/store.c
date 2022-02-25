@@ -3,21 +3,22 @@
 double	strtod_wrapper(char *str)
 {
 	char	*endptr;
-	double	d;
+	double	ret;
 
 	if (!str)
-		return (0);
+		exit_error("strtod_wrapper: str is NULL");
 	errno = 0;
-	d = strtod(str, &endptr);
-	if (isnan(d))
-		exit_error("strtod: Nan is invalid.");
-	if (errno == ERANGE)
-		exit_error(NULL);
+	endptr = NULL;
+	ret = strtod(str, &endptr);
+	if (endptr == str)
+		exit_error("strtod: No digits were found.");
 	if (*endptr != '\0')
-		exit_error("strtod: Contains characters that cannot be converted.");
-	if (d == HUGE_VAL)
-		exit_error("strtod: An overflow has occurred.");
-	return (d);
+		exit_error("strtod: Trailing characters after number.");
+	if (errno)
+		exit_error("strtod: Conversion error.");
+	if (isnan(ret) || isinf(ret))
+		exit_error("strtod: NAN or INF.");
+	return (ret);
 }
 
 t_vect	str_to_vector(char *position)

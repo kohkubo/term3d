@@ -102,20 +102,19 @@ TEST(Load, strtod_wrapper) {
   EXPECT_EQ(strtod_wrapper("-0"), 0);
 
   // NG case
-  EXPECT_EQ(strtod_wrapper(""), 0);
-  EXPECT_EQ(strtod_wrapper("inf"), 0);
-  EXPECT_EQ(strtod_wrapper("-inf"), 0);
-  EXPECT_EQ(strtod_wrapper("nan"), 0);
-  EXPECT_EQ(strtod_wrapper("-nan"), 0);
-  EXPECT_EQ(strtod_wrapper("a"), 0);
-  EXPECT_EQ(strtod_wrapper("."), 0);
-  EXPECT_EQ(strtod_wrapper("+"), 0);
-  EXPECT_EQ(strtod_wrapper("-"), 0);
-  EXPECT_EQ(strtod_wrapper("-0.0"), 0);
-  EXPECT_EQ(strtod_wrapper("++0"), 0);
-  EXPECT_EQ(strtod_wrapper("--0"), 0);
-  EXPECT_EQ(strtod_wrapper("+-0"), 0);
-  EXPECT_EQ(strtod_wrapper("-+0"), 0);
-  EXPECT_EQ(strtod_wrapper("\0"), 0);
-  EXPECT_EQ(strtod_wrapper("\n"), 0);
+  EXPECT_DEATH(strtod_wrapper(""), "");
+  EXPECT_DEATH(strtod_wrapper("inf"), "");
+  EXPECT_DEATH(strtod_wrapper("-inf"), "");
+  EXPECT_DEATH(strtod_wrapper("nan"), "");
+  EXPECT_DEATH(strtod_wrapper("-nan"), "");
+  EXPECT_DEATH(strtod_wrapper("a"), "");
+  EXPECT_DEATH(strtod_wrapper("."), "");
+  EXPECT_DEATH(strtod_wrapper("+"), "");
+  EXPECT_DEATH(strtod_wrapper("-"), "");
+  EXPECT_DEATH(strtod_wrapper("++0"), "");
+  EXPECT_DEATH(strtod_wrapper("--0"), "");
+  EXPECT_DEATH(strtod_wrapper("+-0"), "");
+  EXPECT_DEATH(strtod_wrapper("-+0"), "");
+  EXPECT_DEATH(strtod_wrapper("\0"), "");
+  EXPECT_DEATH(strtod_wrapper("\n"), "");
 }
