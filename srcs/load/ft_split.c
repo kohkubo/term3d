@@ -41,7 +41,7 @@ static char	**cut_word(char const *s, char c, char **buf)
 			ptr = s + strlen(s);
 		len = ptr - s;
 		if (len > 0)
-			buf[i] = ft_substr(s, 0, len);
+			buf[i++] = ft_substr(s, 0, len);
 		s += len + (s[len] != '\0');
 	}
 	buf[i] = NULL;
