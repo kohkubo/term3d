@@ -10,6 +10,16 @@ void	*ft_xcalloc(size_t count, size_t size)
 	return (ptr);
 }
 
+void	*ft_xmalloc(size_t size)
+{
+	void	*ptr;
+
+	ptr = malloc(size);
+	if (!ptr)
+		exit_error(NULL);
+	return (ptr);
+}
+
 void	exit_error(char *errmsg)
 {
 	if (errno != 0)
