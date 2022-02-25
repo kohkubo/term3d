@@ -19,6 +19,18 @@ static int	getch(void)
 	return (ch);
 }
 
+static void light_move(t_data *data, int ch)
+{
+	if (ch == 'i')
+		light_move_up(data);
+	else if (ch == 'k')
+		light_move_down(data);
+	else if (ch == 'j')
+		light_move_left(data);
+	else if (ch == 'l')
+		light_move_right(data);
+}
+
 static void	other_control(t_data *data, int ch)
 {
 	if (ch == 'z')
@@ -31,17 +43,19 @@ static void	other_control(t_data *data, int ch)
 		camera_reset(data);
 	else if (ch == 'q')
 		exit(EXIT_SUCCESS);
+	else
+		light_move(data, ch);
 }
 
 static void	rotate_control(t_data *data, int ch)
 {
-	if (ch == 'i')
+	if (ch == KEY_UP)
 		camera_rotate_up(data);
-	else if (ch == 'k')
+	else if (ch == KEY_DOWN)
 		camera_rotate_down(data);
-	else if (ch == 'j')
+	else if (ch == KEY_LEFT)
 		camera_rotate_left(data);
-	else if (ch == 'l')
+	else if (ch == KEY_RIGHT)
 		camera_rotate_right(data);
 	else if (ch == 'm')
 		camera_rotate_speed_up(data);
