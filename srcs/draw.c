@@ -8,6 +8,7 @@ static void	draw_screen(t_data *data)
 	int	y;
 
 	printf(TOP_LEFT);
+	printf("%s", data->config.color);
 	y = data->base_info.height - 1;
 	while (y >= 0)
 	{
@@ -25,7 +26,6 @@ static void	draw_init(t_data *data, t_thread_line **thread_line)
 	*thread_line = (t_thread_line *)ft_xcalloc(\
 	data->base_info.height, sizeof(t_thread_line));
 	printf(DISABLE_CURSOR);
-	printf("%s", data->config.color);
 }
 
 static void	draw_end(t_data *data, t_thread_line *thread_line)
