@@ -10,5 +10,6 @@
 # include <math.h>
 
 void	init_data(t_data *data);
+void	init_base_info(t_data *data);
 
 #endif

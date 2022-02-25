@@ -1,6 +1,6 @@
 #include "ray.h"
 
-t_object	*intersect(t_data *data)
+t_object	*intersect(t_data *data, t_camera *camera)
 {
 	int			i;
 	double		shortest;
@@ -10,16 +10,16 @@ t_object	*intersect(t_data *data)
 	t = DBL_MAX;
 	hit = NULL;
 	i = 0;
-	while (i < data->count)
+	while (i < data->object_count)
 	{
 		shortest = t;
-		t = fmin(t, data->intersect(&data->camera, &data->object[i]));
+		t = fmin(t, data->intersect(camera, &data->object[i]));
 		if (t < shortest)
 			hit = &data->object[i];
 		i++;
 	}
-	data->camera.lookat = vect_add(\
-	data->camera.pos, vect_scalar_mul(&data->camera.ray, t));
+	camera->lookat = vect_add(\
+	camera->pos, vect_scalar_mul(&camera->ray, t));
 	return (hit);
 }
 
