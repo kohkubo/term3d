@@ -5,6 +5,7 @@
 # include "draw.h"
 # include "init.h"
 # include "config.h"
+# include "read_file.h"
 # include <stdio.h>
 # include <stdlib.h>
 

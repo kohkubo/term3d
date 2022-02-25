@@ -5,7 +5,7 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	set_config(&data, ac, av);
-	load_file(&data, av[1]);
+	read_file(&data, av[1]);
 	init_data(&data);
 	draw(&data);
 	return (EXIT_SUCCESS);

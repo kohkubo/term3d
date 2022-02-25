@@ -110,6 +110,7 @@ double			radian(double degree);
 double			degree(double radian);
 
 void			*ft_xcalloc(size_t count, size_t size);
+void			*ft_xmalloc(size_t size);
 void			exit_error(char *errmsg);
 FILE			*fopen_wrapper(char *filepath);
 double			strtod_wrapper(char *str);

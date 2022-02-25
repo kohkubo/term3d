@@ -1,5 +1,5 @@
 NAME		= term3d
-includes	= ./includes
+includes	= ./includes ./libft
 src_dir		= srcs
 obj_dir		= objs
 obj			= $(src:%.c=$(src_dir)/%.o)
@@ -21,8 +21,8 @@ src =\
 	./move/move3.c \
 	./move/move4.c \
 	./move/move5.c \
-	./load/load.c \
-	./load/store.c \
+	./read_file/read_file.c \
+	./read_file/read_file_util.c \
 	./shading.c \
 	./thread.c \
 	./utils.c \
@@ -38,7 +38,8 @@ src =\
 all		: $(NAME)
 
 $(NAME)	: $(obj)
-	$(CC) $(CFLAGS) $(obj) -o $(NAME)
+	$(MAKE) -C ./libft
+	$(CC) $(CFLAGS) $(obj) -o $(NAME) ./libft/libft.a
 
 .PHONY: clean
 clean	:
@@ -68,8 +69,8 @@ srcs_test = \
 	./$(src_dir)/ray/camera.c \
 	./$(src_dir)/ray/intersect.c \
 	./$(src_dir)/debug.c \
-	./$(src_dir)/load/load.c \
-	./$(src_dir)/load/store.c \
+	./$(src_dir)/read_file/read_file.c \
+	./$(src_dir)/read_file/read_file_util.c \
 	./$(src_dir)/move/move1.c \
 	./$(src_dir)/move/move2.c \
 	./$(src_dir)/move/move3.c \
@@ -84,6 +85,7 @@ srcs_test = \
 	./$(src_dir)/vect/vect3.c \
 	./$(src_dir)/vect/vect4.c \
 	./$(src_dir)/vect/vect5.c \
+	./$(src_dir)/../libft/libft.a \
 
 $(gtest):
 	mkdir -p $(dir ../test)
@@ -95,10 +97,11 @@ $(gtest):
 
 .PHONY: test
 test: $(gtest) fclean
+	$(MAKE) -C ./libft
 	clang++ -std=c++11 \
 	$(testdir)/gtest.cpp $(gtestdir)/googletest-release-1.11.0/googletest/src/gtest_main.cc $(gtestdir)/gtest/gtest-all.cc \
 	-g -fsanitize=address -fsanitize=undefined \
-	-I$(gtestdir) -I/usr/local/opt/llvm/include -I$(includes) -lpthread $(srcs_test) -o tester
+	-I$(gtestdir) $(includes:%=-I%) -lpthread $(srcs_test) -o tester
 	./tester
 	rm -rf tester
 	rm -rf tester.dSYM
