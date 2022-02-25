@@ -38,3 +38,16 @@ void	print_all_object_info(t_data *data)
 		c++;
 	}
 }
+
+void	print_array(char **array)
+{
+	size_t	i;
+
+	i = 0;
+	while (array[i])
+	{
+		printf("%s ", array[i]);
+		i++;
+	}
+	printf("\n");
+}
