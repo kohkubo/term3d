@@ -35,7 +35,7 @@ FILE	*fopen_wrapper(char *filepath)
 
 	file = fopen(filepath, "r");
 	if (!file)
-		exit_error("File open failed.");
+		exit_error("fopen: File open failed.");
 	return (file);
 }
 
@@ -49,12 +49,12 @@ double	strtod_wrapper(char *str)
 	errno = 0;
 	d = strtod(str, &endptr);
 	if (isnan(d))
-		exit_error("Nan is invalid.");
+		exit_error("strtod: Nan is invalid.");
 	if (errno == ERANGE)
 		exit_error(NULL);
 	if (*endptr != '\0')
-		exit_error("Contains characters that cannot be converted.");
+		exit_error("strtod: Contains characters that cannot be converted.");
 	if (d == HUGE_VAL)
-		exit_error("An overflow has occurred.");
+		exit_error("strtod: An overflow has occurred.");
 	return (d);
 }
