@@ -19,7 +19,7 @@ static int	getch(void)
 	return (ch);
 }
 
-static void light_move(t_data *data, int ch)
+static void	light_move(t_data *data, int ch)
 {
 	if (ch == 't')
 		light_move_up(data);
