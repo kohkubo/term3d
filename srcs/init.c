@@ -52,13 +52,13 @@ static void	preprocess_triangle(t_data *data)
 void	init_base_info(t_data *data)
 {
 	data->camera.pos = vect_add(\
-	vect_new(0, 0, -150), data->base_info.center_object_pos);
+	vect_new(0, 0, -64), data->center_object_pos);
 	data->base_info.up = vect_new(0, 1, 0);
 	data->base_info.right = vect_new(1, 0, 0);
 	data->base_info.normal = vect_new(0, 0, 1);
 	data->base_info.normal_axis = vect_normalize(vect_new(0, 1, 0));
 	data->base_info.rotate_angle = radian(1);
-	data->light.pos = vect_new(150, 150, -150);
+	data->light.pos = vect_new(8, 64, -8);
 	data->light.intensity = 1.0;
 	data->intersect = intersect_with_triangle_surface;
 }
@@ -67,7 +67,7 @@ void	init_data(t_data *data)
 {
 	preprocess_triangle(data);
 	set_screen_size(data);
-	data->base_info.center_object_pos = center_objects(data);
+	data->center_object_pos = center_objects(data);
 	init_base_info(data);
 	data->canvas = (char *)ft_xcalloc(\
 	data->base_info.width * data->base_info.height, sizeof(char));

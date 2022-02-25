@@ -25,7 +25,6 @@ static void	draw_init(t_data *data, t_thread_line **thread_line)
 	*thread_line = (t_thread_line *)ft_xcalloc(\
 	data->base_info.height, sizeof(t_thread_line));
 	printf(DISABLE_CURSOR);
-	printf(BOLD);
 	printf("%s", data->config.color);
 }
 
