@@ -37,16 +37,6 @@ static void	draw_end(t_data *data, t_thread_line *thread_line)
 	free(data->object);
 }
 
-static void	print_info(void)
-{
-	printf("\
-======================================================\n\
-[Move camera] w s a d    [Rotate camera] i k j l m n  \n\
-[Move light] f t g h y u [Change color] 1 2 3 4 5 6 7 \n\
-[Zoom] z x [Pause] space [Reset] r [Quit] q           \n\
-======================================================\n");
-}
-
 void	draw(t_data *data)
 {
 	t_thread_line	*thread_line;
@@ -59,7 +49,6 @@ void	draw(t_data *data)
 		draw_screen(data);
 		key_control(data);
 		rotate(data);
-		print_info();
 	}
 	draw_end(data, thread_line);
 }

@@ -40,5 +40,6 @@ void	light_move_left(t_data *data);
 void	light_move_right(t_data *data);
 void	light_move_front(t_data *data);
 void	light_move_back(t_data *data);
+void	print_info(void);
 
 #endif

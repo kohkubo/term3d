@@ -47,6 +47,8 @@ static void	other_control(t_data *data, int ch)
 		camera_reset(data);
 	else if (ch == 'q')
 		exit(EXIT_SUCCESS);
+	else if (ch == 'p')
+		print_info();
 	else
 		light_move(data, ch);
 }
