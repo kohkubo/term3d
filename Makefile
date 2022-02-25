@@ -16,6 +16,7 @@ src =\
 	./rotate.c \
 	./ray/camera.c \
 	./ray/intersect.c \
+	./control/getch.c \
 	./control/control1.c \
 	./control/control2.c \
 	./control/control3.c \
