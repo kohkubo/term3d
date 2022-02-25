@@ -53,12 +53,12 @@ void	store_object_count_from_file(t_data *data, FILE *file)
 {
 	char	line[TERM3D_LINE_SIZE + 1];
 
-	data->count = 0;
-	while (data->count < OBJECT_SIZE_MAX && read_line(file, line))
-		data->count++;
+	data->object_count = 0;
+	while (data->object_count < OBJECT_SIZE_MAX && read_line(file, line))
+		data->object_count++;
 	if (!feof(file))
 		exit_error("The number of objects described exceeds INT_MAX");
-	if (data->count == 0)
+	if (data->object_count == 0)
 		exit_error("No objects found.");
 	rewind(file);
 }
@@ -68,9 +68,9 @@ void	store_object_from_file(t_data *data, FILE *file)
 	char	line[TERM3D_LINE_SIZE + 1];
 	int		c;
 
-	data->object = (t_object *)ft_xcalloc(data->count, sizeof(t_object));
+	data->object = (t_object *)ft_xcalloc(data->object_count, sizeof(t_object));
 	c = 0;
-	while (c < data->count && read_line(file, line))
+	while (c < data->object_count && read_line(file, line))
 		store_object_from_line(line, &data->object[c++]);
 	rewind(file);
 }
