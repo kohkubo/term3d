@@ -13,7 +13,12 @@
 
 void	load_file(t_data *data, char *filepath);
 bool	read_line(FILE *file, char *buf);
-void	store_object_count_from_file(char *filepath, t_data *data);
-void	store_object_from_file(char *filepath, t_data *data);
+void	store_object_count_from_file(t_data *data, FILE *file);
+void	store_object_from_file(t_data *data, FILE *file);
+char	**ft_split(char const *s, char c);
+char	**free_string_array(char **buf);
+
+//for gtest
+t_vect	str_to_vector(char *position);
 
 #endif

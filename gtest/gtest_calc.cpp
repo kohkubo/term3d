@@ -2,7 +2,7 @@
 #include "ray.h"
 #include "init.h"
 
-void VECTOR_EQ(t_vect act, t_vect exp) {
+static void VECTOR_EQ(t_vect act, t_vect exp) {
 	EXPECT_EQ(act.x, exp.x);
 	EXPECT_EQ(act.y, exp.y);
 	EXPECT_EQ(act.z, exp.z);
