@@ -29,6 +29,10 @@ static void light_move(t_data *data, int ch)
 		light_move_left(data);
 	else if (ch == 'h')
 		light_move_right(data);
+	else if (ch == 'y')
+		light_move_front(data);
+	else if (ch == 'u')
+		light_move_back(data);
 }
 
 static void	other_control(t_data *data, int ch)
