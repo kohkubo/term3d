@@ -50,11 +50,11 @@ static double	intersect_with_triangle_surface_sub(
 	{
 		vect[TMP] = vect_sub(&camera->pos, pos);
 		val[U] = vect_dot(&vect[P], &vect[TMP]);
-		if ((val[U] >= 0) && (val[U] <= 1 * val[DET]))
+		if ((val[U] >= 0) && (val[U] <= val[DET]))
 		{
 			vect[Q] = vect_cross(vect[TMP], *edge1);
 			val[V] = vect_dot(&vect[Q], &camera->ray);
-			if ((val[V] >= 0) && (val[U] + val[V] <= 1 * val[DET]))
+			if ((val[V] >= 0) && (val[U] + val[V] <= val[DET]))
 			{
 				val[T] = vect_dot(&vect[Q], edge2) / val[DET];
 				if (val[T] >= 0)
