@@ -71,5 +71,5 @@ void	init_data(t_data *data)
 	init_base_info(data);
 	data->canvas = (char *)ft_xcalloc(\
 	data->base_info.width * data->base_info.height, sizeof(char));
-	receiver(end_handler);
+	set_sigaction(SIGINT, end_handler);
 }
