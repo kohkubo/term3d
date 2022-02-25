@@ -1,27 +1,26 @@
 #include "ray.h"
 
-static void	light_rotate(t_camera *camera, t_light *light)
+void	light_rotate(t_data *data)
 {
-	light->pos = vect_rotate(\
-	&light->pos, &camera->normal_axis, camera->rotate_angle);
+	data->light.pos = vect_rotate(&data->light.pos, \
+	&data->base_info.normal_axis, data->base_info.rotate_angle);
 }
 
-static void	camera_rotate(t_camera *camera)
+static void	camera_rotate(t_data *data)
 {
-	camera->pos = vect_rotate(&camera->pos, \
-&camera->normal_axis, camera->rotate_angle);
-	camera->normal = vect_rotate(&camera->normal, \
-&camera->normal_axis, camera->rotate_angle);
-	camera->up = vect_rotate(&camera->up, \
-&camera->normal_axis, camera->rotate_angle);
-	camera->right = vect_rotate(&camera->right, \
-&camera->normal_axis, camera->rotate_angle);
+	data->camera.pos = vect_rotate(&data->camera.pos, \
+&data->base_info.normal_axis, data->base_info.rotate_angle);
+	data->base_info.normal = vect_rotate(&data->base_info.normal, \
+&data->base_info.normal_axis, data->base_info.rotate_angle);
+	data->base_info.up = vect_rotate(&data->base_info.up, \
+&data->base_info.normal_axis, data->base_info.rotate_angle);
+	data->base_info.right = vect_rotate(&data->base_info.right, \
+&data->base_info.normal_axis, data->base_info.rotate_angle);
 }
 
 void	rotate(t_data *data)
 {
-	if (data->camera.rotate_angle == 0)
+	if (data->base_info.rotate_angle == 0)
 		return ;
-	camera_rotate(&data->camera);
-	light_rotate(&data->camera, &data->light);
+	camera_rotate(data);
 }

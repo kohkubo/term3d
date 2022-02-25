@@ -19,32 +19,28 @@ void	exit_error(char *errmsg)
 	exit(EXIT_FAILURE);
 }
 
-FILE	*fopen_wrapper(char *filepath)
+size_t	arraylen(char **array)
 {
-	FILE	*file;
+	size_t	i;
 
-	file = fopen(filepath, "r");
-	if (!file)
-		exit_error("File open failed.");
-	return (file);
+	i = 0;
+	while (array[i])
+		i++;
+	return (i);
 }
 
-double	strtod_wrapper(char *str)
+size_t	char_count(char *str, char c)
 {
-	char	*endptr;
-	double	d;
+	size_t	count;
+	size_t	i;
 
-	if (!str)
-		return (0);
-	errno = 0;
-	d = strtod(str, &endptr);
-	if (isnan(d))
-		exit_error("Nan is invalid.");
-	if (errno == ERANGE)
-		exit_error(NULL);
-	if (*endptr != '\0')
-		exit_error("Contains characters that cannot be converted.");
-	if (d == HUGE_VAL)
-		exit_error("An overflow has occurred.");
-	return (d);
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			count++;
+		i++;
+	}
+	return (count);
 }

@@ -23,6 +23,7 @@ src =\
 	./move/move5.c \
 	./load/load.c \
 	./load/store.c \
+	./load/ft_split.c \
 	./shading.c \
 	./thread.c \
 	./utils.c \
@@ -70,6 +71,7 @@ srcs_test = \
 	./$(src_dir)/debug.c \
 	./$(src_dir)/load/load.c \
 	./$(src_dir)/load/store.c \
+	./$(src_dir)/load/ft_split.c \
 	./$(src_dir)/move/move1.c \
 	./$(src_dir)/move/move2.c \
 	./$(src_dir)/move/move3.c \
@@ -97,7 +99,7 @@ $(gtest):
 test: $(gtest) fclean
 	clang++ -std=c++11 \
 	$(testdir)/gtest.cpp $(gtestdir)/googletest-release-1.11.0/googletest/src/gtest_main.cc $(gtestdir)/gtest/gtest-all.cc \
-	-g -fsanitize=address -fsanitize=undefined \
+	-g -fsanitize=address -fsanitize=undefined -O0 \
 	-I$(gtestdir) -I/usr/local/opt/llvm/include -I$(includes) -lpthread $(srcs_test) -o tester
 	./tester
 	rm -rf tester
