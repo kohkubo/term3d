@@ -43,6 +43,7 @@ ssize_t	getline_wrapper(char **linep, size_t *linecapp, FILE *stream)
 {
 	ssize_t	ret;
 
+	errno = 0;
 	if (!linep || !linecapp || !stream)
 		exit_error("getline: Invalid arguments.");
 	if (!*linep)
@@ -58,6 +59,8 @@ ssize_t	getline_wrapper(char **linep, size_t *linecapp, FILE *stream)
 		*linecapp = 0;
 		if (ferror(stream))
 			exit_error("getline: Error reading file.");
+		if (errno)
+			exit_error("getline: Invalid arguments.");
 		if (feof(stream))
 			return (0);
 	}

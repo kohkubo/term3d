@@ -22,11 +22,9 @@ static void	draw_screen(t_data *data)
 
 static void	draw_init(t_data *data, t_thread_line **thread_line)
 {
-	char	buf[BUFSIZ];
 
 	*thread_line = (t_thread_line *)ft_xcalloc(\
 	data->camera.height, sizeof(t_thread_line));
-	setbuf(stdout, buf);
 	printf(DISABLE_CURSOR);
 	printf(BOLD);
 	printf("%s", data->config.color);
