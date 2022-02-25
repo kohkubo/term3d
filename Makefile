@@ -21,6 +21,7 @@ src =\
 	./move/move3.c \
 	./move/move4.c \
 	./move/move5.c \
+	./move/move6.c \
 	./move/move7.c \
 	./load/load.c \
 	./load/store.c \
@@ -78,6 +79,7 @@ srcs_test = \
 	./$(src_dir)/move/move3.c \
 	./$(src_dir)/move/move4.c \
 	./$(src_dir)/move/move5.c \
+	./$(src_dir)/move/move6.c \
 	./$(src_dir)/move/move7.c \
 	./$(src_dir)/shading.c \
 	./$(src_dir)/thread.c \
