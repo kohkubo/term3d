@@ -36,11 +36,11 @@ t_vect	str_to_vector(char *position)
 	return (vect);
 }
 
-static void	store_object_from_line(char *line, t_object *obj)
+static void	store_object_from_line(char *buf, t_object *obj)
 {
 	char	**position;
 
-	position = ft_split(line, ' ');
+	position = ft_split(buf, ' ');
 	if (arraylen(position) != 3)
 		exit_error("Position are missing.");
 	obj->pos1 = str_to_vector(position[0]);
@@ -51,10 +51,10 @@ static void	store_object_from_line(char *line, t_object *obj)
 
 void	store_object_count_from_file(t_data *data, FILE *file)
 {
-	char	line[TERM3D_LINE_SIZE + 1];
+	char	buf[TERM3D_LINE_SIZE + 1];
 
 	data->object_count = 0;
-	while (data->object_count < OBJECT_SIZE_MAX && read_line(file, line))
+	while (data->object_count < OBJECT_SIZE_MAX && read_line(file, buf))
 		data->object_count++;
 	if (!feof(file))
 		exit_error("The number of objects described exceeds INT_MAX");
@@ -65,12 +65,12 @@ void	store_object_count_from_file(t_data *data, FILE *file)
 
 void	store_object_from_file(t_data *data, FILE *file)
 {
-	char	line[TERM3D_LINE_SIZE + 1];
+	char	buf[TERM3D_LINE_SIZE + 1];
 	int		c;
 
 	data->object = (t_object *)ft_xcalloc(data->object_count, sizeof(t_object));
 	c = 0;
-	while (c < data->object_count && read_line(file, line))
-		store_object_from_line(line, &data->object[c++]);
+	while (c < data->object_count && read_line(file, buf))
+		store_object_from_line(buf, &data->object[c++]);
 	rewind(file);
 }
