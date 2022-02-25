@@ -13,7 +13,7 @@ void str_to_vector_fail_test(char *position) {
   EXPECT_EXIT(str_to_vector(position), testing::ExitedWithCode(1), "");
 }
 
-TEST(Load, str_to_vector) {
+TEST(DISABLED_Load, str_to_vector) {
 
   //区切る要素の数が異なる
   str_to_vector_fail_test("0");
@@ -54,4 +54,31 @@ TEST(Load, str_to_vector) {
 
   str_to_vector_success_test("0,0,0", vect_new(0, 0, 0));
   str_to_vector_success_test("0.0,0.0,0.0", vect_new(0, 0, 0));
+}
+
+TEST(Load, strtod_wrapper)
+{
+  // OK case
+  EXPECT_EQ(strtod_wrapper("0"), 0);
+  EXPECT_EQ(strtod_wrapper("0.0"), 0);
+  EXPECT_EQ(strtod_wrapper("-0.0"), 0);
+  EXPECT_EQ(strtod_wrapper("-0"), 0);
+
+  // NG case
+  EXPECT_EQ(strtod_wrapper(""), 0);
+  EXPECT_EQ(strtod_wrapper("inf"), 0);
+  EXPECT_EQ(strtod_wrapper("-inf"), 0);
+  EXPECT_EQ(strtod_wrapper("nan"), 0);
+  EXPECT_EQ(strtod_wrapper("-nan"), 0);
+  EXPECT_EQ(strtod_wrapper("a"), 0);
+  EXPECT_EQ(strtod_wrapper("."), 0);
+  EXPECT_EQ(strtod_wrapper("+"), 0);
+  EXPECT_EQ(strtod_wrapper("-"), 0);
+  EXPECT_EQ(strtod_wrapper("-0.0"), 0);
+  EXPECT_EQ(strtod_wrapper("++0"), 0);
+  EXPECT_EQ(strtod_wrapper("--0"), 0);
+  EXPECT_EQ(strtod_wrapper("+-0"), 0);
+  EXPECT_EQ(strtod_wrapper("-+0"), 0);
+  EXPECT_EQ(strtod_wrapper("\0"), 0);
+  EXPECT_EQ(strtod_wrapper("\n"), 0);
 }

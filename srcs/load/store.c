@@ -1,6 +1,6 @@
 #include "load.h"
 
-static double	strtod_wrapper(char *str)
+double	strtod_wrapper(char *str)
 {
 	char	*endptr;
 	double	d;

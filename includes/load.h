@@ -17,6 +17,7 @@ void	store_object_count_from_file(t_data *data, FILE *file);
 void	store_object_from_file(t_data *data, FILE *file);
 char	**ft_split(char const *s, char c);
 char	**free_string_array(char **buf);
+double	strtod_wrapper(char *str);
 
 //for gtest
 t_vect	str_to_vector(char *position);
