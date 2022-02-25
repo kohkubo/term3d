@@ -1,4 +1,4 @@
-#include "move.h"
+#include "control.h"
 
 void	camera_rotate_speed_up(t_data *data)
 {
