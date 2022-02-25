@@ -61,7 +61,6 @@ typedef struct base_info
 	t_vect		right;
 	t_vect		normal;
 	t_vect		normal_axis;
-	t_vect		center_object_pos;
 	double		rotate_angle;
 }				t_base_info;
 
@@ -98,6 +97,7 @@ typedef struct s_data
 	int			object_count;
 	double		(*intersect)(t_camera *, t_object *);
 	t_config	config;
+	t_vect		center_object_pos;
 	t_base_info	base_info;
 }				t_data;
 
