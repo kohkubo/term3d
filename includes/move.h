@@ -14,10 +14,6 @@
 # define MOVE_SCALE 5
 # define MOVE_DISTANCE 0.1
 # define ROTATE_SPEED 0.01
-# define KEY_UP 126
-# define KEY_DOWN 125
-# define KEY_LEFT 123
-# define KEY_RIGHT 124
 
 void	key_control(t_data *data);
 void	camera_move_up(t_data *data);
