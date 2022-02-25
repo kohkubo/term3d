@@ -8,12 +8,12 @@ static void	draw_screen(t_data *data)
 	int	y;
 
 	printf(TOP_LEFT);
-	y = data->camera.height - 1;
+	y = data->base_info.height - 1;
 	while (y >= 0)
 	{
 		x = 0;
-		while (x < data->camera.width)
-			printf("%c ", data->canvas[y * data->camera.width + x++]);
+		while (x < data->base_info.width)
+			printf("%c ", data->canvas[y * data->base_info.width + x++]);
 		printf("\n");
 		y--;
 	}
@@ -23,7 +23,7 @@ static void	draw_screen(t_data *data)
 static void	draw_init(t_data *data, t_thread_line **thread_line)
 {
 	*thread_line = (t_thread_line *)ft_xcalloc(\
-	data->camera.height, sizeof(t_thread_line));
+	data->base_info.height, sizeof(t_thread_line));
 	printf(DISABLE_CURSOR);
 	printf(BOLD);
 	printf("%s", data->config.color);

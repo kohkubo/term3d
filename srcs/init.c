@@ -26,8 +26,8 @@ static void	set_screen_size(t_data *data)
 	if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws) != -1)
 	{
 		tmp = fmin(ws.ws_col, ws.ws_row) * 0.8;
-		data->camera.width = tmp;
-		data->camera.height = tmp;
+		data->base_info.width = tmp;
+		data->base_info.height = tmp;
 	}
 }
 
@@ -53,18 +53,18 @@ void	init_data(t_data *data)
 {
 	preprocess_triangle(data);
 	set_screen_size(data);
-	data->camera.center_object_pos = center_objects(data);
+	data->base_info.center_object_pos = center_objects(data);
 	data->camera.pos = vect_add(\
-	vect_new(0, 0, -150), data->camera.center_object_pos);
-	data->camera.up = vect_new(0, 1, 0);
-	data->camera.right = vect_new(1, 0, 0);
-	data->camera.normal = vect_new(0, 0, 1);
-	data->camera.normal_axis = vect_normalize(vect_new(0, 1, 0));
-	data->camera.rotate_angle = radian(1);
+	vect_new(0, 0, -150), data->base_info.center_object_pos);
+	data->base_info.up = vect_new(0, 1, 0);
+	data->base_info.right = vect_new(1, 0, 0);
+	data->base_info.normal = vect_new(0, 0, 1);
+	data->base_info.normal_axis = vect_normalize(vect_new(0, 1, 0));
+	data->base_info.rotate_angle = radian(1);
 	data->light.pos = vect_new(150, 150, -150);
 	data->light.intensity = 1.0;
 	data->intersect = intersect_with_triangle_surface;
 	data->canvas = (char *)ft_xcalloc(\
-	data->camera.width * data->camera.height, sizeof(char));
+	data->base_info.width * data->base_info.height, sizeof(char));
 	receiver(end_handler);
 }

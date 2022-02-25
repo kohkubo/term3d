@@ -7,7 +7,7 @@ void	print_triangle_info(t_data *data)
 	printf("camera pos    ");
 	vect_print(data->camera.pos);
 	printf("camera normal ");
-	vect_print(data->camera.normal);
+	vect_print(data->base_info.normal);
 	camera_to_lookat = vect_distance(data->camera.pos, data->camera.lookat);
 	printf("camera_to_lookat: %f\n", camera_to_lookat);
 	printf("triangle a ");
