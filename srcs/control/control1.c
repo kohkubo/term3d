@@ -13,7 +13,7 @@ static void	control_other(t_data *data, int ch)
 	else if (ch == 'q')
 		exit(EXIT_SUCCESS);
 	else if (ch == 'p')
-		print_info();
+		print_info(data);
 }
 
 static bool	control_color(t_data *data, char ch)
@@ -34,6 +34,7 @@ static bool	control_color(t_data *data, char ch)
 		data->config.color = WHITE;
 	else
 		return (false);
+	printf("%s", data->config.color);
 	return (true);
 }
 

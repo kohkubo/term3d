@@ -10,18 +10,19 @@ void	camera_reset(t_data *data)
 	init_base_info(data);
 }
 
-void	print_info(void)
+void	print_info(t_data *data)
 {
 	static bool	flg = true;
 
 	if (flg)
 	{
-		printf("\n\
+		printf(WHITE"\n\
 ======================================================\n\
 [Move camera] w s a d    [Rotate camera] i k j l m n  \n\
 [Move light] f t g h y u [Change color] 1 2 3 4 5 6 7 \n\
 [Zoom] z x [Pause] space [Reset] r [Quit] q           \n\
 ======================================================\n");
+		printf("%s", data->config.color);
 		flg = false;
 	}
 	else

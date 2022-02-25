@@ -8,7 +8,6 @@ static void	draw_screen(t_data *data)
 	int	y;
 
 	printf(TOP_LEFT);
-	printf("%s", data->config.color);
 	y = data->base_info.height - 1;
 	while (y >= 0)
 	{
