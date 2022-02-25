@@ -109,8 +109,8 @@ double			degree(double radian);
 
 void			*ft_xcalloc(size_t count, size_t size);
 void			exit_error(char *errmsg);
-FILE			*fopen_wrapper(char *filepath);
-double			strtod_wrapper(char *str);
+size_t			char_count(char *str, char c);
+size_t			arraylen(char **array);
 
 void			end_handler(int sig, siginfo_t *info, void *ucontext);
 void			receiver(void handler(int, siginfo_t *, void *));

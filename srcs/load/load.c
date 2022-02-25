@@ -1,6 +1,23 @@
 #include "load.h"
 
-static void	is_valid_file(char *filepath)
+/*
+Valid Format
+
+[] is 3dvector like [x,y,z]
+
+.tri
+[pos1] [pos2] [pos3]
+
+How to implement?
+
+1. check file extension.
+2. read one line.
+3. parse line with spaces.
+4. parse vector with comma.
+5. store vector x,y,z data into t_data.object
+*/
+
+static void	valid_file_check(char *filepath)
 {
 	struct stat	st;
 	char		*ext;
@@ -34,29 +51,23 @@ bool	read_line(FILE *file, char *buf)
 	return (true);
 }
 
-/*
-Valid Format
+static FILE	*fopen_wrapper(char *filepath)
+{
+	FILE	*file;
 
-[] is 3dvector like [x,y,z]
+	file = fopen(filepath, "r");
+	if (!file)
+		exit_error("fopen: File open failed.");
+	return (file);
+}
 
-.tri
-[pos1] [pos2] [pos3]
-
-.3d (and any other point cloud data.)
-[pos1]
-
-
-How to implement?
-
-1. check file extension.
-2. read one line.
-3. parse line with spaces.
-4. parse vector with comma.
-5. store vector x,y,z data into t_data.object
-*/
 void	load_file(t_data *data, char *filepath)
 {
-	is_valid_file(filepath);
-	store_object_count_from_file(filepath, data);
-	store_object_from_file(filepath, data);
+	FILE	*file;
+
+	valid_file_check(filepath);
+	file = fopen_wrapper(filepath);
+	store_object_count_from_file(data, file);
+	store_object_from_file(data, file);
+	fclose(file);
 }

@@ -1,74 +1,76 @@
 #include "load.h"
 
-static void	store_split_three_or_less(char *str, char *sep, char **token)
+double	strtod_wrapper(char *str)
 {
-	char	*leftover;
+	char	*endptr;
+	double	ret;
 
-	if (!str || !sep || !token)
-		return ;
-	token[0] = strtok(str, sep);
-	token[1] = strtok(NULL, sep);
-	token[2] = strtok(NULL, sep);
-	token[3] = NULL;
-	leftover = strtok(NULL, sep);
-	if (leftover)
-		exit_error("There are four or more strings after the split.");
+	if (!str)
+		exit_error("strtod_wrapper: str is NULL");
+	errno = 0;
+	endptr = NULL;
+	ret = strtod(str, &endptr);
+	if (endptr == str)
+		exit_error("strtod: No digits were found.");
+	if (*endptr != '\0')
+		exit_error("strtod: Trailing characters after number.");
+	if (errno)
+		exit_error("strtod: Conversion error.");
+	if (isnan(ret) || isinf(ret))
+		exit_error("strtod: NAN or INF.");
+	return (ret);
 }
 
-static t_vect	str_to_vector(char *position)
+t_vect	str_to_vector(char *position)
 {
-	char	*vec[4];
-	double	x;
-	double	y;
-	double	z;
+	t_vect	vect;
+	char	**split;
 
-	bzero(vec, 3);
-	store_split_three_or_less(position, ",", vec);
-	if (!vec[0] || !vec[1] || !vec[2])
-		exit_error("Vector elements are missing.");
-	x = strtod_wrapper(vec[0]);
-	y = strtod_wrapper(vec[1]);
-	z = strtod_wrapper(vec[2]);
-	return (vect_new(x, y, z));
+	if (char_count(position, ',') != 2)
+		exit_error("Invalid vector format.");
+	split = ft_split(position, ',');
+	vect.x = strtod_wrapper(split[0]);
+	vect.y = strtod_wrapper(split[1]);
+	vect.z = strtod_wrapper(split[2]);
+	free_string_array(split);
+	return (vect);
 }
 
-static void	store_object_from_line(char *line, t_object *obj)
+static void	store_object_from_line(char *buf, t_object *obj)
 {
-	char	*position[4];
+	char	**position;
 
-	bzero(position, 4);
-	store_split_three_or_less(line, " ", position);
+	position = ft_split(buf, ' ');
+	if (arraylen(position) != 3)
+		exit_error("Position are missing.");
 	obj->pos1 = str_to_vector(position[0]);
 	obj->pos2 = str_to_vector(position[1]);
 	obj->pos3 = str_to_vector(position[2]);
+	free_string_array(position);
 }
 
-void	store_object_count_from_file(char *filepath, t_data *data)
+void	store_object_count_from_file(t_data *data, FILE *file)
 {
-	FILE	*file;
 	char	buf[TERM3D_LINE_SIZE + 1];
 
-	file = fopen_wrapper(filepath);
 	data->object_count = 0;
 	while (data->object_count < OBJECT_SIZE_MAX && read_line(file, buf))
 		data->object_count++;
 	if (!feof(file))
 		exit_error("The number of objects described exceeds INT_MAX");
 	if (data->object_count == 0)
-		exit_error("File is Only Empty Line.");
-	fclose(file);
+		exit_error("No objects found.");
+	rewind(file);
 }
 
-void	store_object_from_file(char *filepath, t_data *data)
+void	store_object_from_file(t_data *data, FILE *file)
 {
-	FILE	*file;
 	char	buf[TERM3D_LINE_SIZE + 1];
 	int		c;
 
-	file = fopen_wrapper(filepath);
 	data->object = (t_object *)ft_xcalloc(data->object_count, sizeof(t_object));
 	c = 0;
 	while (c < data->object_count && read_line(file, buf))
 		store_object_from_line(buf, &data->object[c++]);
-	fclose(file);
+	rewind(file);
 }

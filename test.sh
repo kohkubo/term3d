@@ -25,6 +25,9 @@ make && make clean
 ./term3d testfiles/less_double_min.tri
 ./term3d testfiles/vector_wrong_separate_char.tri
 ./term3d testfiles/vector_no_separate.tri
+./term3d testfiles/consecutive_comma.tri
+./term3d testfiles/vector_elem_end_comma.tri
+./term3d testfiles/vector_elem_head_comma.tri
 ./term3d testfiles/vector_one.tri
 ./term3d testfiles/vector_two.tri
 ./term3d testfiles/vector_four.tri
