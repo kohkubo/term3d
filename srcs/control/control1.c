@@ -1,5 +1,7 @@
 #include "control.h"
 
+extern bool	g_draw_flg;
+
 static void	control_other(t_data *data, int ch)
 {
 	if (ch == 'z')
@@ -11,7 +13,7 @@ static void	control_other(t_data *data, int ch)
 	else if (ch == 'r')
 		camera_reset(data);
 	else if (ch == 'q')
-		exit(EXIT_SUCCESS);
+		g_draw_flg = false;
 	else if (ch == 'p')
 		print_info(data);
 }

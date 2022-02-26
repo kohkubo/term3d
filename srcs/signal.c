@@ -3,7 +3,7 @@
 #include <sys/types.h>
 #include <strings.h>
 
-bool	g_draw_flg = true;
+extern bool	g_draw_flg;
 
 void	end_handler(int sig, siginfo_t *info, void *ucontext)
 {

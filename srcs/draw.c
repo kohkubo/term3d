@@ -1,6 +1,6 @@
 #include "draw.h"
 
-extern bool	g_draw_flg;
+bool	g_draw_flg = true;
 
 static void	draw_screen(t_data *data)
 {
