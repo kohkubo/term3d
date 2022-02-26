@@ -52,7 +52,7 @@ static void	preprocess_triangle(t_data *data)
 void	init_base_info(t_data *data)
 {
 	data->camera.pos = vect_add(\
-	vect_new(0, 0, -64), data->center_object_pos);
+	vect_new(0, 0, -32), data->center_object_pos);
 	data->base_info.up = vect_new(0, 1, 0);
 	data->base_info.right = vect_new(1, 0, 0);
 	data->base_info.normal = vect_new(0, 0, 1);

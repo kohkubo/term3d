@@ -23,6 +23,7 @@ src =\
 	./control/control4.c \
 	./control/control5.c \
 	./control/control6.c \
+	./torus_data.c \
 	./load/load.c \
 	./load/store.c \
 	./load/ft_split.c \
