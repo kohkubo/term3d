@@ -6,8 +6,7 @@ static void	thread_draw_point(t_thread_line *line, int x, int y)
 	double		radiance;
 	char		c;
 
-	line->camera.ray = \
-	camera_ray(&line->camera.pos, &line->data->base_info, x, y);
+	set_camera_ray(&line->camera, &line->data->base_info, x, y);
 	hit = intersect(line->data, &line->camera);
 	if (hit == NULL)
 		line->data->canvas[x + y * line->data->base_info.width] = ' ';
