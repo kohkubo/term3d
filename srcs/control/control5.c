@@ -27,12 +27,7 @@ void	print_info(t_data *data)
 	}
 	else
 	{
-		printf("\n\
-                                                      \n\
-                                                      \n\
-                                                      \n\
-                                                      \n\
-                                                      \n");
+		printf(CLEAR_SCREEN);
 		flg = true;
 	}
 }
