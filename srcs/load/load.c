@@ -25,14 +25,14 @@ static void	valid_file_check(char *filepath)
 	if (!filepath)
 		exit_error("Filepath is NULL");
 	if (stat(filepath, &st) != 0)
-		exit_error("File does not exist.");
+		exit_error("File does not exist");
 	if (!S_ISREG(st.st_mode))
-		exit_error("It's not a file.");
+		exit_error("It's not a file");
 	if (st.st_size == 0)
-		exit_error("File is empty.");
+		exit_error("File is empty");
 	ext = strrchr(filepath, '.');
 	if (!ext || strncmp(ext, ".tri", 5))
-		exit_error("Invalid file extension. valid : .tri .");
+		exit_error("Invalid file extension. valid : .tri");
 }
 
 // No distinction is made
@@ -41,13 +41,13 @@ bool	read_line(FILE *file, char *buf)
 {
 	bzero(buf, TERM3D_LINE_SIZE + 1);
 	if (fscanf(file, TERM3D_READ_FORMAT, buf) == EOF && !feof(file))
-		exit_error("Failed to read file.");
+		exit_error("Failed to read file");
 	if (buf[TERM3D_LINE_SIZE - 1] != '\0')
-		exit_error("Line is too long.");
+		exit_error("Line is too long");
 	if (feof(file) && buf[0] == '\0')
 		return (false);
 	if (ferror(file))
-		exit_error("ferror() has occurred.");
+		exit_error("ferror() has occurred");
 	return (true);
 }
 
@@ -57,7 +57,7 @@ static FILE	*fopen_wrapper(char *filepath)
 
 	file = fopen(filepath, "r");
 	if (!file)
-		exit_error("fopen: File open failed.");
+		exit_error("fopen: File open failed");
 	return (file);
 }
 

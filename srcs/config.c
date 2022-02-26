@@ -8,5 +8,7 @@ void	set_config(t_data *data, int ac, char **av)
 		exit_error("Usage: ./term3d <filename> [charset]");
 	if (ac >= 3)
 		data->config.charset = av[2];
-	data->config.charset_size = fmax(strlen(data->config.charset) - 1, 0);
+	if (strlen(data->config.charset) == 0)
+		exit_error("Error: charset is empty");
+	data->config.charset_size = strlen(data->config.charset);
 }
