@@ -66,6 +66,8 @@ void	init_base_info(t_data *data)
 	data->light.pos = vect_new(8, 64, -8);
 	data->light.intensity = 1.0;
 	data->intersect = intersect_with_triangle_surface;
+	if (data->object_count < 100)
+		data->base_info.rotate_angle = radian(0.1);
 }
 
 void	init_data(t_data *data)
