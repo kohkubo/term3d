@@ -1,6 +1,6 @@
 #include "draw.h"
 
-extern bool	g_draw_flg;
+volatile sig_atomic_t	g_draw_flg = 1;
 
 static void	draw_screen(t_data *data)
 {
