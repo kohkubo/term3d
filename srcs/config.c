@@ -10,5 +10,5 @@ void	set_config(t_data *data, int ac, char **av)
 		data->config.charset = av[2];
 	if (strlen(data->config.charset) == 0)
 		exit_error("Error: charset is empty");
-	data->config.charset_size = strlen(data->config.charset);
+	data->config.charset_size = strlen(data->config.charset) - 1;
 }
