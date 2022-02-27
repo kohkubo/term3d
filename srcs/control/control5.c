@@ -3,6 +3,7 @@
 void	camera_stop(t_data *data)
 {
 	static double	old_angle = 0;
+
 	if (old_angle == 0)
 	{
 		old_angle = data->base_info.rotate_angle;
