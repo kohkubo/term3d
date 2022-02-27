@@ -10,6 +10,7 @@
 # include <limits.h>
 # include <pthread.h>
 # define FOCUS_DISTANCE 8
+# define SCREEN_SIZE_RATIO 0.8
 # define O ". "
 # define X "  "
 /*
