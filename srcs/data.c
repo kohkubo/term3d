@@ -7,12 +7,12 @@ bool	is_equal(double a, double b)
 	return (false);
 }
 
-double	radian(double degree)
+double	degree_to_radian(double degree)
 {
 	return (degree * M_PI / 180.0);
 }
 
-double	degree(double radian)
+double	radian_to_degree(double radian)
 {
 	return (radian * 180.0 / M_PI);
 }
