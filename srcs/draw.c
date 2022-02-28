@@ -1,6 +1,6 @@
 #include "draw.h"
 
-extern bool	g_draw_flg;
+volatile sig_atomic_t	g_draw_flg = 1;
 
 static void	draw_screen(t_data *data)
 {
@@ -25,6 +25,7 @@ static void	draw_init(t_data *data, t_thread_line **thread_line)
 	*thread_line = (t_thread_line *)ft_xcalloc(\
 	data->base_info.height, sizeof(t_thread_line));
 	printf(DISABLE_CURSOR);
+	printf(CLEAR_SCREEN);
 }
 
 static void	draw_end(t_data *data, t_thread_line *thread_line)
