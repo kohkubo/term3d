@@ -18,13 +18,13 @@ TEST(Vect, vect_distance)
 
 	vect1 = vect_new(1, 2, 3);
 	vect2 = vect_new(1, 2, 3);
-	EXPECT_EQ(0, vect_distance(vect1, vect2));
+	EXPECT_EQ(0, vect_distance(&vect1, &vect2));
 
 	// nan
 	vect1 = vect_new(1, 2, 3);
 	vect2 = vect_new(1, 2, 3);
 	vect2.x = NAN;
-	EXPECT_EQ(0, vect_distance(vect1, vect2));
+	EXPECT_EQ(0, vect_distance(&vect1, &vect2));
 }
 
 TEST(Vect, vect_angle_radian)
