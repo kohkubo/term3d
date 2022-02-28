@@ -218,13 +218,13 @@ TEST(DISABLED_Data, less) {
   EXPECT_EQ(less(a, b), false);
 }
 
-TEST(Data, radian)
+TEST(Data, degree_to_radian)
 {
-  EXPECT_EQ(radian(0.0), 0.0);
-  EXPECT_EQ(radian(90.0), M_PI_2);
-  EXPECT_EQ(radian(180.0), M_PI);
-  EXPECT_EQ(radian(270.0), M_PI_2 * 3.0);
-  EXPECT_EQ(radian(360.0), M_PI * 2.0);
+  EXPECT_EQ(degree_to_radian(0.0), 0.0);
+  EXPECT_EQ(degree_to_radian(90.0), M_PI_2);
+  EXPECT_EQ(degree_to_radian(180.0), M_PI);
+  EXPECT_EQ(degree_to_radian(270.0), M_PI_2 * 3.0);
+  EXPECT_EQ(degree_to_radian(360.0), M_PI * 2.0);
 }
 
 TEST(Data, less_equal)

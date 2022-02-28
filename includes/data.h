@@ -104,7 +104,7 @@ typedef struct s_data
 bool			is_equal(double a, double b);
 bool			less(double a, double b);
 bool			less_equal(double a, double b);
-double			radian(double degree);
+double			degree_to_radian(double degree);
 double			degree(double radian);
 
 void			*ft_xcalloc(size_t count, size_t size);

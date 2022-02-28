@@ -2,7 +2,8 @@
 
 void	camera_stop(t_data *data)
 {
-	data->base_info.rotate_angle = radian(!data->base_info.rotate_angle);
+	data->base_info.rotate_angle = \
+	degree_to_radian(!data->base_info.rotate_angle);
 }
 
 void	camera_reset(t_data *data)
