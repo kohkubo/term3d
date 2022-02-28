@@ -3,14 +3,14 @@
 #include <sys/types.h>
 #include <strings.h>
 
-bool	g_draw_flg = true;
+extern volatile sig_atomic_t	g_draw_flg;
 
 void	end_handler(int sig, siginfo_t *info, void *ucontext)
 {
 	(void)ucontext;
 	(void)info;
 	(void)sig;
-	g_draw_flg = false;
+	g_draw_flg = 0;
 }
 
 void	set_sigaction(int sig, void handler(int, siginfo_t *, void *))

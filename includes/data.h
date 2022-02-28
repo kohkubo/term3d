@@ -19,6 +19,8 @@ TOP_LEFTは標準出力の位置を固定するためのものです
 # define TOP_LEFT "\x1b[H"
 # define DISABLE_CURSOR "\033[?25l"
 # define ENABLE_CURSOR "\033[?25h"
+# define CLEAR_SCREEN "\x1b[2J"
+
 /*
 最大制度 DBL_EPSILON
 kawadaさんがEPSILONは 0.000001 くらいがいいって言ってた
