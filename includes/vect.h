@@ -18,7 +18,7 @@ double	vect_dot(const t_vect *vect1, const t_vect *vect2);
 t_vect	vect_cross(const t_vect vect1, const t_vect vect2);
 double	vect_len(const t_vect *vect);
 t_vect	vect_normalize(const t_vect vect);
-double	vect_distance(t_vect vect1, const t_vect vect2);
+double	vect_distance(const t_vect *vect1, const t_vect *vect2);
 t_vect	vect_inv(const t_vect *vect);
 double	vect_det(const t_vect *vect1, const t_vect *vect2, const t_vect *vect3);
 t_vect	vect_rotate(const t_vect *vect, const t_vect *axis, double radian);
