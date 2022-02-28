@@ -19,7 +19,7 @@ t_object	*intersect(t_data *data, t_camera *camera)
 		i++;
 	}
 	camera->lookat = vect_add(\
-	camera->pos, vect_scalar_mul(&camera->ray, t));
+	camera->pos, vect_scalar_mul(&camera->ray_dir_normal, t));
 	return (hit);
 }
 
@@ -44,7 +44,7 @@ static double	intersect_with_triangle_surface_sub(
 	double	val[4];
 	t_vect	vect[3];
 
-	vect[P] = vect_cross(camera->ray, *edge2);
+	vect[P] = vect_cross(camera->ray_dir_normal, *edge2);
 	val[DET] = vect_dot(&vect[P], edge1);
 	if (val[DET] > 0)
 	{
@@ -53,7 +53,7 @@ static double	intersect_with_triangle_surface_sub(
 		if ((val[U] >= 0) && (val[U] <= val[DET]))
 		{
 			vect[Q] = vect_cross(vect[TMP], *edge1);
-			val[V] = vect_dot(&vect[Q], &camera->ray);
+			val[V] = vect_dot(&vect[Q], &camera->ray_dir_normal);
 			if ((val[V] >= 0) && (val[U] + val[V] <= val[DET]))
 			{
 				val[T] = vect_dot(&vect[Q], edge2) / val[DET];
