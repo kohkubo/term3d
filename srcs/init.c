@@ -31,7 +31,7 @@ static void	set_screen_size(t_data *data)
 
 	if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws) != -1)
 	{
-		tmp = fmin(ws.ws_col, ws.ws_row) * 0.8;
+		tmp = fmin(ws.ws_col, ws.ws_row) * SCREEN_SIZE_RATIO;
 		data->base_info.width = tmp;
 		data->base_info.height = tmp;
 	}
