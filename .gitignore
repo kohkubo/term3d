@@ -11,4 +11,6 @@
 !*.tri
 !*.py
 !Makefile
+!gbench/libbenchmark_main.a
+!gbench/libbenchmark.a
 test
