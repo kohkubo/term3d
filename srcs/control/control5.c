@@ -2,7 +2,18 @@
 
 void	camera_stop(t_data *data)
 {
-	data->base_info.rotate_angle = radian(!data->base_info.rotate_angle);
+	static double	old_angle = 0;
+
+	if (old_angle == 0)
+	{
+		old_angle = data->base_info.rotate_angle;
+		data->base_info.rotate_angle = 0;
+	}
+	else
+	{
+		data->base_info.rotate_angle = old_angle;
+		old_angle = 0;
+	}
 }
 
 void	camera_reset(t_data *data)
@@ -27,12 +38,7 @@ void	print_info(t_data *data)
 	}
 	else
 	{
-		printf("\n\
-                                                      \n\
-                                                      \n\
-                                                      \n\
-                                                      \n\
-                                                      \n");
+		printf(CLEAR_SCREEN);
 		flg = true;
 	}
 }

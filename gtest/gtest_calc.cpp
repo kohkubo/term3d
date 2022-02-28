@@ -22,6 +22,6 @@ TEST(Calc, camera_ray)
 	data.base_info.rotate_angle = radian(1);
 	data.base_info.height = 100;
 	data.base_info.width = 100;
-	t_vect ray = camera_ray(&data.camera.pos, &data.base_info, x, y);
-	VECTOR_EQ(ray, vect_new(0, 0, 1));
+	set_camera_ray(&data.camera, &data.base_info, x, y);
+	VECTOR_EQ(data.camera.ray_dir_normal, vect_new(0, 0, 1));
 }
