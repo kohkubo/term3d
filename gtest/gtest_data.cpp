@@ -4,6 +4,7 @@
 
 #define SWAP(a, b) { double tmp = a; a = b; b = tmp; }
 
+/*
 // doubleの比較
 TEST(DISABLED_Data, is_equal) {
   double a = 1.0;
@@ -217,16 +218,19 @@ TEST(DISABLED_Data, less) {
   SWAP(a, b);
   EXPECT_EQ(less(a, b), false);
 }
+*/
 
-TEST(Data, radian)
+TEST(Data, degree_to_radian)
 {
-  EXPECT_EQ(radian(0.0), 0.0);
-  EXPECT_EQ(radian(90.0), M_PI_2);
-  EXPECT_EQ(radian(180.0), M_PI);
-  EXPECT_EQ(radian(270.0), M_PI_2 * 3.0);
-  EXPECT_EQ(radian(360.0), M_PI * 2.0);
+  EXPECT_EQ(degree_to_radian(0.0), 0.0);
+  EXPECT_EQ(degree_to_radian(90.0), M_PI_2);
+  EXPECT_EQ(degree_to_radian(180.0), M_PI);
+  EXPECT_EQ(degree_to_radian(270.0), M_PI_2 * 3.0);
+  EXPECT_EQ(degree_to_radian(360.0), M_PI * 2.0);
 }
 
+
+/*
 TEST(Data, less_equal)
 {
   EXPECT_EQ(less_equal(0.0, 0.0), true);
@@ -242,3 +246,4 @@ TEST(Data, less_equal)
   EXPECT_EQ(less_equal(0.00002, 0.00001), false);
   EXPECT_EQ(less_equal(0.000001, 0.000001), true);
 }
+*/
