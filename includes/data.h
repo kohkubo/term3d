@@ -19,6 +19,7 @@ TOP_LEFTは標準出力の位置を固定するためのものです
 # define TOP_LEFT "\x1b[H"
 # define DISABLE_CURSOR "\033[?25l"
 # define ENABLE_CURSOR "\033[?25h"
+# define CLEAR_SCREEN "\x1b[2J"
 # define EPSILON 0.000001
 # define OBJECT_SIZE_MAX INT_MAX
 
