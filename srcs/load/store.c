@@ -11,13 +11,13 @@ double	strtod_wrapper(char *str)
 	endptr = NULL;
 	ret = strtod(str, &endptr);
 	if (endptr == str)
-		exit_error("strtod: No digits were found.");
+		exit_error("strtod: No digits were found");
 	if (*endptr != '\0')
-		exit_error("strtod: Trailing characters after number.");
+		exit_error("strtod: Trailing characters after number");
 	if (errno)
-		exit_error("strtod: Conversion error.");
+		exit_error("strtod: Conversion error");
 	if (isnan(ret) || isinf(ret))
-		exit_error("strtod: NAN or INF.");
+		exit_error("strtod: NAN or INF");
 	return (ret);
 }
 
@@ -27,7 +27,7 @@ t_vect	str_to_vector(char *position)
 	char	**split;
 
 	if (char_count(position, ',') != 2)
-		exit_error("Invalid vector format.");
+		exit_error("Invalid vector format");
 	split = ft_split(position, ',');
 	vect.x = strtod_wrapper(split[0]);
 	vect.y = strtod_wrapper(split[1]);
@@ -42,7 +42,7 @@ static void	store_object_from_line(char *buf, t_object *obj)
 
 	position = ft_split(buf, ' ');
 	if (arraylen(position) != 3)
-		exit_error("Position are missing.");
+		exit_error("Position are missing");
 	obj->pos1 = str_to_vector(position[0]);
 	obj->pos2 = str_to_vector(position[1]);
 	obj->pos3 = str_to_vector(position[2]);
@@ -59,7 +59,7 @@ void	store_object_count_from_file(t_data *data, FILE *file)
 	if (!feof(file))
 		exit_error("The number of objects described exceeds INT_MAX");
 	if (data->object_count == 0)
-		exit_error("No objects found.");
+		exit_error("No objects found");
 	rewind(file);
 }
 

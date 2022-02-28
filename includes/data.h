@@ -20,10 +20,7 @@ TOP_LEFTは標準出力の位置を固定するためのものです
 # define TOP_LEFT "\x1b[H"
 # define DISABLE_CURSOR "\033[?25l"
 # define ENABLE_CURSOR "\033[?25h"
-/*
-最大制度 DBL_EPSILON
-kawadaさんがEPSILONは 0.000001 くらいがいいって言ってた
-*/
+# define CLEAR_SCREEN "\x1b[2J"
 # define EPSILON 0.000001
 # define OBJECT_SIZE_MAX INT_MAX
 
@@ -103,8 +100,6 @@ typedef struct s_data
 }				t_data;
 
 bool			is_equal(double a, double b);
-bool			less(double a, double b);
-bool			less_equal(double a, double b);
 double			radian(double degree);
 double			degree(double radian);
 
