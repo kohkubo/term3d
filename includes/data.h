@@ -10,6 +10,7 @@
 # include <limits.h>
 # include <pthread.h>
 # define FOCUS_DISTANCE 8
+# define SCREEN_SIZE_RATIO 0.8
 # define O ". "
 # define X "  "
 /*
@@ -20,11 +21,6 @@ TOP_LEFTは標準出力の位置を固定するためのものです
 # define DISABLE_CURSOR "\033[?25l"
 # define ENABLE_CURSOR "\033[?25h"
 # define CLEAR_SCREEN "\x1b[2J"
-
-/*
-最大制度 DBL_EPSILON
-kawadaさんがEPSILONは 0.000001 くらいがいいって言ってた
-*/
 # define EPSILON 0.000001
 # define OBJECT_SIZE_MAX INT_MAX
 
@@ -52,7 +48,7 @@ typedef struct s_camera
 {
 	t_vect		pos;
 	t_vect		lookat;
-	t_vect		ray;
+	t_vect		ray_dir_normal;
 }				t_camera;
 
 typedef struct base_info
@@ -104,8 +100,6 @@ typedef struct s_data
 }				t_data;
 
 bool			is_equal(double a, double b);
-bool			less(double a, double b);
-bool			less_equal(double a, double b);
 double			radian(double degree);
 double			degree(double radian);
 

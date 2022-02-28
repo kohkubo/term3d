@@ -2,7 +2,8 @@
 
 void	set_config(t_data *data, int ac, char **av)
 {
-	data->config.color = WHITE;
+	printf(BLUE);
+	data->config.color = BLUE;
 	data->config.charset = "-~=cxFX8NNNNN";
 	if (ac <= 1 || ac >= 4)
 		exit_error("Usage: ./term3d <filename> [charset]");
