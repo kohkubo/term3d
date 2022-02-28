@@ -103,7 +103,6 @@ bool			is_equal(double a, double b);
 double			degree_to_radian(double degree);
 double			radian_to_degree(double radian);
 
-
 void			*ft_xcalloc(size_t count, size_t size);
 void			exit_error(char *errmsg);
 size_t			char_count(char *str, char c);
