@@ -29,10 +29,10 @@ t_vect	vect_normalize(const t_vect vect)
 	return (vect_scalar_div(&vect, len));
 }
 
-double	vect_distance(const t_vect vect1, const t_vect vect2)
+double	vect_distance(const t_vect *vect1, const t_vect *vect2)
 {
 	t_vect	vect;
 
-	vect = vect_sub(&vect1, &vect2);
+	vect = vect_sub(vect1, vect2);
 	return (vect_len(&vect));
 }
