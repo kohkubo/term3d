@@ -4,17 +4,23 @@ static t_vect	center_objects(t_data *data)
 {
 	t_vect	ret;
 	int		i;
+	double	max_len;
+	t_vect	center;
 
 	i = 0;
+	max_len = DBL_MIN;
 	ret = vect_new(0, 0, 0);
+	center = vect_new(0, 0, 0);
 	while (i < data->object_count)
 	{
 		ret = vect_add(ret, data->object[i].pos1);
 		ret = vect_add(ret, data->object[i].pos2);
 		ret = vect_add(ret, data->object[i].pos3);
+		max_len = fmax(max_len, vect_distance(data->object->pos1, center));
 		i++;
 	}
 	ret = vect_scalar_div(&ret, (double)data->object_count * 3);
+	ret.z = -max_len * 16;
 	return (ret);
 }
 
@@ -51,8 +57,7 @@ static void	preprocess_triangle(t_data *data)
 
 void	init_base_info(t_data *data)
 {
-	data->camera.pos = vect_add(\
-	vect_new(0, 0, -64), data->center_object_pos);
+	data->camera.pos = data->center_object_pos;
 	data->base_info.up = vect_new(0, 1, 0);
 	data->base_info.right = vect_new(1, 0, 0);
 	data->base_info.normal = vect_new(0, 0, 1);
