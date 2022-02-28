@@ -48,7 +48,7 @@ typedef struct s_camera
 {
 	t_vect		pos;
 	t_vect		lookat;
-	t_vect		ray;
+	t_vect		ray_dir_normal;
 }				t_camera;
 
 typedef struct base_info
