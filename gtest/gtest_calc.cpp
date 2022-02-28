@@ -18,7 +18,7 @@ TEST(Calc, camera_ray)
 	data.base_info.up = vect_new(0, 1, 0);
 	data.base_info.right = vect_new(1, 0, 0);
 	data.base_info.normal = vect_new(0, 0, 1);
-	data.base_info.normal_axis = vect_normalize(vect_new(0, 1, 0));
+	data.base_info.axis_normal = vect_normalize(vect_new(0, 1, 0));
 	data.base_info.rotate_angle = degree_to_radian(1);
 	data.base_info.height = 100;
 	data.base_info.width = 100;
