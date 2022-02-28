@@ -16,7 +16,7 @@ static t_vect	center_objects(t_data *data)
 		ret = vect_add(ret, data->object[i].pos1);
 		ret = vect_add(ret, data->object[i].pos2);
 		ret = vect_add(ret, data->object[i].pos3);
-		max_len = fmax(max_len, vect_distance(data->object->pos1, center));
+		max_len = fmax(max_len, vect_distance(&data->object->pos1, &center));
 		i++;
 	}
 	ret = vect_scalar_div(&ret, (double)data->object_count * 3);
