@@ -140,3 +140,22 @@ TEST(Load, strtod_wrapper) {
   EXPECT_DEATH(strtod_wrapper("0..0"), "");
   EXPECT_DEATH(strtod_wrapper("0.0."), "");
 }
+
+void test_fscanf(char *s) {
+  char buf[2048];
+  FILE *fp = fmemopen(buf, sizeof(buf), "w");
+  fprintf(fp, "%s", s);
+  fclose(fp);
+
+  char result[2048];
+  fp = fmemopen(buf, sizeof(buf), "r");
+  EXPECT_EQ(fscanf(fp, "%s", result), 1);
+  EXPECT_EQ(strcmp(result, s), 0);
+  fclose(fp);
+}
+
+TEST(Load, fscanf) {
+  test_fscanf("0");
+  test_fscanf("0.0");
+  test_fscanf("-0.0");
+}
