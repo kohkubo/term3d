@@ -35,19 +35,22 @@ static void	valid_file_check(char *filepath)
 		exit_error("Invalid file extension. valid : .tri");
 }
 
-// No distinction is made
-// between the presence or absence of a line feed at the end.
-bool	read_line(FILE *file, char *buf)
+bool	getline_wrapper(FILE *file, char **buf)
 {
-	bzero(buf, TERM3D_LINE_SIZE + 1);
-	if (fscanf(file, TERM3D_READ_FORMAT, buf) == EOF && !feof(file))
+	size_t	len;
+	char	*end;
+
+	len = 0;
+	if ((getline(buf, &len, file) == EOF && !feof(file)) || ferror(file))
+	{
+		free(*buf);
 		exit_error("Failed to read file");
-	if (buf[TERM3D_LINE_SIZE - 1] != '\0')
-		exit_error("Line is too long");
-	if (feof(file) && buf[0] == '\0')
+	}
+	end = strrchr(*buf, '\n');
+	if (end)
+		*end = '\0';
+	if (feof(file) && *buf[0] == '\0')
 		return (false);
-	if (ferror(file))
-		exit_error("ferror() has occurred");
 	return (true);
 }
 
