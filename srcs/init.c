@@ -32,7 +32,7 @@ static void	set_screen_size(t_data *data)
 	if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws) != -1)
 	{
 		tmp = fmin(ws.ws_col, ws.ws_row) * SCREEN_SIZE_RATIO;
-		data->base_info.width = tmp;
+		data->base_info.width = tmp * 2;
 		data->base_info.height = tmp;
 	}
 }
@@ -58,7 +58,7 @@ static void	preprocess_triangle(t_data *data)
 void	init_base_info(t_data *data)
 {
 	data->camera.pos = data->center_object_pos;
-	data->base_info.up = vect_new(0, 1, 0);
+	data->base_info.up = vect_new(0, -1, 0);
 	data->base_info.right = vect_new(1, 0, 0);
 	data->base_info.normal = vect_new(0, 0, 1);
 	data->base_info.axis_normal = vect_normalize(vect_new(0, 1, 0));
