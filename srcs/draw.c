@@ -4,19 +4,8 @@ volatile sig_atomic_t	g_draw_flg = 1;
 
 static void	draw_screen(t_data *data)
 {
-	int	x;
-	int	y;
-
 	printf(TOP_LEFT);
-	y = data->base_info.height - 1;
-	while (y >= 0)
-	{
-		x = 0;
-		while (x < data->base_info.width)
-			printf("%c ", data->canvas[y * data->base_info.width + x++]);
-		printf("\n");
-		y--;
-	}
+	puts(data->canvas);
 	fflush(stdout);
 }
 

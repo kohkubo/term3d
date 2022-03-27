@@ -1,41 +1,42 @@
 NAME		= term3d
 includes	= ./includes
-src_dir		= srcs
 obj_dir		= objs
-obj			= $(src:%.c=$(src_dir)/%.o)
+obj			= $(src:%.c=%.o)
 CC 			= gcc
 CFLAGS		= -Wall -Wextra -Werror -g $(includes:%=-I%) -MMD -MP -O2
 dep			= $(obj:.o=.d)
 
-src =\
-	./data.c \
-	./term3d.c \
-	./config.c \
-	./init.c \
-	./draw.c \
-	./rotate.c \
-	./ray/camera.c \
-	./ray/intersect.c \
-	./control/getch.c \
-	./control/control1.c \
-	./control/control2.c \
-	./control/control3.c \
-	./control/control4.c \
-	./control/control5.c \
-	./control/control6.c \
-	./load/load.c \
-	./load/store.c \
-	./load/ft_split.c \
-	./shading.c \
-	./thread.c \
-	./utils.c \
-	./signal.c \
-	./vect/vect1.c \
-	./vect/vect2.c \
-	./vect/vect3.c \
-	./vect/vect4.c \
-	./vect/vect5.c \
-	./debug.c \
+src = ./srcs/term3d.c \
+	$(src_sub)
+
+src_sub =\
+	./srcs/data.c \
+	./srcs/config.c \
+	./srcs/init.c \
+	./srcs/draw.c \
+	./srcs/rotate.c \
+	./srcs/ray/camera.c \
+	./srcs/ray/intersect.c \
+	./srcs/control/getch.c \
+	./srcs/control/control1.c \
+	./srcs/control/control2.c \
+	./srcs/control/control3.c \
+	./srcs/control/control4.c \
+	./srcs/control/control5.c \
+	./srcs/control/control6.c \
+	./srcs/load/load.c \
+	./srcs/load/store.c \
+	./srcs/load/ft_split.c \
+	./srcs/shading.c \
+	./srcs/thread.c \
+	./srcs/utils.c \
+	./srcs/signal.c \
+	./srcs/vect/vect1.c \
+	./srcs/vect/vect2.c \
+	./srcs/vect/vect3.c \
+	./srcs/vect/vect4.c \
+	./srcs/vect/vect5.c \
+	./srcs/debug.c \
 
 .PHONY: all
 all		: $(NAME)
@@ -62,34 +63,6 @@ leak:
 gtestdir	=	./test
 gtest		=	$(gtestdir)/gtest $(gtestdir)/googletest-release-1.11.0
 testdir = ./gtest
-srcs_test = \
-	./$(src_dir)/draw.c \
-	./$(src_dir)/data.c \
-	./$(src_dir)/init.c \
-	./$(src_dir)/config.c \
-	./$(src_dir)/rotate.c \
-	./$(src_dir)/ray/camera.c \
-	./$(src_dir)/ray/intersect.c \
-	./$(src_dir)/debug.c \
-	./$(src_dir)/load/load.c \
-	./$(src_dir)/load/store.c \
-	./$(src_dir)/load/ft_split.c \
-	./$(src_dir)/control/getch.c \
-	./$(src_dir)/control/control1.c \
-	./$(src_dir)/control/control2.c \
-	./$(src_dir)/control/control3.c \
-	./$(src_dir)/control/control4.c \
-	./$(src_dir)/control/control5.c \
-	./$(src_dir)/control/control6.c \
-	./$(src_dir)/shading.c \
-	./$(src_dir)/thread.c \
-	./$(src_dir)/signal.c \
-	./$(src_dir)/utils.c \
-	./$(src_dir)/vect/vect1.c \
-	./$(src_dir)/vect/vect2.c \
-	./$(src_dir)/vect/vect3.c \
-	./$(src_dir)/vect/vect4.c \
-	./$(src_dir)/vect/vect5.c \
 
 $(gtest):
 	mkdir -p $(dir ../test)
@@ -104,7 +77,7 @@ test: $(gtest) fclean
 	clang++ -std=c++11 \
 	$(testdir)/gtest.cpp $(gtestdir)/googletest-release-1.11.0/googletest/src/gtest_main.cc $(gtestdir)/gtest/gtest-all.cc \
 	-g -fsanitize=address -fsanitize=undefined -O0 \
-	-I$(gtestdir) -I/usr/local/opt/llvm/include -I$(includes) -lpthread $(srcs_test) -o tester
+	-I$(gtestdir) -I/usr/local/opt/llvm/include -I$(includes) -lpthread $(src_sub) -o tester
 	./tester
 	rm -rf tester
 	rm -rf tester.dSYM
@@ -119,5 +92,11 @@ cave: re
 	find . -name "*.gcno" -delete
 	find . -name "*.info" -delete
 	open cov_test/index-sort-f.html
+
+.PHONY: bench
+bench:
+	gsed -i 's/#include "benchmark\/export\.h"/#include "\.\.\/build\/include\/benchmark\/export\.h"/' benchmark/include/benchmark/benchmark.h
+	g++ gbench/* $(src_sub) -std=c++11 -isystem benchmark/include -Lbenchmark/build/src -lpthread -I$(includes) -o mybenchmark -DBENCH
+	./mybenchmark --benchmark_out="benchmark.txt" --benchmark_out_format=console
 
 -include $(dep)
