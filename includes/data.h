@@ -58,7 +58,7 @@ typedef struct base_info
 	t_vect		up;
 	t_vect		right;
 	t_vect		normal;
-	t_vect		normal_axis;
+	t_vect		axis_normal;
 	double		rotate_angle;
 }				t_base_info;
 
@@ -100,8 +100,8 @@ typedef struct s_data
 }				t_data;
 
 bool			is_equal(double a, double b);
-double			radian(double degree);
-double			degree(double radian);
+double			degree_to_radian(double degree);
+double			radian_to_degree(double radian);
 
 void			*ft_xcalloc(size_t count, size_t size);
 void			exit_error(char *errmsg);
