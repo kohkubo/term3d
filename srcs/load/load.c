@@ -38,7 +38,6 @@ static void	valid_file_check(char *filepath)
 bool	getline_wrapper(FILE *file, char **buf)
 {
 	size_t	len;
-	char	*end;
 
 	len = 0;
 	if ((getline(buf, &len, file) == EOF && !feof(file)) || ferror(file))
@@ -46,11 +45,11 @@ bool	getline_wrapper(FILE *file, char **buf)
 		free(*buf);
 		exit_error("Failed to read file");
 	}
-	end = strrchr(*buf, '\n');
-	if (end)
-		*end = '\0';
-	if (feof(file) && *buf[0] == '\0')
+	len = strlen(*buf);
+	if (feof(file) || len == 0)
 		return (false);
+	if ((*buf)[len - 1] == '\n')
+		(*buf)[len - 1] = '\0';
 	return (true);
 }
 
