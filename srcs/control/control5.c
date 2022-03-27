@@ -28,11 +28,19 @@ void	print_info(t_data *data)
 	if (flg)
 	{
 		printf(WHITE"\n\
-======================================================\n\
-[Move camera] w s a d    [Rotate camera] i k j l m n  \n\
-[Move light] f t g h y u [Change color] 1 2 3 4 5 6 7 \n\
-[Zoom] z x [Pause] space [Reset] r [Quit] q           \n\
-======================================================\n");
+==================================================\
+===========================\n\
+[Move Camera]   Up: w Down: s Left: a Right: d\n\
+[Rotate Camera] Up: i Down: k Left: j Right: l \
+SppedUp: m SpeedDown: n\n\
+[Set Light]     Up: t Down: g Left: f Right: h \
+Front: y Back: u\n\
+[Change Color]  Red: 1 Blue: 2 Green: 3 Yellow: 4 \
+Magenta: 5 Cyan: 6 White: 7\n\
+[Zoom] In: z Out: x    [Pause/Resume] space    \
+[Reset] r    [Quit] q\n\
+==================================================\
+===========================\n");
 		printf("%s", data->config.color);
 		flg = false;
 	}
