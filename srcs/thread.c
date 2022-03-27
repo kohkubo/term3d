@@ -16,6 +16,7 @@ static void	thread_draw_point(t_thread_line *line, int x, int y)
 		c = radiance_to_density(&line->data->config, radiance);
 		line->data->canvas[x + y * line->data->base_info.width] = c;
 	}
+	line->data->canvas[x + 1 + y * line->data->base_info.width] = ' ';
 }
 
 static void	*thread_draw_line(void *arg)
@@ -26,7 +27,12 @@ static void	*thread_draw_line(void *arg)
 	line = (t_thread_line *)arg;
 	x = 0;
 	while (x < line->data->base_info.width)
-		thread_draw_point(line, x++, line->y);
+	{
+		thread_draw_point(line, x, line->y);
+		x += 2;
+	}
+	line->data->canvas[line->data->base_info.width - 1 + \
+	line->y * line->data->base_info.width] = '\n';
 	return (NULL);
 }
 
@@ -36,7 +42,9 @@ static void	thread_error(t_thread_line *line, int y)
 
 	i = 0;
 	while (i < y)
+	{
 		pthread_join(line[i++].thread, NULL);
+	}
 	exit_error(NULL);
 }
 

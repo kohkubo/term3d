@@ -20,13 +20,9 @@ make && make clean
 ./term3d ./testfiles/less_double_min.tri
 ./term3d ./testfiles/minus_sign_double.tri
 ./term3d ./testfiles/nan.tri
-./term3d ./testfiles/plus_sign.tri
 ./term3d ./testfiles/plus_sign_double.tri
 ./term3d ./testfiles/too_long_decimal_point.tri
 ./term3d ./testfiles/too_long_line.tri
-./term3d ./testfiles/too_long_space_end.tri
-./term3d ./testfiles/too_long_space_head.tri
-./term3d ./testfiles/too_long_space_mid.tri
 ./term3d ./testfiles/too_many_decimal_point.tri
 ./term3d ./testfiles/vector_elem_end_comma.tri
 ./term3d ./testfiles/vector_elem_four.tri

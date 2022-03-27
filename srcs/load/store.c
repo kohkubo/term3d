@@ -75,6 +75,5 @@ void	store_object_from_file(t_data *data, FILE *file)
 	c = 0;
 	while (c < data->object_count && getline_wrapper(file, &buf))
 		store_object_from_line(buf, &data->object[c++]);
-	rewind(file);
 	free(buf);
 }
