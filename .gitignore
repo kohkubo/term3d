@@ -10,6 +10,7 @@
 !*.yml
 !*.tri
 !*.py
+!*.gif
 !Makefile
 !gbench/libbenchmark_main.a
 !gbench/libbenchmark.a
