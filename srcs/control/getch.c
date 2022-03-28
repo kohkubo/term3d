@@ -4,7 +4,7 @@
 
 int	fcntl_wrapper(int fd, int cmd, int arg)
 {
-	int ret;
+	int	ret;
 
 	ret = fcntl(fd, cmd, arg);
 	if (ret == -1)
