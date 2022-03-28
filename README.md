@@ -1,15 +1,18 @@
-# Raytracer for terminal with ASCII for terminal
+# Term3D
+
+**Raytracer for terminal with ASCII for terminal**
 
 ![42.gif](gif/42.gif)
-![pika.gif](gif/pika.gif)
+![deer.gif](gif/deer.gif)
 ![torus.gif](gif/torus.gif)
+
 
 ## Authors
 
 - kohkubo
 - yaito
 
-## Control
+## Key control
 
 ```sh
 =============================================================================
@@ -23,22 +26,18 @@
 
 ## Features
 
-- objファイルベースのポリゴン表示
 - Raytracing
-- Fongのモデルによる拡散と鏡面反射
-- トーマス・モイラーの三角形の交差判定アルゴリズム
-- pthreadsを用いたマルチスレッド
-- 描画するASCII文字の指定
-- カラー指定
-  - BULE, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE
-- カメラ移動, 回転
-    - 上下左右、回転軸の変更、回転の停止、回転速度、回転方向の
-- 高速化により、ポリゴン数数千まで対応可能
+- Draws a polygon based on an obj file.
+- Diffuse and specular reflections by Phong`s model
+- Thomas Moyler's triangle crossing algorithm
+- Multithread using pthreads
+- Specify the ASCII characters to be drawn
+- Optimized code (Capable of handling up to thousands of polygons)
 
-## 開発Tools
+## development Tools
 
 - Google Test
 - Google Benchmark
 - CI with GitHub Actions
-- Git Flowに準じたissue駆動開発
-- カバレッジツールを使用した高速化処理
+- Git Flow
+- Coverage Tools
