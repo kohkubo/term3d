@@ -16,6 +16,7 @@ void	exit_error(char *errmsg)
 		perror(NULL);
 	else if (errmsg)
 		fprintf(stderr, "%s\n", errmsg);
+	printf(END);
 	exit(EXIT_FAILURE);
 }
 
