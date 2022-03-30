@@ -27,7 +27,8 @@
 ## Features
 
 - Raytracing
-- Draws a polygon based on an obj file.
+- Draws a polygon based on an obj file
+- Conversion from obj file to tri file
 - Diffuse and specular reflections by Phong`s model
 - Thomas Moyler's triangle crossing algorithm
 - Multithread using pthreads
