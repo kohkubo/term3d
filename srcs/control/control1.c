@@ -62,9 +62,9 @@ static bool	control_light(t_data *data, int ch)
 static bool	control_camera(t_data *data, int ch)
 {
 	if (ch == 'w')
-		camera_move_up(data);
-	else if (ch == 's')
 		camera_move_down(data);
+	else if (ch == 's')
+		camera_move_up(data);
 	else if (ch == 'a')
 		camera_move_left(data);
 	else if (ch == 'd')
